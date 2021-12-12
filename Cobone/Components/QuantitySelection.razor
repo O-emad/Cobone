@@ -1,0 +1,26 @@
+﻿
+<MudItem Style="text-align:center;">
+    <label>Quantity</label>
+    <br />
+    <MudButtonGroup Variant="Variant.Filled" Size="Size.Small" Color="Color.Default">
+        <MudIconButton Icon="@Icons.Filled.Remove" Variant="Variant.Filled" Color="Color.Default" Size="Size.Small" 
+        Disabled="@(Quantity<1)" OnClick="Decrease" />
+        <MudText Style="margin:auto 8px auto 8px;">
+            @Quantity
+        </MudText>
+@*        <MudButton Variant="Variant.Text" DisableRipple="true" Disabled="true" Size="Size.Small" Class="pa-0"
+        Style="color:black; font-size:1rem;">@Quantity</MudButton>*@
+        <MudIconButton Icon="@Icons.Filled.Add" Variant="Variant.Filled" Color="Color.Default" Size="Size.Small"
+        OnClick="Increase"/>
+        </MudButtonGroup>
+</MudItem>
+
+@code{
+    public int Quantity { get; set; }
+    public void Decrease()
+    {
+        if (Quantity > 0)
+            Quantity--;
+    }
+    public void Increase() => Quantity++;
+}

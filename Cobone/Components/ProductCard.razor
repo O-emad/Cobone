@@ -1,0 +1,55 @@
+﻿
+
+
+<MudItem xs="xs" sm="sm" md="md" lg="lg" xl="xl" xxl="xxl">
+    <MudCard>
+    <MudCardMedia Image="/images/test.jpg" Height="200" />
+    <MudCardContent>
+        <MudText Typo="Typo.h5">Product title</MudText>
+        <MudItem  xs="12">
+        <MudRating ReadOnly="true" SelectedValue="4" />
+        <MudChip Label="true">15 Ratings</MudChip>
+    </MudItem>
+    <MudText Typo="Typo.body2" Color="Color.Secondary">Company / condition</MudText>
+    <MudGrid Class="mt-5">
+    <MudChip Label="true" Color="Color.Warning">28% off</MudChip>
+    <MudSpacer></MudSpacer>
+    <MudChip Label="true" Color="Color.Default" DisableRipple="false"
+                                     Variant="Variant.Text" Size="Size.Large"
+                                     >
+                                     <MudLink Href="./"  Underline="Underline.None" Color="Color.Warning">
+                                          Location <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
+                                     </MudLink>
+                               
+                            </MudChip>
+                            </MudGrid>
+    </MudCardContent>
+    <MudCardActions Style="@($"background-color:{Colors.Blue.Default}")">
+        <MudGrid >
+            <MudItem>
+                <MudText><p>SAR <del>230</del> <ins>169</ins></p></MudText>
+            </MudItem>
+            
+            <MudSpacer></MudSpacer>
+                <MudChip Label="true" Color="Color.Default" DisableRipple="false"
+                                     Variant="Variant.Text" Size="Size.Large"
+                                     >
+                                     <MudLink Href="./"  Underline="Underline.None" Color="Color.Default">
+                                          VIEW DEAL <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
+                                     </MudLink>
+                               
+                            </MudChip>
+        </MudGrid>
+    </MudCardActions>
+</MudCard>
+</MudItem>
+
+
+@code{
+ [Parameter] public int xs { get; set; }       
+ [Parameter] public int sm { get; set; }    
+ [Parameter] public int md { get; set; }    
+ [Parameter] public int lg { get; set; }    
+ [Parameter] public int xl { get; set; }    
+ [Parameter] public int xxl { get; set; }    
+}

@@ -1,0 +1,68 @@
+﻿@page "/productdetails/{Id}"
+
+
+
+
+<MudGrid Justify="Justify.Center">
+    <MudItem lg="10">
+        <MudGrid Justify="Justify.FlexStart" Spacing="3">
+            <MudItem lg="8">
+                <ProductDetails />
+            </MudItem>
+            <MudItem lg="4">
+                <MudItem xs="12">
+                    <MudPaper Class="pa-4" Outlined="true" Square="true">
+                        <MudItem Style="@($"background-color:{Colors.Grey.Lighten2}; text-align:center;")" Class="pa-1">
+                            <p>
+
+                                <MudText Color="Color.Warning" Typo="Typo.h6" Align="Align.Center">
+                                    <MudIcon Icon="@Icons.Filled.AccessTime" Color="Color.Warning" Size="Size.Small"></MudIcon>
+                                    For a limited time only
+                                </MudText>
+                            </p>
+                            <MudChip Icon="@Icons.Filled.CheckCircle" Label="true" Color="Color.Success"
+                                     Variant="Variant.Outlined" Size="Size.Large"
+                                     Style="@($"background-color:{Colors.Shades.White}; border-radius:0px; border-color:{Colors.Grey.Lighten1}")">
+                                1550 BOUGHT
+                            </MudChip>
+
+                        </MudItem>
+                        <br />
+                        <h3>
+                            <MudIcon Icon="@Icons.Filled.Menu" Title="Favorite" Color="Color.Info" Size="Size.Large"></MudIcon>
+                            CHOOSE YOUR OPTION
+                        </h3>
+                        <MudList Clickable="false" Dense="false" DisableGutters="true">
+                            <MudListItem Inset="false">
+                                <DealOptionBlock />
+                            </MudListItem>
+                            <MudListItem Inset="false">
+                                <DealOptionBlock />
+                            </MudListItem>
+                            <MudListItem Inset="false">
+                                <DealOptionBlock />
+                            </MudListItem>
+                        </MudList>
+                        <MudItem>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.Payment" Color="Color.Warning" 
+                            FullWidth="true" Class="mb-1 mt-1" Size="Size.Large">QUICK CHECKOUT</MudButton>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.AddShoppingCart" Color="Color.Primary"
+                            FullWidth="true" Class="mt-1 mb-4" Size="Size.Large">ADD TO CART</MudButton>
+                        </MudItem>
+                        <MudItem Style="text-align:center">
+                            <h6>Share this deal:</h6>
+                            <MudIconButton Icon="@Icons.Custom.Brands.Facebook" Color="Color.Primary" aria-label="github"></MudIconButton>
+                            <MudIconButton Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Primary" aria-label="github"></MudIconButton>
+                            <MudIconButton Icon="@Icons.Custom.Brands.Google" Color="Color.Primary" aria-label="github"></MudIconButton>
+                            <MudIconButton Icon="@Icons.Custom.Brands.Twitter" Color="Color.Primary" aria-label="github"></MudIconButton>
+                            <MudIconButton Icon="@Icons.Custom.Brands.Instagram" Color="Color.Primary" aria-label="github"></MudIconButton>
+                        </MudItem>
+                    </MudPaper>
+                </MudItem>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+</MudGrid>
+
+
+
