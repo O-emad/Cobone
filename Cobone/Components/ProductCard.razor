@@ -24,15 +24,17 @@
                             </MudChip>
                             </MudGrid>
     </MudCardContent>
-    <MudCardActions Style="@($"background-color:{Colors.Blue.Default}")">
-        <MudGrid >
-            <MudItem>
-                <MudText><p>SAR <del>230</del> <ins>169</ins></p></MudText>
+    <MudCardActions Style="@($"background-color:{Colors.Blue.Default}")"> 
+        <MudGrid  Justify="Justify.Center" Spacing="1">
+            
+            <MudItem Class="pa-0 py-0 px-2">
+                <MudText Align="Align.Center"
+                Typo="Typo.h4" Style="@($"color:{Colors.Shades.White}")">SAR <del style="@($"color:{Colors.Grey.Lighten1}")">230</del> <ins>169</ins></MudText>
             </MudItem>
             
             <MudSpacer></MudSpacer>
-                <MudChip Label="true" Color="Color.Default" DisableRipple="false"
-                                     Variant="Variant.Text" Size="Size.Large"
+                <MudChip Label="true" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
+                                     Variant="Variant.Text" Size="Size.Large" Class="rounded-0"
                                      >
                                      <MudLink Href="./"  Underline="Underline.None" Color="Color.Default">
                                           VIEW DEAL <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
@@ -40,6 +42,14 @@
                                
                             </MudChip>
         </MudGrid>
+@*        <MudChip Label="true" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
+                                     Variant="Variant.Text" Size="Size.Large" 
+                                     >
+                                     <MudLink Href="./"  Underline="Underline.None" Color="Color.Default">
+                                          VIEW DEAL <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
+                                     </MudLink>
+                               
+                            </MudChip>*@
     </MudCardActions>
 </MudCard>
 </MudItem>
