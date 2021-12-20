@@ -1,35 +1,20 @@
 ﻿
-@*
-<MudCarousel ShowArrows="true" AutoCycle="false" ShowDelimiters="false" ItemsSource="_source" Style="height:500px">
-    <ItemTemplate>
-        <MudGrid Style="height:100%;">
-                <ProductCard xs="12"></ProductCard>
-                <ProductCard xs="12"></ProductCard>
-                <ProductCard xs="12"></ProductCard>
-        </MudGrid>
-    </ItemTemplate>
-</MudCarousel>*@
 
 
-<MudTabs Elevation="4" Rounded="true" Color="@Color.Success" PrevIcon="@Icons.Filled.SkipPrevious" NextIcon="@Icons.Filled.SkipNext" >
-    <MudTabPanel  >
-        <MudGrid>
-            <ProductCard xs="4" />
-             <ProductCard xs="4" />
-              <ProductCard xs="4" />
-        </MudGrid>
-        
-        </MudTabPanel>
-            <MudTabPanel >
-        <MudGrid>
-            <ProductCard xs="4" />
-             <ProductCard xs="4" />
-        </MudGrid>
-        
-        </MudTabPanel>
+<MudCarousel SelectedIndex="SelectedIndex" id="cardsgrid-carousel" Class="product-cards-carousel" ShowArrows="true" AutoCycle="false" ShowDelimiters="false" TData="object">
 
-</MudTabs>
-
-@code{
-        private IList<string> _source = new List<string>() { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-}
+    @if (Grids.Count > 0)
+    {
+        foreach(var grid in Grids)
+        {
+            <MudCarouselItem Class="product-cards-carousel-item">
+                <MudGrid Spacing="2" Justify="Justify.Center">
+                    @foreach(var item in grid)
+                    {
+                    <ProductCard xs="Xs" sm="Sm" md="Md" lg="Lg" xl="Xl"  xxl="Xxl"></ProductCard>
+                    }
+                </MudGrid>
+            </MudCarouselItem>
+        }
+    }
+</MudCarousel>

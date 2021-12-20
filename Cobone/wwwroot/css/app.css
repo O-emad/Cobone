@@ -83,3 +83,16 @@ a, .btn-link {
         transform: rotate(360deg);
     }
 }
+
+
+.product-cards-carousel{
+    position: relative;
+}
+
+.product-cards-carousel-item{
+    height:fit-content;
+}
+
+.product-card{
+  height:max-content;
+}

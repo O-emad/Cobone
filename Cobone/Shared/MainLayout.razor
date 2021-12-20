@@ -5,16 +5,18 @@
 
 <MudLayout>
     <MudGrid Justify="Justify.Center" Spacing="1">
+
+        <!---TopAddCarousel-->
         <MudItem sm="10" xs="10" Style="margin-top:15px;">
             <TopAddCarousel />
         </MudItem>
-
-
 
         <MudItem sm="12" xs="12" Style="padding:0">
             <MudDivider Style="background-color:#000; opacity:0.125" />
         </MudItem>
 
+
+        <!---AppBar-->
         <MudItem sm="10" xs="10" Style="padding:0">
             <MudAppBar Fixed="false" Color="Color.Transparent" Elevation="0">
 
@@ -22,42 +24,46 @@
                 <MudSpacer />
                 <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
             </MudAppBar>
-
         </MudItem>
+
         <MudItem sm="12" xs="12" Style="padding:0">
             <MudDivider Style="background-color:#000; opacity:0.125; height:2px" />
         </MudItem>
+
+        <!---CategoriesAppBar-->
         <MudItem sm="10" xs="10">
-            <MudAppBar Fixed="false" Elevation="0">
-
-                <MudMenu Size="Size.Large" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
-                    <ActivatorContent>
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Style="white-space:pre-line; text-align:center">
-                            <MudIcon Icon="@Icons.Material.Filled.Favorite" />
-                            I am a button
-                        </MudButton>
-                    </ActivatorContent>
-
-                    <ChildContent>
-                        <MudMenuItem>Profile</MudMenuItem>
-                        <MudMenuItem>Theme</MudMenuItem>
-                        <MudMenuItem>Usage</MudMenuItem>
-                        <MudMenuItem>Sign Out</MudMenuItem>
-                    </ChildContent>
-                </MudMenu>
-
+            <MudAppBar Fixed="false" Elevation="0" Style="height:fit-content" DisableGutters="true">
+                <MenuButton Style="height:inherit">
+                    <ProductPreview>
+                        <ProductCard xs="7" sm="6" md="5" lg="4" xl="3"></ProductCard>
+                    </ProductPreview>
+                    <SubCategories>
+                        <MudItem xs="5" sm="6" md="7" lg="8" xl="9"></MudItem>
+                    </SubCategories>
+                </MenuButton>
             </MudAppBar>
         </MudItem>
 
     </MudGrid>
 
 
-    <MudMainContent MaxWidth="MaxWidth.Medium">
-        <MudContainer MaxWidth="MaxWidth.False">
-            @Body
+    <MudMainContent>
+
+
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="pa-0">
+            <MudGrid Justify="Justify.Center" Spacing="2">
+                <MudItem xs="10">
+                    @Body
+                </MudItem>
+            </MudGrid>
         </MudContainer>
+
+
         <MudScrollToTop>
             <MudFab Color="Color.Primary" IconSize="Size.Large" Icon="@Icons.Filled.ArrowCircleUp" />
         </MudScrollToTop>
+
     </MudMainContent>
+
+
 </MudLayout>
