@@ -1,67 +1,118 @@
-﻿
+﻿@using Cobone.Models
 
 
 <MudItem Class="@($"product-card {Class}")" xs="xs" sm="sm" md="md" lg="lg" xl="xl" xxl="xxl" Style="@Style">
-    <MudCard Square="true"  Style="height:auto; align-self:stretch; flex-grow:1; display:grid">
-    <MudCardMedia Image="/images/test.jpg" Height="200" />
-    <MudCardContent>
-        <MudText Typo="Typo.h5">Product title</MudText>
-        <MudItem  xs="12">
-        <MudRating ReadOnly="true" SelectedValue="4" />
-        <MudChip Label="true">15 Ratings</MudChip>
-    </MudItem>
-    <MudText Typo="Typo.body2" Color="Color.Secondary">Company / condition</MudText>
-    <MudGrid Class="mt-5">
-    <MudChip Label="true" Color="Color.Warning">28% off</MudChip>
-    <MudSpacer></MudSpacer>
-    <MudChip Label="true" Color="Color.Default" DisableRipple="false"
-                                     Variant="Variant.Text" Size="Size.Large"
-                                     >
-                                     <MudLink Href="./"  Underline="Underline.None" Color="Color.Warning">
-                                          Location <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
-                                     </MudLink>
-                               
-                            </MudChip>
-                            </MudGrid>
-    </MudCardContent>
-    <MudCardActions Style="@($"align-self:end; background-color:{Colors.Blue.Default}")"> 
-        <MudGrid  Justify="Justify.Center" Spacing="1">
-            
-            <MudItem Class="pa-0 py-0 px-2">
-                <MudText Align="Align.Center"
-                Typo="Typo.h4" Style="@($"color:{Colors.Shades.White}")">SAR <del style="@($"color:{Colors.Grey.Lighten1}")">230</del> <ins>169</ins></MudText>
+    <MudCard Square="true" Style="height:auto; align-self:stretch; flex-grow:1; display:grid">
+        @*Product Image*@
+        <MudCardMedia Image="@Product.Thumb" Height="500" />
+        <MudCardContent>
+            @*Product Title*@
+            <MudText Typo="Typo.h5">@Product.Name</MudText>
+            <MudItem xs="12">
+                @*fix to float rating*@
+                <MudRating ReadOnly="true" SelectedValue="@((int)Product.Rating)" />
+                @*check ratings count with backend dev*@
+                @*<MudChip Label="true">15 Ratings</MudChip>*@
             </MudItem>
-            
-            <MudSpacer></MudSpacer>
-                <MudChip Label="true" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
-                                     Variant="Variant.Text" Size="Size.Large" Class="rounded-0"
-                                     >
-                                     <MudLink Href="./"  Underline="Underline.None" Color="Color.Default">
-                                          VIEW DEAL <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
-                                     </MudLink>
-                               
-                            </MudChip>
-        </MudGrid>
-@*        <MudChip Label="true" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
-                                     Variant="Variant.Text" Size="Size.Large" 
-                                     >
-                                     <MudLink Href="./"  Underline="Underline.None" Color="Color.Default">
-                                          VIEW DEAL <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
-                                     </MudLink>
-                               
-                            </MudChip>*@
-    </MudCardActions>
-</MudCard>
+            @*check company/condition with backend dev*@
+            @*<MudText Typo="Typo.body2" Color="Color.Secondary">Company / condition</MudText>*@
+            <MudGrid Class="mt-5">
+
+                    <MudChip Label="true" Color="Color.Warning">@OffPercentage% off</MudChip>
+
+                <MudSpacer></MudSpacer>
+                @*Check Location with backend dev*@
+                @*                <MudChip Label="true" Color="Color.Default" DisableRipple="false"
+                    Variant="Variant.Text" Size="Size.Large">
+                    <MudLink Href="./" Underline="Underline.None" Color="Color.Warning">
+                    Location <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
+                    </MudLink>
+
+                    </MudChip>*@
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions Style="@($"align-self:end; background-color:{Colors.Blue.Default}")">
+            <MudGrid Justify="Justify.FlexStart" Spacing="1">
+
+                <MudItem Class="pa-0 py-0 px-2" xs="8" >
+                    @if (Product.Special > 0)
+                    {
+                        <MudText Align="Align.Left"
+                             Typo="Typo.h5" Style="@($"color:{Colors.Shades.White}")">
+                            <del style="@($"color:{ Colors.Grey.Lighten1}")">@Product.Price_Formated</del>
+                            <br/>
+                            <ins> @Product.Special_Formated</ins>
+
+                        </MudText>
+                    }
+                    else
+                    {
+                        <MudText Align="Align.Left"
+                             Typo="Typo.h5" Style="@($"color:{Colors.Shades.White}")">
+                             <ins>
+                                @Product.Price_Formated
+                                <br/>
+                                <br/>
+                             </ins>
+                        </MudText>
+
+                    }
+
+                </MudItem>
+
+                <MudSpacer></MudSpacer>
+                <MudItem Class="pa-0 ma-0 px-2" xs="4">
+                <MudChip Label="false" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
+                         Variant="Variant.Text" Size="Size.Large" Class="rounded-0">
+                    <MudLink Href="./" Underline="Underline.None" Color="Color.Default">
+                        VIEW DEAL
+                    </MudLink>
+
+                </MudChip>
+                </MudItem>
+            </MudGrid>
+            @*        <MudChip Label="true" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
+                Variant="Variant.Text" Size="Size.Large"
+                >
+                <MudLink Href="./"  Underline="Underline.None" Color="Color.Default">
+                VIEW DEAL <MudIcon Icon="@Icons.Filled.ChevronRight"></MudIcon>
+                </MudLink>
+
+                </MudChip>*@
+        </MudCardActions>
+    </MudCard>
 </MudItem>
 
 
-@code{
-    [Parameter] public int xs { get; set; }       
-    [Parameter] public int sm { get; set; }    
-    [Parameter] public int md { get; set; }    
-    [Parameter] public int lg { get; set; }    
-    [Parameter] public int xl { get; set; }    
-    [Parameter] public int xxl { get; set; }   
-    [Parameter] public string Class{ get; set; }
-    [Parameter] public string Style{ get; set; }
+@code {
+    [Parameter] public int xs { get; set; }
+    [Parameter] public int sm { get; set; }
+    [Parameter] public int md { get; set; }
+    [Parameter] public int lg { get; set; }
+    [Parameter] public int xl { get; set; }
+    [Parameter] public int xxl { get; set; }
+    [Parameter] public string Class { get; set; }
+    [Parameter] public string Style { get; set; }
+
+    //switch this to generic typing in case you want to use the card for something rather than Product Model
+    [Parameter] public Product Product { get; set; }
+
+    public int OffPercentage { get; set; }
+
+    void GetOffPercentage()
+    {
+        if (Product is not null)
+        {
+            if (Product.Price > 0 && Product.Special > 0)
+            {
+
+                OffPercentage = (int)(100 - ((Product.Special / Product.Price) * 100));
+            }
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        GetOffPercentage();
+    }
 }

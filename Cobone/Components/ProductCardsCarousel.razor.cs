@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Cobone.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Services;
@@ -12,8 +13,8 @@ namespace Cobone.Components
 {
     public partial class ProductCardsCarousel :IAsyncDisposable
     {
-        [Parameter] public List<string> Source { get; set; }
-        private List<List<string>> Grids { get; set; } = new List<List<string>>();
+        [Parameter] public List<Product> Source { get; set; }
+        private List<List<Product>> Grids { get; set; } = new List<List<Product>>();
         [Inject] public IJSRuntime? JS { get; set; }
         [Inject] IBreakpointService? BreakpointListener { get; set; }
         private Guid _subscriptionId;
@@ -29,11 +30,11 @@ namespace Cobone.Components
         public int Xl { get; set; } = 3;
         public int Xxl { get; set; } = 3;
 
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                
                 var subscriptionResult = await BreakpointListener.Subscribe(async (breakpoint) =>
                 {
                     breakPoint = breakpoint;
@@ -63,7 +64,7 @@ namespace Cobone.Components
             Sm = Md = 6;
             Lg = 4;
             Xl = Xxl = 3;
-            Grids = new List<List<string>>();
+            Grids = new List<List<Product>>();
             int productsPerGrid = 1;
             if (Source.Count == 0)
                 return;

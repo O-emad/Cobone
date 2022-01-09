@@ -8,10 +8,10 @@ namespace Cobone.Models
 {
     public class Home
     {
-        public Slider[]? Slider { get; set; }
-        public HomeProduct[]? Latest { get; set; }
-        public HomeProduct[]? Specials { get; set; }
-        public HomeProduct[]? BestSeller { get; set; }
+        public List<Slider>? Slider { get; set; }
+        public List<Product>? Latest { get; set; }
+        public List<Product>? Specials { get; set; }
+        public List<Product>? BestSeller { get; set; }
         public Featured[]? Featured { get; set; }
     }
 }

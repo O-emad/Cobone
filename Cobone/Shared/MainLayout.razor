@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject ICategoryDataService CategoryDataService
+@inject IHomeDataService HomeDataService
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -7,8 +9,11 @@
     <MudGrid Justify="Justify.Center" Spacing="1">
 
         <!---TopAddCarousel-->
-        <MudItem sm="10" xs="10" Style="margin-top:15px;">
-            <TopAddCarousel />
+        <MudItem sm="10" xs="10" Style="margin-top:15px; justify-content:center;" >
+            @if (HomeData is not null && HomeData is not default(Home?))
+            {
+                <TopAddCarousel SliderData="@HomeData.Slider" />
+            }
         </MudItem>
 
         <MudItem sm="12" xs="12" Style="padding:0">
@@ -32,15 +37,23 @@
 
         <!---CategoriesAppBar-->
         <MudItem sm="10" xs="10">
-            <MudAppBar Fixed="false" Elevation="0" Style="height:fit-content" DisableGutters="true">
-                <MenuButton Style="height:inherit">
-                    <ProductPreview>
-                        <ProductCard xs="7" sm="6" md="5" lg="4" xl="3"></ProductCard>
-                    </ProductPreview>
-                    <SubCategories>
-                        <MudItem xs="5" sm="6" md="7" lg="8" xl="9"></MudItem>
-                    </SubCategories>
-                </MenuButton>
+            <MudAppBar  Fixed="false" Elevation="0" Style="height:fit-content" DisableGutters="true">
+            @if (Categories is not null && Categories.Count > 0)
+            {
+                foreach (var category in Categories)
+                {
+                    
+                        <MenuButton Style="height:inherit" ButtonLabel="@category.Name">
+@*                          <ProductPreview>
+                                <ProductCard xs="7" sm="6" md="5" lg="4" xl="3"></ProductCard>
+                            </ProductPreview>
+                            <SubCategories>
+                                <MudItem xs="5" sm="6" md="7" lg="8" xl="9"></MudItem>
+                            </SubCategories>*@
+                        </MenuButton>
+                    
+                }
+            }
             </MudAppBar>
         </MudItem>
 
@@ -49,7 +62,7 @@
 
     <MudMainContent>
 
-
+        <CascadingValue Value="this">
         <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="pa-0">
             <MudGrid Justify="Justify.Center" Spacing="2">
                 <MudItem xs="10">
@@ -57,7 +70,7 @@
                 </MudItem>
             </MudGrid>
         </MudContainer>
-
+        </CascadingValue>
 
         <MudScrollToTop>
             <MudFab Color="Color.Primary" IconSize="Size.Large" Icon="@Icons.Filled.ArrowCircleUp" />
@@ -67,3 +80,22 @@
 
 
 </MudLayout>
+
+
+@code {
+
+    public List<Category> Categories { get; set; }
+    public Home? HomeData { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (CategoryDataService is not null)
+        {
+            Categories = (await CategoryDataService.GetCategories()).ToList();
+        }
+        if(HomeDataService is not null)
+        {
+            HomeData = await HomeDataService.GetHomeData();
+        }
+    }
+
+}

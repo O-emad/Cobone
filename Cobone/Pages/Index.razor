@@ -1,9 +1,11 @@
-﻿@page "/"
+﻿
 
+@page "/"
+@using Cobone.Models
 
 
 <MudGrid>
-    <MudItem xs="12" Class="d-flex align-stretch">
+@*    <MudItem xs="12" Class="d-flex align-stretch">
         <MudGrid Justify="Justify.FlexStart">
             <ProductCard Style="height:auto; display:flex" Class="flex-grow-1 order-0 align-self-stretch"></ProductCard>
             <MudItem Class="order-1">
@@ -31,12 +33,21 @@
 
         </MudGrid>
     </MudItem>
-    <CategoryPreviewBlock Xs="12"></CategoryPreviewBlock>
-    <CategoryPreviewBlock Xs="12"></CategoryPreviewBlock>
-    <CategoryPreviewBlock Xs="12"></CategoryPreviewBlock>
-    <CategoryPreviewBlock Xs="12"></CategoryPreviewBlock>
-    <CategoryPreviewBlock Xs="12"></CategoryPreviewBlock>
-    <CategoryPreviewBlock Xs="12"></CategoryPreviewBlock>
+*@
+    @if (HomeData is not null && HomeData is not default(Home?))
+    {
+        <CategoryPreviewBlock Xs="12" Products="@HomeData?.BestSeller" Title="Best Seller"></CategoryPreviewBlock>
+        <CategoryPreviewBlock Xs="12" Products="@HomeData?.Latest" Title="Latest"></CategoryPreviewBlock>
+        <CategoryPreviewBlock Xs="12" Products="@HomeData?.Specials" Title="Special"></CategoryPreviewBlock>
+        
+    }
+    @if(Layout is not null && Layout.Categories is not default(List<Category>))
+    {
+        foreach(var category in Layout.Categories)
+        {
+            <CategoryPreviewBlock Xs="12" Products="@(new List<Product>())" Title="@category.Name"></CategoryPreviewBlock>
+        }
+    }
     @*        <MudItem xs="12">
         <ProductCardsCarousel Source="@(new List<string>(){"adsf","asdf","asdfasd","asdfasdf","asdfasdf"})"></ProductCardsCarousel>
         </MudItem>*@
