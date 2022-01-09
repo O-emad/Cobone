@@ -49,10 +49,10 @@ namespace Cobone.Components
                 breakPoint = subscriptionResult.Breakpoint;
                 _subscriptionId = subscriptionResult.SubscriptionId;
                 PopulateCarouselGrid();
-                await JS.InvokeVoidAsync("carouselFitContent");
+                //await JS.InvokeVoidAsync("carouselFitContent");
                 StateHasChanged();
             }
-
+            await JS.InvokeVoidAsync("carouselFitContent");
             await base.OnAfterRenderAsync(firstRender);
         }
 

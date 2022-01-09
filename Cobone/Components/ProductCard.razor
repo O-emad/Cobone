@@ -1,8 +1,8 @@
 ﻿
 
 
-<MudItem Class="product-card" xs="xs" sm="sm" md="md" lg="lg" xl="xl" xxl="xxl">
-    <MudCard>
+<MudItem Class="@($"product-card {Class}")" xs="xs" sm="sm" md="md" lg="lg" xl="xl" xxl="xxl" Style="@Style">
+    <MudCard Square="true"  Style="height:auto; align-self:stretch; flex-grow:1; display:grid">
     <MudCardMedia Image="/images/test.jpg" Height="200" />
     <MudCardContent>
         <MudText Typo="Typo.h5">Product title</MudText>
@@ -24,7 +24,7 @@
                             </MudChip>
                             </MudGrid>
     </MudCardContent>
-    <MudCardActions Style="@($"background-color:{Colors.Blue.Default}")"> 
+    <MudCardActions Style="@($"align-self:end; background-color:{Colors.Blue.Default}")"> 
         <MudGrid  Justify="Justify.Center" Spacing="1">
             
             <MudItem Class="pa-0 py-0 px-2">
@@ -56,10 +56,12 @@
 
 
 @code{
- [Parameter] public int xs { get; set; }       
- [Parameter] public int sm { get; set; }    
- [Parameter] public int md { get; set; }    
- [Parameter] public int lg { get; set; }    
- [Parameter] public int xl { get; set; }    
- [Parameter] public int xxl { get; set; }    
+    [Parameter] public int xs { get; set; }       
+    [Parameter] public int sm { get; set; }    
+    [Parameter] public int md { get; set; }    
+    [Parameter] public int lg { get; set; }    
+    [Parameter] public int xl { get; set; }    
+    [Parameter] public int xxl { get; set; }   
+    [Parameter] public string Class{ get; set; }
+    [Parameter] public string Style{ get; set; }
 }
