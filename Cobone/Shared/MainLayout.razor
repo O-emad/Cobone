@@ -9,7 +9,7 @@
     <MudGrid Justify="Justify.Center" Spacing="1">
 
         <!---TopAddCarousel-->
-        <MudItem sm="10" xs="10" Style="margin-top:15px; justify-content:center;" >
+        <MudItem  Style="margin-top:15px; justify-content:center;" >
             @if (HomeData is not null && HomeData is not default(Home?))
             {
                 <TopAddCarousel SliderData="@HomeData.Slider" />
@@ -37,13 +37,13 @@
 
         <!---CategoriesAppBar-->
         <MudItem sm="10" xs="10">
-            <MudAppBar  Fixed="false" Elevation="0" Style="height:fit-content" DisableGutters="true">
+            <MudAppBar  Fixed="false" Elevation="0" Style="height:auto; justify-content:center" DisableGutters="true" Class="overflow-auto">
             @if (Categories is not null && Categories.Count > 0)
             {
                 foreach (var category in Categories)
                 {
                     
-                        <MenuButton Style="height:inherit" ButtonLabel="@category.Name">
+                        <MenuButton Style="height:auto" ButtonLabel="@category.Name">
 @*                          <ProductPreview>
                                 <ProductCard xs="7" sm="6" md="5" lg="4" xl="3"></ProductCard>
                             </ProductPreview>

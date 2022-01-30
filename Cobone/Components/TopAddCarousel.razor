@@ -1,7 +1,8 @@
 ﻿
 
 
-    <MudCarousel Style="@($"height:{SliderData[0].Height}px; width:{SliderData[0].Width}px;")" ShowArrows="@arrows" ShowDelimiters="@delimiters" AutoCycle="@autocycle" TData="object">
+    <MudCarousel
+    Style="@($"height:{SliderData[0].Height}px; width:{SliderData[0].Width}px; justify-content:center")" ShowArrows="@arrows" ShowDelimiters="@delimiters" AutoCycle="@autocycle" TData="object">
 
 
         @foreach(var banner in SliderData[0].Banners)
