@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Cobone.Models
@@ -12,6 +12,7 @@ namespace Cobone.Models
         public int Product_Id { get; set; }
         public string? Seo_Url { get; set; }
         public string? Thumb { get; set; }
+        public string? image { get; set; }
         public string? Name { get; set; }
         public int Quantity { get; set; }
         public string? Status { get; set; }

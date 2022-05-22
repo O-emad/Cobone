@@ -1,18 +1,20 @@
-﻿@page "/productdetails/{Id}"
+﻿@page "/productInfo/{Id}"
 
 
 
-
+                    @if (Product is not null && Product is not default(FullProductInfo?))
+                    {
 <MudGrid Justify="Justify.Center">
     <MudItem lg="10">
         <MudGrid Justify="Justify.FlexStart" Spacing="3">
             <MudItem lg="8">
-                <ProductDetails />
+                <ProductDetails  Product="Product"/>
             </MudItem>
             <MudItem lg="4">
                 <MudItem xs="12">
-                    <MudPaper Class="pa-4" Outlined="true" Square="true">
-                        <MudItem Style="@($"background-color:{Colors.Grey.Lighten2}; text-align:center;")" Class="pa-1">
+
+                        <MudPaper Class="pa-4" Outlined="true" Square="true">
+                            <MudItem Style="@($"background-color:{Colors.Grey.Lighten2}; text-align:center;")" Class="pa-1">
                             <p>
 
                                 <MudText Color="Color.Warning" Typo="Typo.h6" Align="Align.Center">
@@ -58,11 +60,12 @@
                             <MudIconButton Icon="@Icons.Custom.Brands.Instagram" Color="Color.Primary" aria-label="github"></MudIconButton>
                         </MudItem>
                     </MudPaper>
+                    
                 </MudItem>
             </MudItem>
         </MudGrid>
     </MudItem>
 </MudGrid>
-
+}
 
 

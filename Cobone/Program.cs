@@ -21,5 +21,7 @@ builder.Services.AddHttpClient<ICategoryDataService, CategoryDataService>("Categ
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IHomeDataService, HomeDataService>("HomeAPI", client => client.BaseAddress = new Uri("https://rokiba.com/demo/store/index.php?route=feed/rest_api/getHome"))
     .AddHttpMessageHandler<BaseMessageHandler>();
+builder.Services.AddHttpClient<IProductDataService, ProductDataService>("ProductAPI", client => client.BaseAddress = new Uri("https://rokiba.com/demo/store/index.php?route=feed/rest_api/products"))
+    .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://rokiba.com/demo/store/index.php?route=feed/rest_api/gettoken"));
 await builder.Build().RunAsync();

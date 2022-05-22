@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Cobone.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace Cobone.Components
 {
     public partial class ProductDetails
     {
-        
-
+        [Parameter] public FullProductInfo Product { get; set; }
     }
 }

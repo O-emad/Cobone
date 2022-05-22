@@ -4,7 +4,7 @@
 <MudItem Class="@($"product-card {Class}")" xs="xs" sm="sm" md="md" lg="lg" xl="xl" xxl="xxl" Style="@Style">
     <MudCard Square="true" Style="height:auto; align-self:stretch; flex-grow:1; display:grid">
         @*Product Image*@
-        <MudCardMedia Image="@Product.Thumb" Height="500" />
+        <MudCardMedia Image="@Thumb" Height="500" />
         <MudCardContent>
             @*Product Title*@
             <MudText Typo="Typo.h5">@Product.Name</MudText>
@@ -64,7 +64,7 @@
                 <MudItem Class="pa-0 ma-0 px-2" xs="4">
                 <MudChip Label="false" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
                          Variant="Variant.Text" Size="Size.Large" Class="rounded-0">
-                    <MudLink Href="./" Underline="Underline.None" Color="Color.Default">
+                    <MudLink Href="@($"./productinfo/{Product.Product_Id}")" Underline="Underline.None" Color="Color.Default">
                         VIEW DEAL
                     </MudLink>
 
@@ -97,6 +97,7 @@
     //switch this to generic typing in case you want to use the card for something rather than Product Model
     [Parameter] public Product Product { get; set; }
 
+    public string Thumb { get; set; }
     public int OffPercentage { get; set; }
 
     void GetOffPercentage()
@@ -113,6 +114,18 @@
 
     protected override void OnInitialized()
     {
-        GetOffPercentage();
+        if (Product is not null)
+        {
+            if (!string.IsNullOrWhiteSpace(Product.Thumb))
+            {
+                Thumb = Product.Thumb;
+            }
+            else
+            {
+                Thumb = Product.image;
+
+            }
+        }   
+            GetOffPercentage();
     }
 }

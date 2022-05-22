@@ -4,12 +4,12 @@
 
 
     <MudItem xs="12">
-        <h1>Product Title</h1>
-        <h4>Prief product description that will probably be two lines, dssdsfsjkdfngjskdfngjkdfngjklnfdsgnjkdflksfndsjlndfg</h4>
+        <h1>@Product.Name</h1>
+        @*<h4>Prief product description that will probably be two lines, dssdsfsjkdfngjskdfngjkdfngjklnfdsgnjkdflksfndsjlndfg</h4>*@
     </MudItem>
     <MudItem xs="12">
-        <MudRating ReadOnly="true" SelectedValue="4" />
-        <MudChip Label="true">15 Ratings</MudChip>
+        <MudRating ReadOnly="true" SelectedValue="@((int)Product.Rating)" />
+        @*<MudChip Label="true">15 Ratings</MudChip>*@
     </MudItem>
     <MudItem xs="12">
         <MudCarousel ShowDelimiters="false" TData="object" AutoCycle="true" ShowArrows="true" AutoCycleTime="TimeSpan.FromSeconds(3)" Style="height:200px;">
@@ -29,8 +29,10 @@
                 </div>
             </MudCarouselItem>
         </MudCarousel>
+        @((MarkupString)Product.Description)
     </MudItem>
-    <MudItem xs="12">
+    
+@*    <MudItem xs="12">
         <MudPaper Class="pa-4" Outlined="true">
             <h3>
                 <MudIcon Icon="@Icons.Filled.Menu" Title="Favorite" Color="Color.Info" Size="Size.Large"></MudIcon>
@@ -114,7 +116,7 @@
 
         </MudPaper>
     </MudItem>
-        <MudItem xs="12">
+    <MudItem xs="12">
         <MudPaper Class="pa-4" Outlined="true">
             <h3>
                 <MudIcon Icon="@Icons.Filled.Menu" Title="Favorite" Color="Color.Info" Size="Size.Large"></MudIcon>
@@ -141,5 +143,5 @@
             </MudList>
 
         </MudPaper>
-    </MudItem>
+    </MudItem>*@
 </MudGrid>
