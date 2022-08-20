@@ -1,4 +1,5 @@
 ﻿@using Cobone.Models
+@using System.Net
 
 
 <MudItem xs="Xs" sm="Sm" md="Md" lg="Lg" xl="Xl" xxl="Xxl" Class="pa-0 ma-0">
@@ -6,7 +7,7 @@
         <MudCardContent>
             <MudGrid Class="pa-0 ma-0" Spacing="1">
                 <MudItem xs="6">
-                    <MudText Typo="Typo.h5">@Title</MudText>
+                    <MudText Typo="Typo.h5">@(WebUtility.HtmlDecode(Title))</MudText>
                 </MudItem>
                 <MudSpacer/>
                 <MudItem>

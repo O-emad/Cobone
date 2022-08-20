@@ -19,7 +19,7 @@ namespace Cobone.Services
 
         public async Task<IEnumerable<Category>> GetCategories()
         {            
-            var response  =  await JsonSerializer.DeserializeAsync<BaseResponse<List<Category>>>(await httpClient.GetStreamAsync(""),new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            var response  =  await JsonSerializer.DeserializeAsync<BaseResponse<List<Category>>>(await httpClient.GetStreamAsync("index.php?route=feed/rest_api/categories&level=2"),new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
             return response?.Data ?? Enumerable.Empty<Category>(); 
         }
 

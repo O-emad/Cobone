@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Cobone.Pages
 {
-    public partial class Registration
+    public partial class Login
     {
-        AccountRegister model = new AccountRegister();
+        AccountLogin model = new AccountLogin();
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         [Inject]
@@ -21,11 +21,8 @@ namespace Cobone.Pages
 
             if (AccountDataService is not null)
             {
-                model.Custom_Field = new Custom_Field();
-                model.Agree = 1;
-                model.Customer_Group_Id = 1;
-                await AccountDataService.Register(model);
-                NavigationManager.NavigateTo("/",true);
+                await AccountDataService.Login(model);
+                NavigationManager.NavigateTo("/", true);
                 StateHasChanged();
 
             }

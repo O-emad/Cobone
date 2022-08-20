@@ -1,31 +1,23 @@
 ﻿
 
 
-<MudButton @onmouseenter="OnMouseEnter" @onmouseleave="OnMouseLeave" Style="@Style">@ButtonLabel</MudButton>
-<MudPopover  @bind-Open="PopoverOpen" Direction="Direction.Bottom" AnchorOrigin="Origin.BottomLeft" RelativeWidth="true">
-    <MudGrid Class="ma-2" Spacing="2" Justify="Justify.Center">
-
-            @ProductPreview
-
-            @SubCategories
-        
-
-        @*        <ProductCard xs="7" sm="6" md="5" lg ="4" xl="3"></ProductCard>
-        <MudItem xs="5" sm="6" md="7" lg="8" xl="9"></MudItem>*@
-    </MudGrid>
+<MudButton OnClick="OnMouseEnter" Style="@ButtonStyle">@ButtonLabel</MudButton>
+<MudPopover  @bind-Open="PopoverOpen" @onmouseleave="OnMouseLeave" Direction="Direction.Top" 
+AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.TopCenter"  RelativeWidth="true" Style="z-index:400">
+    @PopoverContent
 </MudPopover>
+<MudOverlay @bind-Visible="PopoverOpen" DarkBackground="true" ZIndex="200" AutoClose="true"/>
 
 
 @code{
     [Parameter] public string ButtonLabel{ get; set; }
-    [Parameter] public RenderFragment ProductPreview{ get; set; }
-    [Parameter] public RenderFragment SubCategories{ get; set; }
-    [Parameter] public string Style{ get; set; }
-    public bool PopoverOpen { get; set; }
+    [Parameter] public RenderFragment PopoverContent{ get; set; }
+    [Parameter] public string ButtonStyle{ get; set; }
+    public bool PopoverOpen { get; set; } = false;
 
     private void OnMouseEnter()
     {
-        PopoverOpen = true;
+        PopoverOpen = !PopoverOpen;
     }
     private void OnMouseLeave()
     {

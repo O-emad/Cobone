@@ -9,7 +9,7 @@ h1:focus {
 }
 
 a, .btn-link {
-    color: #0071c1;
+    color: rgb(107,216,19);
 }
 
 .btn-primary {
@@ -66,7 +66,7 @@ a, .btn-link {
 
 .loader {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
+    border-top: 16px solid #59b210;
     border-radius: 50%;
     width: 120px;
     height: 120px;

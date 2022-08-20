@@ -1,0 +1,82 @@
+﻿@using System.Net
+
+
+<MudAppBar Dense="false" Fixed="false" Elevation="0" Color="Color.Secondary"
+           Style="height:auto; justify-items:center; justify-content:center; text-align:center;" DisableGutters="true" Class="overflow-auto">
+    @if (Categories is not null && Categories.Count > 0)
+    {
+        <MudPopover @bind-Open="PopoverOpen" @onmouseleave="OnMouseLeave" Direction="Direction.Top" 
+                AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.TopCenter" RelativeWidth="true" Style="z-index:400; width:83.33%" >
+            <MudGrid Justify="Justify.FlexStart" Spacing="3" Class="pa-5">
+                <MudItem xs="4" xxl="4">
+                    <MudPaper Class="pa-3" Elevation="3" Outlined="true" Width="250">
+                        <MudNavMenu Color="Color.Primary" Bordered="true" Rounded="true" Dense="false">
+                            <MudNavLink Class="mud-nav-group" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+                            @if (Categories is not null && Categories.Count > 0)
+                            {
+                                @foreach (var category in Categories)
+                                {
+                                    <IdNavigation Category="@category" NavLinkLabel="@(WebUtility.HtmlDecode(category.Name))" 
+                                    OnClick="OnNavigationMenuClick"> </IdNavigation>
+
+                                }
+                            }
+                        </MudNavMenu>
+                    </MudPaper>
+                </MudItem>
+                <MudItem xs="8" xxl="8">
+                @if (OpenedCategory != null)
+                {
+                    <MudPaper Class="pa-3" Elevation="3" Outlined="true" Width="250">
+                    @foreach (var subCategory in OpenedCategory.Categories)
+                    {
+                        
+                            <MudLink Href="@($"category/{subCategory.Category_Id}")">
+                                @(
+                                    WebUtility.HtmlDecode(subCategory.Name)
+                                    )
+                            </MudLink>
+                        
+                    }
+                    </MudPaper>
+                }
+                </MudItem>
+            </MudGrid>
+        </MudPopover>
+        <MudOverlay @bind-Visible="PopoverOpen" DarkBackground="true" ZIndex="200" AutoClose="true" />
+        <MudSpacer />
+        foreach (var category in Categories)
+        {
+            <IdButton ButtonLabel="@(WebUtility.HtmlDecode(category.Name))" Style="height:auto; color:#000000;"
+              Category="@category" OnClick="OnCategoryClick"></IdButton>
+        }
+        <MudSpacer />
+    }
+</MudAppBar>
+
+@code {
+    [Parameter] public List<Category> Categories { get; set; }
+    [Parameter] public string ButtonLabel { get; set; }
+    [Parameter] public RenderFragment PopoverContent { get; set; }
+    [Parameter] public string ButtonStyle { get; set; }
+    public bool PopoverOpen { get; set; } = false;
+    private Category? OpenedCategory = null;
+
+
+    private void OnNavigationMenuClick(Category category){
+        OpenedCategory = category;
+        StateHasChanged();
+    }
+
+    private void OnCategoryClick(Category category)
+    {
+        OpenedCategory = category;
+        PopoverOpen = !PopoverOpen;
+        StateHasChanged();
+    }
+
+    private void OnMouseLeave()
+    {
+        PopoverOpen = false;
+    }
+}

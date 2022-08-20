@@ -1,0 +1,20 @@
+﻿
+
+<MudNavLink  Match="@Match" OnClick="DoAction"
+            Class="mud-nav-group">@NavLinkLabel</MudNavLink>
+
+
+
+@code{
+    [Parameter] public Action<Category> OnClick { get; set; }
+    [Parameter] public NavLinkMatch Match { get; set; }
+    [Parameter] public string NavLinkLabel { get; set; }
+    [Parameter] public Category Category { get; set; }
+
+
+    public void DoAction()
+    {
+        Match = NavLinkMatch.Prefix;
+        OnClick(Category);
+    }
+}

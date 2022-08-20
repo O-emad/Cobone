@@ -34,9 +34,12 @@ namespace Cobone.MessageHandlers
             do
             {
                 //if no authorization cookie saved, use the dummy token to get unauthorized response and request a new token
-                string cookie = await cookieService.GetValue("Authorization", "Bearer db8da0586c299643d24aad2cc0ae3908ec39b21e");
-                var cookieValues = cookie.Split(' ');
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(cookieValues[0],cookieValues[1]);
+                string cookie = await cookieService.GetValue("Authorization", " ");
+                if (!string.IsNullOrWhiteSpace(cookie))
+                {
+                    var cookieValues = cookie.Split(' ');
+                    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(cookieValues[0], cookieValues[1]);
+                }
                 //request.Headers.Add("Authorization", cookie.Replace('\'',' '));
                 response = await base.SendAsync(request, cancellationToken);
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)

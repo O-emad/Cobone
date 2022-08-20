@@ -33,7 +33,33 @@
 
         </MudGrid>
     </MudItem>
+
 *@
+@*<h3>ClaimsPrincipal Data</h3>
+
+<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>
+<hr/>
+<button @onclick="Register">Register</button>
+<hr/>
+<button @onclick="Login">Login</button>
+<hr/>
+<button @onclick="Logout">Logout</button>
+<hr/>
+<p>@authMessage</p>
+
+@if (claims.Count() > 0)
+{
+    <ul>
+        @foreach (var claim in claims)
+        {
+            <li>@claim.Type: @claim.Value</li>
+        }
+    </ul>
+}
+
+<p>@surnameMessage</p>*@
+
+
     @if (Layout is not null && Layout.HomeData is not default(Home?))
     {
         <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.BestSeller" Title="Best Seller"></CategoryPreviewBlock>
@@ -41,7 +67,7 @@
         <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.Specials" Title="Special"></CategoryPreviewBlock>
         
     }
-    @if(CategoriesWithProducts is not null && CategoriesWithProducts is not default(List<CategoryProducts>))
+    @if(CategoriesWithProducts is not null && CategoriesWithProducts.Count > 0)
     {
         foreach(var category in CategoriesWithProducts)
         {

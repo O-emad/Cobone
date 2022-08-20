@@ -2,7 +2,11 @@
 @inject ICategoryDataService CategoryDataService
 @inject IHomeDataService HomeDataService
 @inject NavigationManager NavigationManager
-<MudThemeProvider />
+@inject IAccountDataService AccountDataService
+@inject IBreakpointService BreakpointListener
+
+@using System.Net
+<MudThemeProvider Theme="MyCustomTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -10,110 +14,162 @@
     <MudGrid Justify="Justify.Center" Spacing="1">
 
         <!---TopAddCarousel-->
-        <MudItem Style="margin-top:15px; justify-content:center;">
-            @if (HomeData is not null && HomeData is not default(Home?))
-            {
-                <TopAddCarousel SliderData="@HomeData.Slider" />
-            }
-        </MudItem>
-
-        <MudItem sm="12" xs="12" Style="padding:2">
-            <MudDivider Style="background-color:#000; opacity:0.125" />
-        </MudItem>
+        @*        <MudItem sm="12" xs="12" Style="padding:2">
+        <MudDivider Style="background-color:#0000; opacity:0.125" />
+        </MudItem>*@
 
 
         <!---AppBar-->
-        <MudItem sm="10" xs="10" Style="padding:2">
-            <MudAppBar Fixed="false" Color="Color.Transparent" Elevation="0">
+        <MudItem sm="12" xs="12" Style="padding:0">
+            <MudAppBar Fixed="false" Color="Color.Primary" Elevation="0" Style="padding-top:10px; padding-bottom:10px;">
+
+                @if (breakPoint < Breakpoint.Lg)
+                {
+                    <MudIconButton DisableElevation="true" DisableRipple="true" Icon="@Icons.Material.Filled.Menu"
+                               Color="Color.Tertiary" Size="Size.Large" OnClick="@ToggleDrawer" />
+                    <MudSpacer />
+                }
                 <MudLink Href="/">
-                    <MudImage Src="images/cobone-icon.svg" />
+                    <MudImage Fluid="true" Src="images/logo.png" />
                 </MudLink>
                 <MudSpacer />
 
+                @if (breakPoint > Breakpoint.Md)
+                {
+                    <AuthorizeView>
+                        <NotAuthorized>
+                            @*                        <MudButton DisableElevation="true" DisableRipple="true" OnClick="GoToLogin">
+                        <MudGrid Class="m-0">
+                        <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
+                        <MudBadge Visible="false" Overlap="true" Color="Color.Primary">
+                        <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" Color="Color.Tertiary" />
+                        </MudBadge>
+                        </MudItem>
+                        <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
+                        <MudText Typo="Typo.button" Color="Color.Tertiary">Account</MudText>
+                        </MudItem>
+                        </MudGrid>
 
+                        </MudButton>*@
 
-                <MudMenu FullWidth="true" Dense="true" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
-                    <ActivatorContent>
-                        
-                        <MudButton DisableElevation="true" DisableRipple="true">
-                            <MudGrid Class="m-0">
+                            <MudIconButton DisableElevation="true" DisableRipple="true" OnClick="GoToLogin" Icon="@Icons.Outlined.AccountCircle"
+                                       Size="Size.Large" Color="Color.Tertiary">
+
+                            </MudIconButton>
+                        </NotAuthorized>
+
+                        <Authorized>
+                            <MudMenu Dense="true" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
+                                <ActivatorContent>
+
+                                    @*                                <MudButton DisableElevation="true" DisableRipple="true">
+                                <MudGrid Class="m-0">
                                 <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                            <MudBadge Visible="false" Overlap="true" Color="Color.Primary">
-                                <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" />
-                            </MudBadge>
-                            </MudItem>
-                            <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                                 <MudText Typo="Typo.button">Account</MudText>
-                            </MudItem>
-                            </MudGrid>
-                            
-                        </MudButton>
-                    </ActivatorContent>
-                    <ChildContent>
-                        <MudMenuItem Href="account/orders">Orders</MudMenuItem>
-                        <MudMenuItem Href="account/credit">Credits</MudMenuItem>
-                        <MudMenuItem Href="account/data">Settings</MudMenuItem>
-                        <MudMenuItem>Logout</MudMenuItem>
-                    </ChildContent>
-                </MudMenu>
-
-
-
-                <MudButton DisableElevation="true" DisableRipple="true">
-                            <MudGrid Class="m-0">
+                                <MudBadge Visible="false" Overlap="true" Color="Color.Primary">
+                                <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" Color="Color.Tertiary" />
+                                </MudBadge>
+                                </MudItem>
                                 <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                            <MudBadge Content="@ShoppingCartContent" Visible="@(ShoppingCartContent>0)" Overlap="true" Color="Color.Primary">
-                                <MudIcon Icon="@Icons.Outlined.ShoppingCart" Size="Size.Large" />
-                            </MudBadge>
-                            </MudItem>
-                            <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                                 <MudText Typo="Typo.button">Cart</MudText>
-                            </MudItem>
-                            </MudGrid>
+                                <MudText Typo="Typo.button" Color="Color.Tertiary">Account</MudText>
+                                </MudItem>
+                                </MudGrid>
+
+                                </MudButton>*@
+                                    <MudIconButton DisableElevation="true" DisableRipple="true" Icon="@Icons.Outlined.AccountCircle"
+                                               Size="Size.Large" Color="Color.Tertiary">
+                                    </MudIconButton>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    <MudMenuItem Href="account/orders">Orders</MudMenuItem>
+                                    <MudMenuItem Href="account/credit">Credits</MudMenuItem>
+                                    <MudMenuItem Href="account/data">Settings</MudMenuItem>
+                                    <MudMenuItem OnClick="Logout">Logout</MudMenuItem>
+                                </ChildContent>
+                            </MudMenu>
+                        </Authorized>
+
+                    </AuthorizeView>
+                }
+
+                <MudButton DisableElevation="false" DisableRipple="false">
+                    <MudBadge Content="@ShoppingCartContent" Visible="@(ShoppingCartContent>0)" Overlap="true" Color="Color.Primary">
+                        <MudIcon Icon="@Icons.Outlined.ShoppingCart" Size="Size.Large" Color="Color.Tertiary" />
+                    </MudBadge>
                 </MudButton>
 
 
 
                 @*                <MudBreadcrumbs Items="_items">
-                    <SeparatorTemplate>
-                    <span>|</span>
-                    </SeparatorTemplate>
-                    <ItemTemplate Context="item">
-                    <MudButton DisableElevation="true" DisableRipple="true">
-                    <MudBadge Content="item.Href" Visible="@(!item.Disabled)" Overlap="true" Color="Color.Primary">
-                    <MudIcon Icon="@item.Icon" Size="Size.Large" />
-                    </MudBadge>
-                    </MudButton>
-                    </ItemTemplate>
-                    </MudBreadcrumbs>*@
+                <SeparatorTemplate>
+                <span>|</span>
+                </SeparatorTemplate>
+                <ItemTemplate Context="item">
+                <MudButton DisableElevation="true" DisableRipple="true">
+                <MudBadge Content="item.Href" Visible="@(!item.Disabled)" Overlap="true" Color="Color.Primary">
+                <MudIcon Icon="@item.Icon" Size="Size.Large" />
+                </MudBadge>
+                </MudButton>
+                </ItemTemplate>
+                </MudBreadcrumbs>*@
 
             </MudAppBar>
         </MudItem>
 
-        <MudItem sm="12" xs="12" Style="padding:2">
-            <MudDivider Style="background-color:#000; opacity:0.125; height:2px" />
-        </MudItem>
+        @*        <MudItem sm="12" xs="12" Style="padding:2">
+        <MudDivider Style="background-color:#000; opacity:0.125; height:2px" />
+        </MudItem>*@
 
         <!---CategoriesAppBar-->
-        <MudItem sm="10" xs="10">
-            <MudAppBar Fixed="false" Elevation="0" Style="height:auto; justify-content:center" DisableGutters="true" Class="overflow-auto">
-                @if (Categories is not null && Categories.Count > 0)
-                {
-                    foreach (var category in Categories)
+        @if (breakPoint > Breakpoint.Md)
+        {
+            <MudItem sm="12" xs="12">
+                <CategoryAppBar Categories="@Categories">
+
+                </CategoryAppBar>
+            </MudItem>
+        }
+        else
+        {
+            <MudDrawer Class="z-30" @bind-Open="@openDrawer" Elevation="1">
+                <MudPaper Elevation="25" Style="padding-top:10px;">
+                    <MudToolBar>
+                        <MudIconButton Icon="@Icons.Material.Outlined.ArrowBack" Color="Color.Primary" Size="Size.Large" OnClick="ToggleDrawer" />
+                        <MudSpacer />
+                        <MudIconButton Icon="@Icons.Outlined.AccountCircle" Color="Color.Primary" Size="Size.Large" />
+                    </MudToolBar>
+                </MudPaper>
+
+                <MudPaper Width="250px" Class="py-3" Elevation="0">
+                    <MudNavMenu Color="Color.Primary" Bordered="true" Rounded="true" Dense="false">
+                    <MudNavLink Class="mud-nav-group" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+                   @if (Categories is not null && Categories.Count > 0)
                     {
-
-                        <MenuButton Style="height:auto" ButtonLabel="@category.Name">
-                            @*                          <ProductPreview>
-                                <ProductCard xs="7" sm="6" md="5" lg="4" xl="3"></ProductCard>
-                                </ProductPreview>
-                                <SubCategories>
-                                <MudItem xs="5" sm="6" md="7" lg="8" xl="9"></MudItem>
-                                </SubCategories>*@
-                        </MenuButton>
-
-                    }
-                }
-            </MudAppBar>
+                        @foreach(var category in Categories)
+                        {
+                            if (category.Categories?.Count > 0)
+                            {
+                                <MudNavGroup Title="@(WebUtility.HtmlDecode(category.Name))" Expanded="false" >
+                                    @foreach(var subCategory in category.Categories)
+                                    {
+                                        <MudNavLink Href="@($"/category/{@subCategory.Category_Id}")"  Match="NavLinkMatch.All">@(WebUtility.HtmlDecode(subCategory.Name))</MudNavLink>
+                                    }
+                                
+                                </MudNavGroup>
+                            }else{
+                                <MudNavLink Href="@($"/category/{@category.Category_Id}")" Match="NavLinkMatch.All"
+                                 Class="mud-nav-group">@(WebUtility.HtmlDecode(category.Name))</MudNavLink>
+                            }
+                        }
+                     }
+                    </MudNavMenu>
+                </MudPaper>
+            </MudDrawer>
+        }
+        <MudItem Style="margin-top:15px; justify-content:center;">
+            @if (HomeData is not null && HomeData is not default(Home?))
+            {
+                <TopAddCarousel SliderData="@HomeData.Slider" />
+            }
         </MudItem>
 
     </MudGrid>
@@ -141,27 +197,3 @@
 </MudLayout>
 
 
-@code {
-
-    public List<Category> Categories { get; set; }
-    public Home? HomeData { get; set; }
-    private BreadcrumbItem item;
-    private MudButton button;
-    public int ShoppingCartContent { get; set; } = 1;
-    private void MoveToIndex()
-    {
-        NavigationManager.NavigateTo("/");
-    }
-    protected override async Task OnInitializedAsync()
-    {
-        if (CategoryDataService is not null)
-        {
-            Categories = (await CategoryDataService.GetCategories()).ToList();
-        }
-        if (HomeDataService is not null)
-        {
-            HomeData = await HomeDataService.GetHomeData();
-        }
-    }
-
-}

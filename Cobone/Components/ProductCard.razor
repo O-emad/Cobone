@@ -1,4 +1,5 @@
 ﻿@using Cobone.Models
+@using System.Net
 
 
 <MudItem Class="@($"product-card {Class}")" xs="xs" sm="sm" md="md" lg="lg" xl="xl" xxl="xxl" Style="@Style">
@@ -7,7 +8,7 @@
         <MudCardMedia Image="@Thumb" Height="500" />
         <MudCardContent>
             @*Product Title*@
-            <MudText Typo="Typo.h5">@Product.Name</MudText>
+            <MudText Typo="Typo.h5">@(WebUtility.HtmlDecode(Product.Name))</MudText>
             <MudItem xs="12">
                 @*fix to float rating*@
                 <MudRating ReadOnly="true" SelectedValue="@((int)Product.Rating)" />
@@ -31,7 +32,7 @@
                     </MudChip>*@
             </MudGrid>
         </MudCardContent>
-        <MudCardActions Style="@($"align-self:end; background-color:{Colors.Blue.Default}")">
+        <MudCardActions Style="@($"align-self:end; background-color:#59b210")">
             <MudGrid Justify="Justify.FlexStart" Spacing="1">
 
                 <MudItem Class="pa-0 py-0 px-2" xs="8" >

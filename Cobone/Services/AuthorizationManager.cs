@@ -25,11 +25,11 @@ namespace Cobone.Services
         public async Task<bool> AuthorizeClientCredentials()
         {
             
-            var request = new HttpRequestMessage(HttpMethod.Post, "/demo/store/index.php?route=feed/rest_api/gettoken&grant_type=client_credentials");
+            var request = new HttpRequestMessage(HttpMethod.Post, "/controlcenter/index.php?route=feed/rest_api/gettoken&grant_type=client_credentials");
             //request.SetBrowserRequestMode(BrowserRequestMode.NoCors);
-            request.Headers.Add("Authorization", "Basic cm9raWJhX29hdXRoX2NsaWVudDpyb2tpYmFfb2F1dGhfc2VjcmV0");
-            
-            request.Content = new StringContent("{\"old_token\": \"db8da0586c299643d24aad2cc0ae3908ec39b21e\"}", Encoding.UTF8, "application/json");
+            request.Headers.Add("Authorization", "Basic c2hvcHBpbmdfb2F1dGhfY2xpZW50MjI6c2hvcHBpbmdfb2F1dGhfc2VjcmV0MjI=");
+            //\"old_token\": \"db8da0586c299643d24aad2cc0ae3908ec39b21e\"
+            request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
             var response = await httpClient.SendAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
