@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Cobone.Shared
 {
@@ -19,7 +20,7 @@ namespace Cobone.Shared
         private Guid _subscriptionId;
         private Breakpoint breakPoint;
         private bool openDrawer = false;
-
+        
         private void MoveToIndex()
         {
             NavigationManager.NavigateTo("/");

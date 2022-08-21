@@ -1,20 +1,29 @@
 ﻿
 
-<MudNavLink  Match="@Match" OnClick="DoAction"
-            Class="mud-nav-group">@NavLinkLabel</MudNavLink>
+<MudButton  OnClick="DoAction" Variant="Variant.Filled" @onfocusout="DO2"  
+            Class="mud-nav-group px-5 my-2" Style="text-align:left;" Color="@ButtonColor">
+    <MudText Color="Color.Tertiary">@NavLinkLabel</MudText>
+</MudButton>
 
 
 
 @code{
     [Parameter] public Action<Category> OnClick { get; set; }
-    [Parameter] public NavLinkMatch Match { get; set; }
     [Parameter] public string NavLinkLabel { get; set; }
     [Parameter] public Category Category { get; set; }
+    public Color ButtonColor { get; set; } = Color.Dark;
 
 
     public void DoAction()
     {
-        Match = NavLinkMatch.Prefix;
+        ButtonColor = Color.Primary;
         OnClick(Category);
     }
+
+    public void DO2(){
+        ButtonColor = Color.Dark ;
+    }
+
+
+    
 }

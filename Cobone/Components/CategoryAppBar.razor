@@ -12,7 +12,11 @@
                 <MudItem xs="4" xxl="4">
                     <MudPaper Class="pa-3" Elevation="3" Outlined="true" Width="250">
                         <MudNavMenu Color="Color.Primary" Bordered="true" Rounded="true" Dense="false">
-                            <MudNavLink Class="mud-nav-group" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+               
+                            <MudButton Variant="Variant.Filled" Href="/" OnClick="OnNavigateLink"
+                                   Class="mud-nav-group px-5 my-2" Style="text-align:left;" Color="Color.Dark">
+                                <MudText Color="Color.Tertiary">Home</MudText>
+                            </MudButton>
                             @if (Categories is not null && Categories.Count > 0)
                             {
                                 @foreach (var category in Categories)
@@ -28,17 +32,21 @@
                 @if (OpenedCategory != null)
                 {
                     <MudPaper Class="pa-3" Elevation="3" Outlined="true" Width="250">
-                        <MudButton Color="Color.Primary" OnClick="OnAllDealsClick">AllDeals</MudButton>
+                            <MudChip Color="Color.Dark" OnClick="OnAllDealsClick"><MudText>All Deals</MudText> </MudChip>
+                            <MudDivider/>
+                            <MudItem Class="ma-5">
+                                <MudText Typo="Typo.h6" Style="font-weight:bold;">@(WebUtility.HtmlDecode(OpenedCategory.Name))</MudText>
                     @foreach (var subCategory in OpenedCategory.Categories)
                     {
                         
-                            <MudLink Href="@($"category/{subCategory.Category_Id}")">
+                            <MudLink @onclick="OnNavigateLink" Href="@($"category/{subCategory.Category_Id}")" Class="ma-3">
                                 @(
                                     WebUtility.HtmlDecode(subCategory.Name)
                                     )
                             </MudLink>
                         
                     }
+                    </MudItem>
                     </MudPaper>
                 }
                 </MudItem>
@@ -66,23 +74,37 @@
 
     private void OnNavigationMenuClick(Category category){
         OpenedCategory = category;
+        if(category.Categories?.Count == 0){
+            NavigationManager.NavigateTo($"/category/{OpenedCategory.Category_Id}");
+            PopoverOpen = false;
+        }
         StateHasChanged();
     }
 
     private void OnAllDealsClick(){
+        PopoverOpen = false;
         if(OpenedCategory is not null)
             NavigationManager.NavigateTo($"/category/{OpenedCategory.Category_Id}");
     }
 
     private void OnCategoryClick(Category category)
     {
+
         OpenedCategory = category;
         PopoverOpen = !PopoverOpen;
+        if (category.Categories?.Count == 0)
+        {
+            NavigationManager.NavigateTo($"/category/{OpenedCategory.Category_Id}");
+            PopoverOpen = false;
+        }
         StateHasChanged();
     }
 
     private void OnMouseLeave()
     {
+        //PopoverOpen = false;
+    }
+    private void OnNavigateLink(){
         PopoverOpen = false;
     }
 }
