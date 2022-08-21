@@ -1,4 +1,5 @@
 ﻿@using System.Net
+@inject NavigationManager NavigationManager
 
 
 <MudAppBar Dense="false" Fixed="false" Elevation="0" Color="Color.Secondary"
@@ -18,7 +19,6 @@
                                 {
                                     <IdNavigation Category="@category" NavLinkLabel="@(WebUtility.HtmlDecode(category.Name))" 
                                     OnClick="OnNavigationMenuClick"> </IdNavigation>
-
                                 }
                             }
                         </MudNavMenu>
@@ -28,6 +28,7 @@
                 @if (OpenedCategory != null)
                 {
                     <MudPaper Class="pa-3" Elevation="3" Outlined="true" Width="250">
+                        <MudButton Color="Color.Primary" OnClick="OnAllDealsClick">AllDeals</MudButton>
                     @foreach (var subCategory in OpenedCategory.Categories)
                     {
                         
@@ -66,6 +67,11 @@
     private void OnNavigationMenuClick(Category category){
         OpenedCategory = category;
         StateHasChanged();
+    }
+
+    private void OnAllDealsClick(){
+        if(OpenedCategory is not null)
+            NavigationManager.NavigateTo($"/category/{OpenedCategory.Category_Id}");
     }
 
     private void OnCategoryClick(Category category)

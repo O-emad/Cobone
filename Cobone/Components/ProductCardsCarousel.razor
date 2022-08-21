@@ -2,17 +2,17 @@
 
 
 
-<MudCarousel SelectedIndex="SelectedIndex" id="cardsgrid-carousel" Class="product-cards-carousel" ShowArrows="true" AutoCycle="false" ShowDelimiters="false" TData="object">
+<MudCarousel SelectedIndex="SelectedIndex" id="cardsgrid-carousel" Class="product-cards-carousel d-flex align-stretch flex-grow-1 pa-0 ma-0" ShowArrows="true" AutoCycle="false" ShowDelimiters="false" TData="object">
 
     @if (Grids.Count > 0)
     {
         foreach(var grid in Grids)
         {
-            <MudCarouselItem Class="product-cards-carousel-item">
-                <MudGrid Spacing="2" Justify="Justify.Center">
+            <MudCarouselItem Class="product-cards-carousel-item pa-2">
+                <MudGrid Spacing="2" Justify="Justify.Center" Class="d-flex align-stretch flex-grow-1 gap-4">
                     @foreach(var item in grid)
                     {
-                    <ProductCard xs="Xs" sm="Sm" md="Md" lg="Lg" xl="Xl"  xxl="Xxl" Product="item"></ProductCard>
+                        <ProductCard xs="Xs" sm="Sm" md="Md" lg="Lg" xl="Xl" xxl="Xxl" Product="item" Class="d-flex flex-1"></ProductCard>
                     }
                 </MudGrid>
             </MudCarouselItem>

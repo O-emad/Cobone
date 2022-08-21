@@ -78,7 +78,8 @@ namespace Cobone.Shared
                 Secondary = "#fafafa",
                 AppbarBackground = "#59b210",
                 Tertiary = "#ffffff",
-               
+                Dark = Colors.Grey.Lighten1
+
             },
 
             LayoutProperties = new LayoutProperties()
