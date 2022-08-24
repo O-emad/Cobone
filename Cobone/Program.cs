@@ -28,6 +28,8 @@ builder.Services.AddAuthorizationCore(authorizationOptions =>
          Cobone.Policies.Policies.CanAuthorize());
 });
 builder.Services.AddTransient<BaseMessageHandler>();
+builder.Services.AddHttpClient<ICartDataService, CartDataService>("CartAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest/cart"))
+    .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<ICategoryDataService, CategoryDataService>("CategoryAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/categories"))
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IHomeDataService, HomeDataService>("HomeAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/getHome"))

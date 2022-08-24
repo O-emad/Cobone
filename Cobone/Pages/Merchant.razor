@@ -1,0 +1,83 @@
+﻿@page "/merchant"
+@layout MerchantLayout
+
+
+<MudGrid Justify="Justify.Center" Spacing="2">
+    <MudItem xs="12" xxl="12">
+        <MudPaper Elevation="4" Style="border-radius:25px" class="d-flex flex-grow-1 gap-4 pa-5">
+            <MudTextField Label="Order Id" @bind-Value="orderId" Variant="@Variant.Text" Clearable Class="flex-grow-1" />
+                    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Search" Color="Color.Primary" Style="border-radius:20px">Search</MudButton>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" xxl="12">
+        <MudCard Elevation="4" Style="border-radius:25px">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Order Details</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudDivider></MudDivider>
+            <MudCardContent>
+            </MudCardContent>
+            <MudCardActions>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" xxl="12">
+        <MudCard Elevation="4" Style="border-radius:25px">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Shipping Address</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudDivider></MudDivider>
+            <MudCardContent>
+            </MudCardContent>
+            <MudCardActions>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" xxl="12">
+        <MudCard Elevation="4" Style="border-radius:25px">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Products</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudDivider></MudDivider>
+            <MudCardContent>
+            </MudCardContent>
+            <MudCardActions>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" xxl="12">
+        <MudCard Elevation="4" Style="border-radius:25px">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Invoice Details</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudDivider></MudDivider>
+            <MudCardContent>
+            </MudCardContent>
+            <MudCardActions>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" xxl="12">
+        <MudCard Elevation="4" Style="border-radius:25px">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Order History</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudDivider></MudDivider>
+            <MudCardContent>
+            </MudCardContent>
+            <MudCardActions>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</MudGrid>

@@ -14,7 +14,7 @@
                 <MudItem xs="12">
 
                         <MudPaper Class="pa-4" Outlined="true" Square="true">
-                            <MudItem Style="@($"background-color:{Colors.Grey.Lighten2}; text-align:center;")" Class="pa-1">
+@*                            <MudItem Style="@($"background-color:{Colors.Grey.Lighten2}; text-align:center;")" Class="pa-1">
                             <p>
 
                                 <MudText Color="Color.Warning" Typo="Typo.h6" Align="Align.Center">
@@ -29,27 +29,29 @@
                             </MudChip>
 
                         </MudItem>
-                        <br />
-                        <h3>
-                            <MudIcon Icon="@Icons.Filled.Menu" Title="Favorite" Color="Color.Info" Size="Size.Large"></MudIcon>
+                        <br />*@
+                        <MudText Typo="Typo.h6" Align="Align.Justify" GutterBottom="true">
+                            <MudIcon Icon="@Icons.Filled.Menu" Title="Favorite" Color="Color.Info" Size="Size.Large" ></MudIcon>
                             CHOOSE YOUR OPTION
-                        </h3>
+                        </MudText>
                         <MudList Clickable="false" Dense="false" DisableGutters="true">
                             <MudListItem Inset="false">
+                                <CascadingValue Value="this">
+                                <DealOptionBlock Price="@Product.Price" Special="@Product.Special" Quantity="@Product.Quantity" />
+                                    </CascadingValue>
+                            </MudListItem>
+@*                            <MudListItem Inset="false">
                                 <DealOptionBlock />
                             </MudListItem>
                             <MudListItem Inset="false">
                                 <DealOptionBlock />
-                            </MudListItem>
-                            <MudListItem Inset="false">
-                                <DealOptionBlock />
-                            </MudListItem>
+                            </MudListItem>*@
                         </MudList>
                         <MudItem>
                             <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.Payment" Color="Color.Warning" 
                             FullWidth="true" Class="mb-1 mt-1" Size="Size.Large">QUICK CHECKOUT</MudButton>
                             <MudButton Variant="Variant.Filled" StartIcon="@Icons.Filled.AddShoppingCart" Color="Color.Primary"
-                            FullWidth="true" Class="mt-1 mb-4" Size="Size.Large">ADD TO CART</MudButton>
+                            FullWidth="true" Class="mt-1 mb-4" Size="Size.Large" OnClick="AddToCart">ADD TO CART</MudButton>
                         </MudItem>
                         <MudItem Style="text-align:center">
                             <h6>Share this deal:</h6>

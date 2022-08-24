@@ -1,0 +1,15 @@
+﻿
+
+<MudPaper Square="false" Outlined="true" Style=" align-self:stretch; flex-grow:1; display:grid; border-radius:25px;">
+    <MudGrid Justify="Justify.FlexStart" Spacing="0">
+        <MudItem xs="6" xxl="6">
+            <MudImage Height="200"  Style="background-size:auto;" Src="@Product.thumb" />
+        </MudItem>
+    </MudGrid>
+
+</MudPaper>
+
+
+@code{
+    [Parameter] public CartProduct Product { get; set; }
+}

@@ -32,7 +32,7 @@ namespace Cobone.Models
             public string Special_Start_Date { get; set; }
             public string Special_End_Date { get; set; }
             //public object[] discounts { get; set; }
-            //public object[] options { get; set; }
+            public ProductOption[] options { get; set; }
             public string Minimum { get; set; }
             public string Meta_Title { get; set; }
             public string Meta_Description { get; set; }

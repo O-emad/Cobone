@@ -1,22 +1,70 @@
-﻿
+﻿@using Cobone.Pages
+
+
+
+
 <MudCard Square="true" Elevation="0" Style="@($"border-left-style:solid; border-left-width:6px; border-left-color:{Colors.Grey.Lighten1}")">
     <MudCardContent>
-        <MudText>Story of the day</MudText>
-        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+@*        <MudText>Story of the day</MudText>
+        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>*@
+
+        @if(Quantity == 0){
+            <MudText Typo="Typo.body1" Color="Color.Error">sorry, the item is out of stock</MudText>
+        }else if(Quantity < 10){
+            <MudText Typo="Typo.body1" Color="Color.Error">only @Quantity available!</MudText>
+        }
     </MudCardContent>
     <MudCardActions>
         <MudGrid Justify="Justify.FlexStart">
-            <QuantitySelection/>
+            <CascadingValue Value="this">
+            <QuantitySelection AvailableQuantity="@Quantity"/>
+            </CascadingValue>
             <MudSpacer/>
                 <MudItem> 
-                <MudText Color="Color.Primary" Typo="Typo.h4" Align="Align.Right">SAR 69</MudText>
-                <MudItem>
-                                     
-                 <MudText Color="Color.Default" Typo="Typo.h6"><MudChip Label="true" Color="Color.Warning">28% off</MudChip> <del>SAR 99</del></MudText>
-                </MudItem>
+                @if (Special > 0)
+                {
+                    <MudText Color="Color.Primary" Typo="Typo.h4" Align="Align.Right">@Special EGP</MudText>
+                    <MudItem>
 
+                 <MudText Color="Color.Default" Typo="Typo.h6"><MudChip Label="true" Color="Color.Warning">@OffPercentage% off</MudChip> <del>@Price EGP</del></MudText>
+                </MudItem>
+                }else{
+                    <MudText Color="Color.Primary" Typo="Typo.h4" Align="Align.Right">@Price EGP</MudText>
+                }
             </MudItem>
         </MudGrid>
 
     </MudCardActions>
 </MudCard>
+
+
+@code{
+    [Parameter] public float Price { get; set; } = 0f;
+    [Parameter] public float Special { get; set; } = 0f;
+    [Parameter] public int Quantity { get; set; }
+    public int OffPercentage { get; set; }
+    [CascadingParameter]
+    public ProductInfo ProductInfo { get; set; }
+
+    void GetOffPercentage()
+    {
+
+        if (Special == 0)
+        {
+            OffPercentage = 0;
+        }
+        if (Price > 0 && Special > 0)
+        {
+
+            OffPercentage = (int)(100 - ((Special / Price) * 100));
+        }
+
+    }
+
+    protected override void OnInitialized()
+    {
+        GetOffPercentage();
+        base.OnInitialized();
+    }
+
+}

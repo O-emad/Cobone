@@ -20,7 +20,20 @@ namespace Cobone.Shared
         private Guid _subscriptionId;
         private Breakpoint breakPoint;
         private bool openDrawer = false;
-        
+        public Cart Cart { get; set; } = new Cart()
+        {
+            total_product_count = 0
+        };
+
+        public bool CartPopoverOpen { get; set; } = false;
+
+
+        private void OpenCartPopOver()
+        {
+            CartPopoverOpen = !CartPopoverOpen;
+        }
+
+
         private void MoveToIndex()
         {
             NavigationManager.NavigateTo("/");
@@ -56,6 +69,18 @@ namespace Cobone.Shared
             if (HomeDataService is not null)
             {
                 HomeData = await HomeDataService.GetHomeData();
+            }
+            if (CartDataService is not null){
+                Cart = await CartDataService.GetCartItems();
+            }
+        }
+
+        public async Task RefreshCart()
+        {
+            if (CartDataService is not null)
+            {
+                Cart = await CartDataService.GetCartItems();
+                StateHasChanged();
             }
         }
 

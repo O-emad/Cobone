@@ -1,0 +1,45 @@
+﻿@inherits LayoutComponentBase
+@inject ICategoryDataService CategoryDataService
+@inject IHomeDataService HomeDataService
+@inject NavigationManager NavigationManager
+@inject IAccountDataService AccountDataService
+@inject ICartDataService CartDataService
+@inject IBreakpointService BreakpointListener
+
+@using System.Net
+<MudThemeProvider Theme="MyCustomTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudGrid Justify="Justify.Center" Spacing="1">
+        <MudItem sm="12" xs="12" Style="padding:0">
+            <MudAppBar Fixed="false" Color="Color.Primary" Elevation="0" Style="padding-top:10px; padding-bottom:10px;">
+
+                <MudLink Href="/">
+                    <MudImage Fluid="true" Src="images/logo.png" />
+                </MudLink>
+
+            </MudAppBar>
+        </MudItem>
+
+    </MudGrid>
+
+
+    <MudMainContent>
+            <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="pa-0">
+                <MudGrid Justify="Justify.Center" Spacing="2">
+                    <MudItem xs="10">
+                        @Body
+                    </MudItem>
+                </MudGrid>
+            </MudContainer>
+
+        <MudScrollToTop>
+            <MudFab Color="Color.Primary" IconSize="Size.Large" Icon="@Icons.Filled.ArrowCircleUp" />
+        </MudScrollToTop>
+
+    </MudMainContent>
+
+
+</MudLayout>

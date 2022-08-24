@@ -16,11 +16,19 @@
 </MudItem>
 
 @code{
+    [Parameter] public int AvailableQuantity { get; set; }
     public int Quantity { get; set; }
+    [CascadingParameter]
+    public DealOptionBlock DealOptionBlock { get; set; }
     public void Decrease()
     {
-        if (Quantity > 0)
+        if (Quantity > 0){
             Quantity--;
+            DealOptionBlock.ProductInfo.SelectedQuantity = Quantity;
+        }
     }
-    public void Increase() => Quantity++;
+    public void Increase(){
+        if (Quantity < AvailableQuantity) Quantity++;
+        DealOptionBlock.ProductInfo.SelectedQuantity = Quantity;
+    }
 }

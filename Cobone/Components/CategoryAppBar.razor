@@ -3,7 +3,7 @@
 
 
 <MudAppBar Dense="false" Fixed="false" Elevation="0" Color="Color.Secondary"
-           Style="height:auto; justify-items:center; justify-content:center; text-align:center;" DisableGutters="true" Class="overflow-auto">
+           Style="height:auto; justify-items:center; justify-content:center; text-align:center; z-index:300" DisableGutters="true" Class="overflow-auto">
     @if (Categories is not null && Categories.Count > 0)
     {
         <MudPopover @bind-Open="PopoverOpen" @onmouseleave="OnMouseLeave" Direction="Direction.Top" 
