@@ -14,11 +14,6 @@
 <MudLayout>
     <MudGrid Justify="Justify.Center" Spacing="1">
 
-        <!---TopAddCarousel-->
-        @*        <MudItem sm="12" xs="12" Style="padding:2">
-        <MudDivider Style="background-color:#0000; opacity:0.125" />
-        </MudItem>*@
-
 
         <!---AppBar-->
         <MudItem sm="12" xs="12" Style="padding:0">
@@ -30,29 +25,36 @@
                                Color="Color.Tertiary" Size="Size.Large" OnClick="@ToggleDrawer" />
                     <MudSpacer />
                 }
-                <MudLink Href="/">
-                    <MudImage Fluid="true" Src="images/logo.png" />
+                <MudLink Href="/" Class="pr-5">
+                    <MudImage Width="181" Height="65" Fluid="true" Src="images/logo.png"  />
                 </MudLink>
+
+                <MudTextField  @bind-Value="Search" Label="Search" Variant="Variant.Filled" Adornment="Adornment.End"
+                              AdornmentIcon="@Icons.Filled.Search" AdornmentColor="Color.Primary" Class="pa-0 ma-0" Style="@($"background:{Colors.Grey.Lighten2}")"></MudTextField>
+                
                 <MudSpacer />
+
+                <MudIconButton Icon="@Icons.Filled.Storefront" DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary" OnClick="NavigateToMerchant"/>
+                <MudButton  DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary"
+                            OnClick="OpenSpecialPopOver">
+                            <MudIcon Icon="@Icons.Filled.LocalOffer" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
+
+                    <MudPopover @bind-Open="SpecialPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top"
+                                AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight" RelativeWidth="false" Style="z-index:500">
+                        <div class="pa-5">
+                            <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                                <MudText Typo="Typo.h6" Class="pr-5">Special Offers</MudText>
+                                <MudSpacer />
+                                <MudIconButton OnClick="CloseOverlay" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
+                            </MudItem>
+                        </div>
+                    </MudPopover>
+                </MudButton>
 
                 @if (breakPoint > Breakpoint.Md)
                 {
                     <AuthorizeView>
                         <NotAuthorized>
-                            @*                        <MudButton DisableElevation="true" DisableRipple="true" OnClick="GoToLogin">
-                        <MudGrid Class="m-0">
-                        <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                        <MudBadge Visible="false" Overlap="true" Color="Color.Primary">
-                        <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" Color="Color.Tertiary" />
-                        </MudBadge>
-                        </MudItem>
-                        <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                        <MudText Typo="Typo.button" Color="Color.Tertiary">Account</MudText>
-                        </MudItem>
-                        </MudGrid>
-
-                        </MudButton>*@
-
                             <MudIconButton DisableElevation="true" DisableRipple="true" OnClick="GoToLogin" Icon="@Icons.Outlined.AccountCircle"
                                        Size="Size.Large" Color="Color.Tertiary">
 
@@ -62,20 +64,6 @@
                         <Authorized>
                             <MudMenu Dense="true" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
                                 <ActivatorContent>
-
-                                    @*                                <MudButton DisableElevation="true" DisableRipple="true">
-                                <MudGrid Class="m-0">
-                                <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                                <MudBadge Visible="false" Overlap="true" Color="Color.Primary">
-                                <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" Color="Color.Tertiary" />
-                                </MudBadge>
-                                </MudItem>
-                                <MudItem lg="12" xl="12" xs="12" md="12" sm="12" xxl="12" Class="m-0 p-0">
-                                <MudText Typo="Typo.button" Color="Color.Tertiary">Account</MudText>
-                                </MudItem>
-                                </MudGrid>
-
-                                </MudButton>*@
                                     <MudIconButton DisableElevation="true" DisableRipple="true" Icon="@Icons.Outlined.AccountCircle"
                                                Size="Size.Large" Color="Color.Tertiary">
                                     </MudIconButton>
@@ -98,21 +86,22 @@
                     </MudBadge>
                     <MudPopover @bind-Open="CartPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top" 
                                 AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight" RelativeWidth="false" Style="z-index:500">
-                        <MudGrid Class="pa-5" Justify="Justify.FlexStart" Spacing="2" >
+                          <div class="pa-5">
+                        @*<MudGrid Class="pa-5" Spacing="2" Justify="Justify.FlexEnd" >*@
                             <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
                                 <MudText Typo="Typo.h6" Class="pr-5">Your Shopping Cart</MudText>
                                 <MudSpacer/>
-                                <MudIconButton OnClick="OpenCartPopOver" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
+                                <MudIconButton OnClick="CloseOverlay" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
                             </MudItem>
                                                         @if (Cart.total_product_count > 0)
                             {
-                            <MudItem xs="12" xxl="12">
+                            <MudItem xs="12" xxl="12" Class="py-4">
                                 @foreach(var product in Cart.products){
                                     <CartItemComponent Product="@product"/>
                                 }
                             </MudItem>
 
-                                <MudItem xs="12" xxl="12" >
+                                <MudItem xs="12" xxl="12" Class="pt-3" >
                                     <MudText Typo="Typo.body2">ORDER TOTAL</MudText>
                                     <MudText Typo="Typo.h6">@Cart.total</MudText>
                                 </MudItem>
@@ -122,34 +111,12 @@
                                 <MudButton Variant="Variant.Filled" Color="Color.Dark"
                              FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OpenCartPopOver">Continue Shopping</MudButton>
                              }
-                        </MudGrid>
+                       @* </MudGrid>*@
+                        </div>
                     </MudPopover>
                 </MudButton>
-
-
-
-
-
-                @*                <MudBreadcrumbs Items="_items">
-                <SeparatorTemplate>
-                <span>|</span>
-                </SeparatorTemplate>
-                <ItemTemplate Context="item">
-                <MudButton DisableElevation="true" DisableRipple="true">
-                <MudBadge Content="item.Href" Visible="@(!item.Disabled)" Overlap="true" Color="Color.Primary">
-                <MudIcon Icon="@item.Icon" Size="Size.Large" />
-                </MudBadge>
-                </MudButton>
-                </ItemTemplate>
-                </MudBreadcrumbs>*@
-
             </MudAppBar>
         </MudItem>
-
-        @*        <MudItem sm="12" xs="12" Style="padding:2">
-        <MudDivider Style="background-color:#000; opacity:0.125; height:2px" />
-        </MudItem>*@
-
         <!---CategoriesAppBar-->
         @if (breakPoint > Breakpoint.Md)
         {
@@ -196,8 +163,9 @@
                 </MudPaper>
             </MudDrawer>
         }
-        <MudItem Style="margin-top:15px; justify-content:center;">
+        <MudItem Style="justify-content:center;" xs="10" xxl="10" Class="pa-0 mt-5">
             @if (HomeData is not null && HomeData is not default(Home?))
+
             {
                 <TopAddCarousel SliderData="@HomeData.Slider" />
             }
@@ -207,7 +175,7 @@
 
 
     <MudMainContent>
-        <MudOverlay @bind-Visible="CartPopoverOpen" DarkBackground="true" ZIndex="450" AutoClose="true" />
+        <MudOverlay @bind-Visible="OverlayOpen" DarkBackground="true" ZIndex="450" AutoClose="true" OnClick="CloseOverlay" />
         <CascadingValue Value="this">
             <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="pa-0">
                 <MudGrid Justify="Justify.Center" Spacing="2">

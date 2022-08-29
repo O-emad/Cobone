@@ -39,4 +39,5 @@ builder.Services.AddHttpClient<IProductDataService, ProductDataService>("Product
 builder.Services.AddHttpClient<IAccountDataService, AccountDataService>("AccountAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/gettoken"));
+
 await builder.Build().RunAsync();

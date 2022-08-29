@@ -1,7 +1,7 @@
 ﻿@page "/category/{CategoryId}"
 @using System.Net
 
-<MudPaper Elevation="2" Class="pa-3 ma-0" Style="border-radius:25px;">
+<MudPaper Elevation="0" Class="pa-3 ma-0"  Style="@($"background:{Colors.Grey.Lighten4}; border-radius:5px;")">
     <MudChip Class="ma-3 pa-3 py-5"  Color="Color.Dark">
         <MudText Typo="Typo.h5" Style="font-weight:bold;">@(WebUtility.HtmlDecode(CategoryName))</MudText>
     </MudChip>

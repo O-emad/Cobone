@@ -9,5 +9,12 @@ namespace Cobone.Pages
     public partial class Merchant
     {
         private string orderId = "";
+
+        private bool searched = false;
+
+        public void Search()
+        {
+            searched = true;
+        }
     }
 }

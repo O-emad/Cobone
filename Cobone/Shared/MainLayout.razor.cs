@@ -26,13 +26,36 @@ namespace Cobone.Shared
         };
 
         public bool CartPopoverOpen { get; set; } = false;
+        public bool SpecialPopoverOpen { get; set; } = false;
 
+        public bool OverlayOpen { get; set; } = false;
+        public string Search { get; set; }
 
         private void OpenCartPopOver()
         {
-            CartPopoverOpen = !CartPopoverOpen;
+            CartPopoverOpen = true;
+            SpecialPopoverOpen = false;
+            OverlayOpen = true;
         }
 
+        private void OpenSpecialPopOver()
+        {
+            SpecialPopoverOpen = true; ;
+            CartPopoverOpen = false;
+            OverlayOpen = true;
+        }
+
+        private void CloseOverlay()
+        {
+            CartPopoverOpen = false;
+            SpecialPopoverOpen = false;
+            OverlayOpen = false;
+        }
+
+        private void NavigateToMerchant()
+        {
+            NavigationManager.NavigateTo("/merchant");
+        }
 
         private void MoveToIndex()
         {

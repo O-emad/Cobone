@@ -2,12 +2,15 @@
 @inject NavigationManager NavigationManager
 
 <MudItem xs="12" sm="12" md="6" lg="4" xl="3" Class="d-flex product-card">
-    <MudCard Square="false" Elevation="6" Style="height:auto; align-self:stretch; flex-grow:1; display:grid; border-radius:25px;">
+    <MudCard Square="false" Elevation="0" Style="height:auto; align-self:stretch; flex-grow:1; display:grid; border-radius:5px;">
         @*Product Image*@
         <MudCardMedia Height="200" Style="background-size:cover;" Image="@Thumb" />
         <MudCardContent Class="flex-1">
             @*Product Title*@
-            <MudText Inline="true" Typo="Typo.h5">@(WebUtility.HtmlDecode(Product.Name))</MudText>
+@*            <MudItem Style="width:100%; aspect-ratio:1">
+                <MudImage Src="@Thumb" Fluid="true" ObjectFit="ObjectFit.Cover"/>
+            </MudItem>*@
+            <MudText Inline="true" Typo="Typo.h6">@(WebUtility.HtmlDecode(Product.Name))</MudText>
                 <MudItem xs="12">
                     <MudRating ReadOnly="true" SelectedValue="@((int)Product.Rating)" />
                 </MudItem>
@@ -15,7 +18,7 @@
                     <MudChip Label="true" Color="Color.Warning">@OffPercentage% off</MudChip>
                 </MudGrid>
             </MudCardContent>
-            <MudCardActions Class="pa-3" Style="@($"align-self:end; background-color:#59b210; border-radius:0px 0px 25px 25px;")">
+            <MudCardActions Class="pa-3" Style="@($"align-self:end; background-color:#59b210; border-radius:0px 0px 5px 5px;")">
                 <MudGrid Justify="Justify.FlexStart" Spacing="1" Class="d-flex justify-space-between flex-grow-1 gap-4">
                     <MudItem Class="pa-0 py-0 px-2">
                     @if (Product.Special > 0)
