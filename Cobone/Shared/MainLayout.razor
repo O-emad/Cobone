@@ -26,18 +26,19 @@
                     <MudSpacer />
                 }
                 <MudLink Href="/" Class="pr-5">
-                    <MudImage Width="181" Height="65" Fluid="true" Src="images/logo.png"  />
+                    <MudImage Width="181" Height="65" Fluid="true" Src="images/logo.png" />
                 </MudLink>
 
-                <MudTextField  @bind-Value="Search" Label="Search" Variant="Variant.Filled" Adornment="Adornment.End"
+                <MudTextField @bind-Value="Search" Label="Search" Variant="Variant.Filled" Adornment="Adornment.End"
                               AdornmentIcon="@Icons.Filled.Search" AdornmentColor="Color.Primary" Class="pa-0 ma-0" Style="@($"background:{Colors.Grey.Lighten2}")"></MudTextField>
-                
+
                 <MudSpacer />
 
-                <MudIconButton Icon="@Icons.Filled.Storefront" DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary" OnClick="NavigateToMerchant"/>
-                <MudButton  DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary"
-                            OnClick="OpenSpecialPopOver">
-                            <MudIcon Icon="@Icons.Filled.LocalOffer" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
+                <MudIconButton Icon="@Icons.Filled.Storefront" DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary" OnClick="NavigateToMerchant" />
+                <MudDivider Vertical="true" FlexItem="true" Class="ma-3" />
+                <MudButton DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary"
+                           OnClick="OpenSpecialPopOver">
+                    <MudIcon Icon="@Icons.Filled.LocalOffer" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
 
                     <MudPopover @bind-Open="SpecialPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top"
                                 AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight" RelativeWidth="false" Style="z-index:500">
@@ -53,6 +54,7 @@
 
                 @if (breakPoint > Breakpoint.Md)
                 {
+                    <MudDivider Vertical="true" FlexItem="true" Class="ma-3" />
                     <AuthorizeView>
                         <NotAuthorized>
                             <MudIconButton DisableElevation="true" DisableRipple="true" OnClick="GoToLogin" Icon="@Icons.Outlined.AccountCircle"
@@ -79,39 +81,40 @@
 
                     </AuthorizeView>
                 }
-
-                <MudButton DisableElevation="false" DisableRipple="false" Class="pa-4 mt-2" OnClick="OpenCartPopOver"> 
+                <MudDivider Vertical="true" FlexItem="true" Class="ma-3" />
+                <MudButton DisableElevation="false" DisableRipple="false" Class="pa-4 mt-2" OnClick="OpenCartPopOver">
                     <MudBadge Content="@Cart.total_product_count" Visible="@(Cart.total_product_count>0)" Overlap="true" Color="Color.Dark">
                         <MudIcon Icon="@Icons.Outlined.ShoppingCart" Size="Size.Large" Color="Color.Tertiary" />
                     </MudBadge>
-                    <MudPopover @bind-Open="CartPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top" 
+                    <MudPopover @bind-Open="CartPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top"
                                 AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight" RelativeWidth="false" Style="z-index:500">
-                          <div class="pa-5">
-                        @*<MudGrid Class="pa-5" Spacing="2" Justify="Justify.FlexEnd" >*@
+                        <div class="pa-5">
+                            @*<MudGrid Class="pa-5" Spacing="2" Justify="Justify.FlexEnd" >*@
                             <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
                                 <MudText Typo="Typo.h6" Class="pr-5">Your Shopping Cart</MudText>
-                                <MudSpacer/>
+                                <MudSpacer />
                                 <MudIconButton OnClick="CloseOverlay" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
                             </MudItem>
-                                                        @if (Cart.total_product_count > 0)
+                            @if (Cart.total_product_count > 0)
                             {
-                            <MudItem xs="12" xxl="12" Class="py-4">
-                                @foreach(var product in Cart.products){
-                                    <CartItemComponent Product="@product"/>
-                                }
-                            </MudItem>
+                                <MudItem xs="12" xxl="12" Class="py-4">
+                                    @foreach (var product in Cart.products)
+                                    {
+                                        <CartItemComponent Product="@product" />
+                                    }
+                                </MudItem>
 
-                                <MudItem xs="12" xxl="12" Class="pt-3" >
+                                <MudItem xs="12" xxl="12" Class="pt-3">
                                     <MudText Typo="Typo.body2">ORDER TOTAL</MudText>
                                     <MudText Typo="Typo.h6">@Cart.total</MudText>
                                 </MudItem>
 
-                                <MudButton Variant="Variant.Filled"  Color="Color.Primary" 
-                             FullWidth="true" Class="my-2" Size="Size.Large">CheckOut</MudButton>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                       FullWidth="true" Class="my-2" Size="Size.Large">CheckOut</MudButton>
                                 <MudButton Variant="Variant.Filled" Color="Color.Dark"
-                             FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OpenCartPopOver">Continue Shopping</MudButton>
-                             }
-                       @* </MudGrid>*@
+                                       FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OpenCartPopOver">Continue Shopping</MudButton>
+                            }
+                            @* </MudGrid>*@
                         </div>
                     </MudPopover>
                 </MudButton>
@@ -139,26 +142,28 @@
 
                 <MudPaper Width="250px" Class="py-3" Elevation="0">
                     <MudNavMenu Color="Color.Primary" Bordered="true" Rounded="true" Dense="false">
-                    <MudNavLink Class="mud-nav-group" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
-                   @if (Categories is not null && Categories.Count > 0)
-                    {
-                        @foreach(var category in Categories)
+                        <MudNavLink Class="mud-nav-group" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+                        @if (Categories is not null && Categories.Count > 0)
                         {
-                            if (category.Categories?.Count > 0)
+                            @foreach (var category in Categories)
                             {
-                                <MudNavGroup Title="@(WebUtility.HtmlDecode(category.Name))" Expanded="false" >
-                                    @foreach(var subCategory in category.Categories)
-                                    {
-                                        <MudNavLink Href="@($"/category/{@subCategory.Category_Id}")"  Match="NavLinkMatch.All">@(WebUtility.HtmlDecode(subCategory.Name))</MudNavLink>
-                                    }
-                                
-                                </MudNavGroup>
-                            }else{
-                                <MudNavLink Href="@($"/category/{@category.Category_Id}")" Match="NavLinkMatch.All"
-                                 Class="mud-nav-group">@(WebUtility.HtmlDecode(category.Name))</MudNavLink>
+                                if (category.Categories?.Count > 0)
+                                {
+                                    <MudNavGroup Title="@(WebUtility.HtmlDecode(category.Name))" Expanded="false">
+                                        @foreach (var subCategory in category.Categories)
+                                        {
+                                            <MudNavLink Href="@($"/category/{@subCategory.Category_Id}")" Match="NavLinkMatch.All">@(WebUtility.HtmlDecode(subCategory.Name))</MudNavLink>
+                                        }
+
+                                    </MudNavGroup>
+                                }
+                                else
+                                {
+                                    <MudNavLink Href="@($"/category/{@category.Category_Id}")" Match="NavLinkMatch.All"
+                                Class="mud-nav-group">@(WebUtility.HtmlDecode(category.Name))</MudNavLink>
+                                }
                             }
                         }
-                     }
                     </MudNavMenu>
                 </MudPaper>
             </MudDrawer>
@@ -191,6 +196,74 @@
         </MudScrollToTop>
 
     </MudMainContent>
+
+
+    <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="pl-0 pr-0" Style="@($"background:{Colors.Grey.Lighten4}; margin-top:80px; padding-bottom:80px;")">
+        <MudGrid Justify="Justify.Center" Class="pt-5">
+            <MudItem xs="10" xxl="10">
+                <MudGrid>
+                    <MudItem xs="12" sm="12" md="6">
+                        <MudStack>
+                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">COMPANY</MudText>
+                            <MudLink Href="/aboutus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">About us</MudLink>
+                            <MudLink Href="/contactus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Contant us</MudLink>
+                            <MudLink Href="/privacy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Privacy Policy</MudLink>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="12" md="6">
+                        <MudStack>
+                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">DOWNLOAD OUR APP</MudText>
+                            <MudStack Row="true">
+                                <MudPaper Class="mud-transparent d-flex justify-center align-center pa-4 pt-0" Style="height:100%" Elevation="0">
+                                    <MudLink Href="https://apps.apple.com/eg/app/cobony/id1604234152">
+                                        <MudImage Src="images/appstoreicon.png" Alt="IOS" ObjectFit="ObjectFit.Cover" ObjectPosition="ObjectPosition.Center" />
+                                    </MudLink>
+                                </MudPaper>
+
+                                <MudPaper Class="mud-transparent d-flex justify-center align-center pa-4 pt-0" Style="height:100%" Elevation="0">
+                                    <MudLink Href="https://play.google.com/store/apps/details?id=com.rokiba.cobony">
+                                        <MudImage Src="images/playstoreicon.png" Alt="ANDRIOD" ObjectFit="ObjectFit.Cover" ObjectPosition="ObjectPosition.Center" />
+                                    </MudLink>
+                                </MudPaper>
+                            </MudStack>
+                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">MEET US </MudText>
+                            <MudStack Row="true" Class="pa-4 pt-0" >
+                                <MudButton Href="https://facebook.com"
+                                           Target="_blank"
+                                           Variant="Variant.Filled"
+                                           StartIcon="@Icons.Custom.Brands.Facebook"
+                                           EndIcon="@Icons.Filled.ArrowRight"
+                                           Color="Color.Tertiary"
+                                           Style="@($"color:{Colors.Shades.Black}")"
+                                           Size="Size.Large">
+                                           
+                                    Facebook
+                                </MudButton>
+                                                                <MudButton Href="https://instagram.com"
+                                           Target="_blank"
+                                           Variant="Variant.Filled"
+                                           StartIcon="@Icons.Custom.Brands.Instagram"
+                                           EndIcon="@Icons.Filled.ArrowRight"
+                                           Color="Color.Tertiary"
+                                           Style="@($"color:{Colors.Shades.Black}")"
+                                           Size="Size.Large">
+                                    Instagram
+                                </MudButton>
+                            </MudStack>
+                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">CREDIT / DEBIT CARDS </MudText>
+                            <MudStack Row="true">
+                            <MudPaper Class="mud-transparent d-flex justify-center align-center pa-4 pt-0" Style="height:100%" Elevation="0">
+                                    <MudImage Src="images/credit.png" Alt="credit" ObjectFit="ObjectFit.Cover" ObjectPosition="ObjectPosition.Center" />
+                            </MudPaper>
+                            </MudStack>
+                        </MudStack>
+                    </MudItem>
+                </MudGrid>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+
+
 
 
 </MudLayout>

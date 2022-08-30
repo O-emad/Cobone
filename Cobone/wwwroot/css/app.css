@@ -108,3 +108,7 @@ a, .btn-link {
 .mud-input.mud-input-filled {
     background: #AABBCC;
 }
+
+.link:hover {
+    color: #59b210 !important;
+}
