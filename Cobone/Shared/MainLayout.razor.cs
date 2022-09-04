@@ -1,4 +1,6 @@
 ﻿using Cobone.Models;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using MudBlazor.Services;
 using System;
@@ -12,6 +14,8 @@ namespace Cobone.Shared
 {
     public partial class MainLayout :IAsyncDisposable
     {
+        [Inject]
+        public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         public List<Category> Categories { get; set; }
         public Home? HomeData { get; set; }
         private BreadcrumbItem item;
@@ -45,7 +49,7 @@ namespace Cobone.Shared
             OverlayOpen = true;
         }
 
-        private void CloseOverlay()
+        public void CloseOverlay()
         {
             CartPopoverOpen = false;
             SpecialPopoverOpen = false;
@@ -104,8 +108,26 @@ namespace Cobone.Shared
             {
                 Cart = await CartDataService.GetCartItems();
                 StateHasChanged();
+                
             }
         }
+
+
+        public async Task Checkout()
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity?.IsAuthenticated ?? false)
+            {
+                NavigationManager.NavigateTo("/checkout");
+                CloseOverlay();
+            }
+            else
+            {
+                //Navigate to sign-in / registeration
+            }
+        }
+
 
         private async void Logout()
         {

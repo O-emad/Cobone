@@ -27,6 +27,12 @@ namespace Cobone.Services
             response.EnsureSuccessStatusCode();
         }
 
+        public async Task DeleteCartItem(string key)
+        {
+            var response = await httpClient.DeleteAsync($"index.php?route=rest/cart/cart&key={key}");
+            response.EnsureSuccessStatusCode();
+        }
+
         public async Task<Cart> GetCartItems()
         {
             try

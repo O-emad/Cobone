@@ -112,3 +112,8 @@ a, .btn-link {
 .link:hover {
     color: #59b210 !important;
 }
+
+
+.mud-radio-content{
+    flex-grow:1;
+}

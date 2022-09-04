@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Cobone.Services
 {
-    public interface ICartDataService
+    public interface ICountryDataService
     {
-        Task AddToCart(CartItem item);
-        Task<Cart> GetCartItems();
-        Task DeleteCartItem(string key);
+        Task<IEnumerable<Country>> GetCountries();
     }
 }
