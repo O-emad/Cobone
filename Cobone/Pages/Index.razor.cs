@@ -4,6 +4,7 @@ using Cobone.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.JSInterop;
 using MudBlazor;
 using System;
@@ -26,6 +27,8 @@ namespace Cobone.Pages
         public IHomeDataService? HomeDataService { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public ICheckoutDataService CheckoutDataService { get; set; }
         [CascadingParameter]
         public MainLayout Layout { get; set; }
         public Home? HomeData { get; set; }
@@ -33,6 +36,20 @@ namespace Cobone.Pages
         public List<Category> Categories { get; set; }
         private bool _hasProducts = false;
 
+
+        protected override async Task OnParametersSetAsync()
+        {
+            var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("ref", out var _ref))
+            {
+                var refQuery = Convert.ToString(_ref);
+                if(refQuery == "confirm")
+                {
+                    if (CheckoutDataService is not null) await CheckoutDataService.ConfirmOrder();
+                    NavigationManager.NavigateTo("/", true);
+                }
+            }
+        }
 
         protected override void OnInitialized()
         {

@@ -27,7 +27,9 @@ namespace Cobone.Services
         {
             var response = await httpClient.PostAsync("index.php?route=rest/confirm/confirm", null);
             response.EnsureSuccessStatusCode();
-            return new OrderOverview();
+            var responseBodyObject = await JsonSerializer.DeserializeAsync<BaseResponse<OrderOverview>>(response.Content.ReadAsStream(),
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return responseBodyObject?.Data ?? new OrderOverview();
         }
 
         public async Task<IEnumerable<PaymentMethod>> GetPaymentMethods()
