@@ -57,6 +57,9 @@ namespace Cobone.Pages
                 {
                     await CartDataService.AddToCart(cartItem);
                     await Layout.RefreshCart();
+                    Layout.CloseOverlay();
+                    Layout.OpenCartPopOver();
+                    StateHasChanged();
                 }
             }
         }

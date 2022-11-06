@@ -11,6 +11,7 @@ namespace Cobone.Services
     {
         Task<AccountDetails> GetAccountDetails();
         Task Login(AccountLogin accountLogin);
+        Task ForgotPassword(AccountForgotPassword accountForgotPassword);
         Task Register(AccountRegister accountRegister);
         Task Logout();
     }

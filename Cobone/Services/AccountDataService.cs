@@ -41,6 +41,19 @@ namespace Cobone.Services
 
             }
         }
+        public async Task ForgotPassword(AccountForgotPassword accountForgotPassword)
+        {
+            try
+            {
+                var forgotCredentialsJson = new StringContent(JsonSerializer.Serialize(accountForgotPassword).ToLower(), encoding: Encoding.UTF8, "application/json");
+                var response = await httpClient.PostAsync("index.php?route=rest/forgotten/forgotten", forgotCredentialsJson);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
 
         public async Task Logout()
         {

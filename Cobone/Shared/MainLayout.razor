@@ -26,19 +26,19 @@
                     <MudSpacer />
                 }
                 <MudLink Href="/" Class="pr-5">
-                    <MudImage Width="181" Height="65" Fluid="true" Src="images/logo.png" />
+                    <MudImage Width="181" Height="65" Fluid="true" Src="images/Logo.png" />
                 </MudLink>
 
-                <MudTextField @bind-Value="Search" Label="Search" Variant="Variant.Filled" Adornment="Adornment.End"
-                              AdornmentIcon="@Icons.Filled.Search" AdornmentColor="Color.Primary" Class="pa-0 ma-0" Style="@($"background:{Colors.Grey.Lighten2}")"></MudTextField>
+                <MudTextField @bind-Value="Search" Variant="Variant.Outlined" Adornment="Adornment.End" Placeholder="What are you looking for"
+                              AdornmentIcon="@Icons.Filled.Search" AdornmentColor="Color.Tertiary" Class="pa-0 ma-0 border-solid border rounded-lg"></MudTextField>
 
                 <MudSpacer />
 
-                <MudIconButton Icon="@Icons.Filled.Storefront" DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary" OnClick="NavigateToMerchant" />
-                <MudDivider Vertical="true" FlexItem="true" Class="ma-3" />
+                @*<MudIconButton Icon="@Icons.Filled.Storefront" DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary" OnClick="NavigateToMerchant" />*@
+                <MudDivider Vertical="true" Light="true" FlexItem="true" Class="ma-3" />
                 <MudButton DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary"
                            OnClick="OpenSpecialPopOver">
-                    <MudIcon Icon="@Icons.Filled.LocalOffer" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
+                    <MudIcon Icon="@Icons.Filled.LocalPlay" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
 
                     <MudPopover @bind-Open="SpecialPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top"
                                 AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight" RelativeWidth="false" Style="z-index:500">
@@ -54,7 +54,7 @@
 
                 @if (breakPoint > Breakpoint.Md)
                 {
-                    <MudDivider Vertical="true" FlexItem="true" Class="ma-3" />
+                    <MudDivider Vertical="true" Light="true" FlexItem="true" Class="ma-3" />
                     <AuthorizeView>
                         <NotAuthorized>
                             <MudIconButton DisableElevation="true" DisableRipple="true" OnClick="GoToLogin" Icon="@Icons.Outlined.AccountCircle"
@@ -81,7 +81,7 @@
 
                     </AuthorizeView>
                 }
-                <MudDivider Vertical="true" FlexItem="true" Class="ma-3" />
+                <MudDivider Vertical="true" FlexItem="true" Light="true" Class="ma-3" />
                 <MudButton DisableElevation="false" DisableRipple="false" Class="pa-4 mt-2" OnClick="OpenCartPopOver">
                     <MudBadge Content="@Cart.total_product_count" Visible="@(Cart.total_product_count>0)" Overlap="true" Color="Color.Dark">
                         <MudIcon Icon="@Icons.Outlined.ShoppingCart" Size="Size.Large" Color="Color.Tertiary" />
@@ -126,9 +126,11 @@
         @if (breakPoint > Breakpoint.Md)
         {
             <MudItem sm="12" xs="12">
-                <CategoryAppBar Categories="@Categories">
 
+                <CategoryAppBar Categories="@Categories">
+                    
                 </CategoryAppBar>
+   
             </MudItem>
         }
         else

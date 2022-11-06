@@ -35,7 +35,7 @@ namespace Cobone.Shared
         public bool OverlayOpen { get; set; } = false;
         public string Search { get; set; }
 
-        private void OpenCartPopOver()
+        public void OpenCartPopOver()
         {
             CartPopoverOpen = true;
             SpecialPopoverOpen = false;
