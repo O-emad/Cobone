@@ -20,9 +20,9 @@ namespace Cobone.Models
     public class Option_Value
     {
         public string image { get; set; }
-        public int price { get; set; }
+        public float price { get; set; }
         public string price_formated { get; set; }
-        public int price_excluding_tax { get; set; }
+        public float price_excluding_tax { get; set; }
         public string price_excluding_tax_formated { get; set; }
         public string price_prefix { get; set; }
         public int product_option_value_id { get; set; }

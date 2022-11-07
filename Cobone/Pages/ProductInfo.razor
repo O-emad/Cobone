@@ -40,7 +40,27 @@
                         <MudList Clickable="false" Dense="false" DisableGutters="true">
                             <MudListItem Inset="false">
                                 <CascadingValue Value="this">
+                                 @if(Product.options.Length > 0){
+                                    @foreach (var option in Product.options)
+                                    {
+                                        @foreach (var optionValue in option.option_value)
+                                            {
+                                                    var price = Product.Price;
+                                                    var special = Product.Special;
+                                                    if(optionValue.price_prefix == "+"){
+                                                        price += optionValue.price;
+                                                        special += optionValue.price;
+                                                    }else{
+                                                        price -= optionValue.price;
+                                                        special -= optionValue.price;
+                                                    }
+                                                    <DealOptionBlock Name="@optionValue.name" Price="price" Special="special" Quantity="@optionValue.quantity" />
+                                            }
+                                        
+                                    }
+                                 }else{
                                 <DealOptionBlock Price="@Product.Price" Special="@Product.Special" Quantity="@Product.Quantity" />
+                                }
                                     </CascadingValue>
                             </MudListItem>
 @*                            <MudListItem Inset="false">

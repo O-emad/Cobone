@@ -40,6 +40,7 @@ namespace Cobone.Shared
             CartPopoverOpen = true;
             SpecialPopoverOpen = false;
             OverlayOpen = true;
+            StateHasChanged();
         }
 
         private void OpenSpecialPopOver()

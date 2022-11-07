@@ -62,6 +62,8 @@ builder.Services.AddHttpClient<ICheckoutDataService, CheckoutDataService>("Check
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IPaymentGatewayDataService, PaymobDataService>("PaymentAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
     .AddHttpMessageHandler<BaseMessageHandler>();
+builder.Services.AddHttpClient<IInformationDataService, InformationDataService>("InformationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/information"))
+    .AddHttpMessageHandler<BaseMessageHandler>();
 
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/gettoken"));
 builder.Services.AddHttpClient<ICountryDataService, CountryDataService>("CountryAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed"))

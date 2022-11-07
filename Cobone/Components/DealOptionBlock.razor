@@ -4,10 +4,13 @@
 
 
 <MudCard Square="true" Elevation="0" Style="@($"border-left-style:solid; border-left-width:6px; border-left-color:{Colors.Grey.Lighten1}")">
+    <MudCardHeader>
+        <MudText Typo="Typo.h6">@Name</MudText>
+    </MudCardHeader>
     <MudCardContent>
-@*        <MudText>Story of the day</MudText>
-        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>*@
-
+        @*<MudText>Story of the day</MudText>*@
+        <MudText Typo="Typo.body2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec sodales orci. Proin dui ligula, commodo sit amet purus id, lacinia pellentesque turpis.
+            Vivamus maximus pretium eros sit amet fermentum. Sed iaculis nulla lectus, non cursus odio hendrerit id. Mauris posuere purus pulvinar, tincidunt sapien in, dictum magna.</MudText>
         @if(Quantity == 0){
             <MudText Typo="Typo.body1" Color="Color.Error">sorry, the item is out of stock</MudText>
         }else if(Quantity < 10){
@@ -42,6 +45,7 @@
     [Parameter] public float Price { get; set; } = 0f;
     [Parameter] public float Special { get; set; } = 0f;
     [Parameter] public int Quantity { get; set; }
+    [Parameter] public string Name { get; set; } = "";
     public int OffPercentage { get; set; }
     [CascadingParameter]
     public ProductInfo ProductInfo { get; set; }
