@@ -35,6 +35,36 @@ namespace Cobone.Shared
         public bool OverlayOpen { get; set; } = false;
         public string Search { get; set; }
 
+
+        private string[] states =
+    {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming",
+    };
+
+        private async Task<IEnumerable<string>> Search1(string value)
+        {
+            // In real life use an asynchronous function for fetching data from an api.
+            await Task.Delay(1000);
+
+            // if text is null or empty, show complete list
+            if (string.IsNullOrEmpty(value))
+                return HomeData.BestSeller.Select(p=>p.Name).ToList();
+            return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+        }
+
         public void OpenCartPopOver()
         {
             CartPopoverOpen = true;
@@ -151,7 +181,7 @@ namespace Cobone.Shared
                 AppbarBackground = "#59b210",
                 Tertiary = "#ffffff",
                 Dark = Colors.Grey.Lighten1,
-                Info=Colors.Shades.Black
+                Info = Colors.Shades.Black
                 
 
             },

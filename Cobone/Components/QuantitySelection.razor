@@ -24,11 +24,14 @@
     {
         if (Quantity > 0){
             Quantity--;
-            DealOptionBlock.ProductInfo.SelectedQuantity = Quantity;
+            //DealOptionBlock.ProductInfo.SelectedQuantity = Quantity;
+            DealOptionBlock.ProductInfo.SelectedOptions.Remove(DealOptionBlock.OptionId);
+            DealOptionBlock.ProductInfo.SelectedOptions.Add(DealOptionBlock.OptionId, Quantity);
         }
     }
     public void Increase(){
         if (Quantity < AvailableQuantity) Quantity++;
-        DealOptionBlock.ProductInfo.SelectedQuantity = Quantity;
+        DealOptionBlock.ProductInfo.SelectedOptions.Remove(DealOptionBlock.OptionId);
+        DealOptionBlock.ProductInfo.SelectedOptions.Add(DealOptionBlock.OptionId, Quantity);
     }
 }

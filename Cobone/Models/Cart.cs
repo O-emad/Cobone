@@ -44,7 +44,7 @@ namespace Cobone.Models
         public int points { get; set; }
         public string product_id { get; set; }
         public string model { get; set; }
-        public object[] option { get; set; }
+        public CartOption[] option { get; set; }
         public string quantity { get; set; }
         public string recurring { get; set; }
         public bool stock { get; set; }
@@ -60,6 +60,12 @@ namespace Cobone.Models
         public string title { get; set; }
         public string text { get; set; }
         public int value { get; set; }
+    }
+
+    public class CartOption
+    {
+        public string name { get; set; }
+        public string value { get; set; }
     }
 
 }

@@ -105,9 +105,9 @@ a, .btn-link {
     -webkit-text-stroke-color: black;
 }
 
-.mud-input.mud-input-filled {
+/*.mud-input.mud-input-filled {
     background: #AABBCC;
-}
+}*/
 
 .link:hover {
     color: #59b210 !important;
@@ -132,3 +132,19 @@ a, .btn-link {
             font-weight: 500 !important;
         }
 
+
+.mud-input.mud-input-filled{
+    background:transparent;
+}
+
+.mud-input-label-filled {
+    color: white !important;
+}
+
+.mud-input.mud-input-filled.mud-input-underline:hover:before {
+     border-bottom: 0px solid var(--mud-palette-action-default); 
+}
+
+.mud-input.mud-input-underline:hover:not(.mud-disabled):before {
+     border-bottom: 0px solid var(--mud-palette-action-default); 
+}

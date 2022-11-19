@@ -49,12 +49,13 @@
                                                     var special = Product.Special;
                                                     if(optionValue.price_prefix == "+"){
                                                         price += optionValue.price;
-                                                        special += optionValue.price;
+                                                        special = special == 0 ? 0 : special + optionValue.price;
                                                     }else{
                                                         price -= optionValue.price;
-                                                        special -= optionValue.price;
+                                                        special = special == 0 ? 0 : special - optionValue.price;
                                                     }
-                                                    <DealOptionBlock Name="@optionValue.name" Price="price" Special="special" Quantity="@optionValue.quantity" />
+                                                    <DealOptionBlock Name="@optionValue.name" Price="price" Special="special" Quantity="@optionValue.quantity"
+                                                    OptionId="@optionValue.product_option_value_id"/>
                                             }
                                         
                                     }

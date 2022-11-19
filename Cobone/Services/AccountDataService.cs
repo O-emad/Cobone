@@ -77,5 +77,33 @@ namespace Cobone.Services
 
             }
         }
+
+        public async Task ChangePassword(AccountPasswordChange passwordChange)
+        {
+            try
+            {
+                var passwordChangeJson = new StringContent(JsonSerializer.Serialize(passwordChange).ToLower(), encoding: Encoding.UTF8, "application/json");
+                var response = await httpClient.PutAsync("index.php?route=rest/account/password", passwordChangeJson);
+                response.EnsureSuccessStatusCode();
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task UpdateAccountDetails(AccountUpdateDetails accountUpdate)
+        {
+            try
+            {
+                var accountUpdateJson = new StringContent(JsonSerializer.Serialize(accountUpdate).ToLower(), encoding: Encoding.UTF8, "application/json");
+                var response = await httpClient.PutAsync("index.php?route=rest/account/account", accountUpdateJson);
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

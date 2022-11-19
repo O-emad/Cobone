@@ -28,14 +28,19 @@
                 <MudLink Href="/" Class="pr-5">
                     <MudImage Width="181" Height="65" Fluid="true" Src="images/Logo.png" />
                 </MudLink>
-<MudMenu StartIcon="@Icons.Filled.Translate"  IconColor="Color.Primary" EndIcon="@Icons.Filled.KeyboardArrowDown" 
-Label="Language" Color="Color.Tertiary" Variant="Variant.Filled">
-    <MudMenuItem>Swedish</MudMenuItem>
-    <MudMenuItem>Old Norse</MudMenuItem>
-</MudMenu>
-
-                <MudTextField @bind-Value="Search" Variant="Variant.Outlined" Adornment="Adornment.End" Placeholder="What are you looking for"
-                              AdornmentIcon="@Icons.Filled.Search" AdornmentColor="Color.Tertiary" Class="pa-0 ma-0 border-solid border rounded-lg"></MudTextField>
+                <MudMenu FullWidth="true" Class="pr-5 align-self-stretch" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" StartIcon="@Icons.Filled.Translate"
+                                   Size="Size.Large" Class="ma-0 align-self-stretch rounded-lg" EndIcon="@Icons.Filled.ArrowDropDown">Language</MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem>English</MudMenuItem>
+                        <MudMenuItem>Arabic</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+                <MudAutocomplete T="string" Label="What are you looking for" @bind-Value="Search" SearchFunc="@Search1" Variant="Variant.Filled" ShowProgressIndicator="true"
+                                 ProgressIndicatorColor="Color.Tertiary" AdornmentIcon="@Icons.Material.Filled.Search" 
+                                 AdornmentColor="Color.Tertiary" Class="ma-0 border-solid border-2 rounded-lg align-self-stretch" />
 
                 <MudSpacer />
 
@@ -92,8 +97,8 @@ Label="Language" Color="Color.Tertiary" Variant="Variant.Filled">
                         <MudIcon Icon="@Icons.Outlined.ShoppingCart" Size="Size.Large" Color="Color.Tertiary" />
                     </MudBadge>
                     <MudPopover @bind-Open="CartPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Right"
-                                AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" OffsetY="true"  RelativeWidth="false" Style="z-index:500" Class="pa-0 ma-0">
-                        <div class="pa-5" style="width:auto; max-width:100vw" >
+                                AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" OffsetY="true" RelativeWidth="false" Style="z-index:500" Class="pa-0 ma-0">
+                        <div class="pa-5" style="width:auto; max-width:100vw">
                             @*<MudGrid Class="pa-5" Spacing="2" Justify="Justify.FlexEnd" >*@
                             <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
                                 <MudText Typo="Typo.h6" Class="pr-5">Your Shopping Cart</MudText>
@@ -104,10 +109,10 @@ Label="Language" Color="Color.Tertiary" Variant="Variant.Filled">
                             {
                                 <MudItem xs="12" xxl="12" Class="py-4 mt-3" Style="max-height:500px; overflow:scroll">
                                     <CascadingValue Value="this">
-                                    @foreach (var product in Cart.products)
-                                    {
-                                        <CartItemComponent Product="@product" />
-                                    }
+                                        @foreach (var product in Cart.products)
+                                        {
+                                            <CartItemComponent Product="@product" />
+                                        }
                                     </CascadingValue>
                                 </MudItem>
 
@@ -133,9 +138,9 @@ Label="Language" Color="Color.Tertiary" Variant="Variant.Filled">
             <MudItem sm="12" xs="12">
 
                 <CategoryAppBar Categories="@Categories">
-                    
+
                 </CategoryAppBar>
-   
+
             </MudItem>
         }
         else
@@ -215,7 +220,7 @@ Label="Language" Color="Color.Tertiary" Variant="Variant.Filled">
                         <MudStack>
                             <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">COMPANY</MudText>
                             <MudLink Href="/aboutus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">About us</MudLink>
-                            <MudLink Href="/contactus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Contant us</MudLink>
+                            <MudLink Href="/contactus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Contact us</MudLink>
                             <MudLink Href="/termsandconditions" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Terms and conditions</MudLink>
                             <MudLink Href="/privacy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Privacy Policy</MudLink>
                         </MudStack>
@@ -246,45 +251,45 @@ Label="Language" Color="Color.Tertiary" Variant="Variant.Filled">
                             </MudStack>
                             <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">MEET US </MudText>
                             <MudStack Class="pa-4 pt-0">
-                            <MudStack Row="true">
-                                <MudButton Href="https://facebook.com"
-                                           Target="_blank"
-                                           Variant="Variant.Filled"
-                                           StartIcon="@Icons.Custom.Brands.Facebook"
-                                           EndIcon="@Icons.Filled.ArrowRight"
-                                           Color="Color.Tertiary"
-                                           Style="@($"color:{Colors.Shades.Black}")"
-                                           Size="Size.Large" FullWidth="true">
-                                           
-                                    Facebook
-                                </MudButton>
-                                 <MudButton Href="https://instagram.com"
-                                           Target="_blank"
-                                           Variant="Variant.Filled"
-                                           StartIcon="@Icons.Custom.Brands.Instagram"
-                                           EndIcon="@Icons.Filled.ArrowRight"
-                                           Color="Color.Tertiary"
-                                           Style="@($"color:{Colors.Shades.Black}")"
-                                           Size="Size.Large" FullWidth="true">
-                                    Instagram
-                                </MudButton>
-                            </MudStack>
-                            <MudButton Href="/helpcenter"
-                                       Variant="Variant.Filled"
-                                       StartIcon="@Icons.Filled.HelpCenter"
-                                       EndIcon="@Icons.Filled.ArrowRight"
-                                       Color="Color.Tertiary"
-                                       Style="@($"color:{Colors.Shades.Black}")"
-                                       Size="Size.Large" FullWidth="true">
+                                <MudStack Row="true">
+                                    <MudButton Href="https://facebook.com"
+                                               Target="_blank"
+                                               Variant="Variant.Filled"
+                                               StartIcon="@Icons.Custom.Brands.Facebook"
+                                               EndIcon="@Icons.Filled.ArrowRight"
+                                               Color="Color.Tertiary"
+                                               Style="@($"color:{Colors.Shades.Black}")"
+                                               Size="Size.Large" FullWidth="true">
 
-                                Customer Service
-                            </MudButton>
+                                        Facebook
+                                    </MudButton>
+                                    <MudButton Href="https://instagram.com"
+                                               Target="_blank"
+                                               Variant="Variant.Filled"
+                                               StartIcon="@Icons.Custom.Brands.Instagram"
+                                               EndIcon="@Icons.Filled.ArrowRight"
+                                               Color="Color.Tertiary"
+                                               Style="@($"color:{Colors.Shades.Black}")"
+                                               Size="Size.Large" FullWidth="true">
+                                        Instagram
+                                    </MudButton>
+                                </MudStack>
+                                <MudButton Href="/helpcenter"
+                                           Variant="Variant.Filled"
+                                           StartIcon="@Icons.Filled.HelpCenter"
+                                           EndIcon="@Icons.Filled.ArrowRight"
+                                           Color="Color.Tertiary"
+                                           Style="@($"color:{Colors.Shades.Black}")"
+                                           Size="Size.Large" FullWidth="true">
+
+                                    Customer Service
+                                </MudButton>
                             </MudStack>
                             <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">CREDIT / DEBIT CARDS </MudText>
                             <MudStack Row="true">
-                            <MudPaper Class="mud-transparent d-flex justify-center align-center pa-4 pt-0" Style="height:100%" Elevation="0">
+                                <MudPaper Class="mud-transparent d-flex justify-center align-center pa-4 pt-0" Style="height:100%" Elevation="0">
                                     <MudImage Src="images/credit.png" Alt="credit" ObjectFit="ObjectFit.Cover" ObjectPosition="ObjectPosition.Center" />
-                            </MudPaper>
+                                </MudPaper>
                             </MudStack>
                         </MudStack>
                     </MudItem>

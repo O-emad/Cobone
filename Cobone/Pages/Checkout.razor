@@ -267,7 +267,7 @@
                 var token = await PaymentGatewayDataService.AuthenticationRequest();
                 var orderRegisterRequest = new PaymobOrderRegisterRequest()
                     {
-                        amount = orderOverview.total.ToString(),
+                        amount = (orderOverview.total * 100).ToString(),
                         currency = orderOverview.currency_code,
                         token = token
                     };

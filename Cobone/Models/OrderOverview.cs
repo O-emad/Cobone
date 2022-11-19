@@ -54,7 +54,7 @@ namespace Cobone.Models
         public OrderSummaryProduct[] products { get; set; }
         public object[] vouchers { get; set; }
         public string comment { get; set; }
-        public int total { get; set; }
+        public float total { get; set; }
         public int affiliate_id { get; set; }
         public int commission { get; set; }
         public int marketing_id { get; set; }

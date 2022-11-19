@@ -1,1 +1,36 @@
 ﻿@page "/contactus"
+
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="12">
+
+        <MudCard>
+            <MudCardHeader>
+                <MudText Typo="Typo.h1"
+                         Style="font-size: 36px; margin-bottom: 18px; font-family:Helvetica Neue, Helvetica, Arial, sans-serif; color: rgba(102, 102, 102, 1)">Contact Us</MudText>
+            </MudCardHeader>
+            <MudCardContent Class="pa-5">
+               <MudStack>
+                    <MudSelect Dense="false" T="string" Label="Reason" Variant="Variant.Outlined">
+                        <MudSelectItem Value="@("I have a question about the deal")" />
+                        <MudSelectItem Value="@("I have a question about payment")" />
+                        <MudSelectItem Value="@("I would like to share some feedback")" />
+                    </MudSelect>
+
+                    <MudTextField T="string" Label="First Name" Variant="Variant.Outlined"></MudTextField>
+                    <MudTextField T="string" Label="Last Name" Variant="Variant.Outlined"></MudTextField>
+                    <MudTextField T="string" Label="Phone" Variant="Variant.Outlined"></MudTextField>
+                    <MudTextField T="string" Label="Email" Variant="Variant.Outlined"></MudTextField>
+                    <MudTextField T="string" Label="Subject" Variant="Variant.Outlined"></MudTextField>
+                    <MudTextField T="string" Label="Your Message" Variant="Variant.Outlined" Lines="5"></MudTextField>
+                    <MudButton Variant="Variant.Filled" Size="Size.Large" Color="Color.Primary">Send</MudButton>
+                </MudStack>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@code{
+
+
+}

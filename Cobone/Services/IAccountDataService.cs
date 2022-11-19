@@ -14,5 +14,9 @@ namespace Cobone.Services
         Task ForgotPassword(AccountForgotPassword accountForgotPassword);
         Task Register(AccountRegister accountRegister);
         Task Logout();
+
+        Task ChangePassword(AccountPasswordChange passwordChange);
+        Task UpdateAccountDetails(AccountUpdateDetails accountUpdate);
+
     }
 }

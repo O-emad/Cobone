@@ -23,6 +23,8 @@ namespace Cobone.Pages
         [Parameter] public string Id { get; set; }
 
         public FullProductInfo? Product { get; set; }
+
+        public Dictionary<int, int> SelectedOptions { get; set; } = new Dictionary<int, int>();
         public int SelectedQuantity { get; set; }
         [CascadingParameter]
         public MainLayout Layout { get; set; }
@@ -35,30 +37,34 @@ namespace Cobone.Pages
 
         private async Task AddToCart()
         {
-            if (SelectedQuantity > 0)
+            if (SelectedOptions.Count > 0)
             {
-                var selectedOption = Product.options.FirstOrDefault();
-                var cartItem = new CartItem()
+                foreach (var option in SelectedOptions)
                 {
-                    product_id = Product.Product_Id.ToString(),
-                    quantity = SelectedQuantity.ToString(),
-                    option = new Dictionary<string, string>() { { selectedOption?.product_option_id.ToString()??" ", selectedOption?.option_id.ToString()??" "} }
-                };
-                var quantityOfCartItemInCart = int.Parse(Layout.Cart.products?.Where(p => p.product_id == cartItem.product_id)
-                    .FirstOrDefault(new CartProduct() {quantity ="0"}).quantity??"0") ;
-                var quantityOfNewRequestedCartItem = SelectedQuantity;
-                var canAddToCart = Product.Quantity >= quantityOfCartItemInCart + quantityOfNewRequestedCartItem;
-                if (!canAddToCart)
-                {
-                    Snackbar.Add("Requested Quantity Exceeds Available Quanity", Severity.Error);
-                    return;
+                    var selectedOption = Product.options.FirstOrDefault();
+                    var cartItem = new CartItem()
+                    {
+                        product_id = Product.Product_Id.ToString(),
+                        quantity = option.Value.ToString(),
+                        option = new Dictionary<string, string>() { { selectedOption?.product_option_id.ToString() ?? " ", option.Key.ToString() ?? " " } }
+                    };
+                    var quantityOfCartItemInCart = int.Parse(Layout.Cart.products?.Where(p => p.product_id == cartItem.product_id)
+                        .FirstOrDefault(new CartProduct() { quantity = "0" }).quantity ?? "0");
+                    var quantityOfNewRequestedCartItem = SelectedQuantity;
+                    var canAddToCart = selectedOption.option_value.Where(o=>o.product_option_value_id == option.Key).FirstOrDefault()
+                        .quantity >= quantityOfCartItemInCart + quantityOfNewRequestedCartItem;
+                    if (!canAddToCart)
+                    {
+                        Snackbar.Add("Requested Quantity Exceeds Available Quanity", Severity.Error);
+                        continue;
+                    }
+                    if (CartDataService is not null)
+                    {
+                        await CartDataService.AddToCart(cartItem);
+                    }
                 }
-                if (CartDataService is not null)
-                {
-                    await CartDataService.AddToCart(cartItem);
-                    await Layout.RefreshCart();
-                    Layout.OpenCartPopOver();
-                }
+                await Layout.RefreshCart();
+                Layout.OpenCartPopOver();
             }
         }
     }
