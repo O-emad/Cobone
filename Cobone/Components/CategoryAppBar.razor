@@ -2,7 +2,7 @@
 @inject NavigationManager NavigationManager
 
 
-<MudAppBar Dense="false" Fixed="false" Elevation="0" Color="Color.Secondary"
+<MudAppBar Dense="false" Fixed="false" Elevation="2" Color="Color.Secondary"
            Style="height:auto; justify-items:center; justify-content:center; text-align:center; z-index:300" DisableGutters="true" Class="overflow-auto">
     @if (Categories is not null && Categories.Count > 0)
     {
@@ -53,12 +53,14 @@
             </MudGrid>
         </MudPopover>
         <MudOverlay @bind-Visible="PopoverOpen" DarkBackground="true" ZIndex="200" AutoClose="true" />
-        <MudSpacer />
-        foreach (var category in Categories)
+        <MudSpacer  />
+        <div class="d-flex justify-space-between flex-grow-1 gap-4" style="height:100%;">
+        @foreach (var category in Categories)
         {
-            <IdButton ButtonLabel="@(WebUtility.HtmlDecode(category.Name))" Style="height:auto; color:#000000;"
+            <IdButton ButtonLabel="@(WebUtility.HtmlDecode(category.Name))" Style="height:auto; color:#000000; font-size:1.0rem; height:100%"
               Category="@category" OnClick="OnCategoryClick"></IdButton>
         }
+        </div>
         <MudSpacer />
     }
 </MudAppBar>

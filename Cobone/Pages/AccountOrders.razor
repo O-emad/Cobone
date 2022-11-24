@@ -68,6 +68,28 @@
                     <MudCard Elevation="4" Style="border-radius:0px">
                         <MudCardHeader>
                             <CardHeaderContent>
+                                <MudText Typo="Typo.h6">Order QR-Code</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudDivider Light="true"></MudDivider>
+                        <MudCardContent>
+
+                            <MudPaper Class="d-flex justify-center flex-grow-1 gap-4" Elevation="0">
+                                <SfQRCodeGenerator Value="@SearchedOrderDetails.order_id">
+                                    <QRCodeGeneratorDisplayText  Visibility="false"></QRCodeGeneratorDisplayText>
+                                </SfQRCodeGenerator>
+                            </MudPaper>
+
+
+                        </MudCardContent>
+                        <MudCardActions>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+                <MudItem xs="12" xxl="12">
+                    <MudCard Elevation="4" Style="border-radius:0px">
+                        <MudCardHeader>
+                            <CardHeaderContent>
                                 <MudText Typo="Typo.h6">Order Details</MudText>
                             </CardHeaderContent>
                         </MudCardHeader>

@@ -8,6 +8,7 @@ using Cobone.MessageHandlers;
 using Cobone.Utils;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
+using Syncfusion.Blazor;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -27,6 +28,7 @@ builder.Services.AddMudServices(config =>
     config.SnackbarConfiguration.ShowTransitionDuration = 500;
     config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
 });
+
 builder.Services.AddSingleton<BrowserService>();
 builder.Services.AddTransient<ICookie, Cookie>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
@@ -70,5 +72,7 @@ builder.Services.AddHttpClient<IMerchantDataService, MerchantDataService>("Merch
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/gettoken"));
 builder.Services.AddHttpClient<ICountryDataService, CountryDataService>("CountryAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed"))
     .AddHttpMessageHandler<BaseMessageHandler>();
+
+builder.Services.AddSyncfusionBlazor();
 await builder.Build().RunAsync();
 

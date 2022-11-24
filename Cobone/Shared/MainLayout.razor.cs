@@ -34,6 +34,9 @@ namespace Cobone.Shared
 
         public bool OverlayOpen { get; set; } = false;
         public string Search { get; set; }
+        public string LanguageLabel { get; set; } = "English";
+        public bool _RTL { get; set; } = false;
+        public List<string> Languages { get; set; } = new List<string>() { "English", "العربيه" };
 
 
         private string[] states =
@@ -177,7 +180,7 @@ namespace Cobone.Shared
 
                 Success = Colors.LightGreen.Accent4,
                 Primary = "#59b210",
-                Secondary = "#fafafa",
+                Secondary = "#F5F5F5",
                 AppbarBackground = "#59b210",
                 Tertiary = "#ffffff",
                 Dark = Colors.Grey.Lighten1,
@@ -190,7 +193,9 @@ namespace Cobone.Shared
             {
                 DrawerWidthLeft = "260px",
                 DrawerWidthRight = "300px"
-            }
+                
+            },
+            
         };
 
         private void GoToLogin()
@@ -204,7 +209,11 @@ namespace Cobone.Shared
             openDrawer = !openDrawer;
         }
 
-
+        private void OnLanguageMenuItemClick(string language)
+        {
+            LanguageLabel = language;
+            _RTL = !(language == "English");
+        }
 
         public async ValueTask DisposeAsync() => await BreakpointListener.Unsubscribe(_subscriptionId);
     }

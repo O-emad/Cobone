@@ -36,7 +36,7 @@
                 </MudPaper>
             </MudTabPanel>
             @*check if cart has shipping*@
-            <MudTabPanel Text="Shipping Address" Disabled="@ActivePanel[1]">
+@*            <MudTabPanel Text="Shipping Address" Disabled="@ActivePanel[1]">
                 <MudPaper Elevation="0">
                     <div class="pa-5" style="width:auto; max-width:100vw">
                         <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
@@ -137,7 +137,7 @@
                     </div>
                 </MudPaper>
             </MudTabPanel>
-
+*@
             <MudTabPanel Text="Payment Method" Disabled="@ActivePanel[4]">
                 <MudPaper Elevation="0">
                     <div class="pa-5" style="width:auto; max-width:100vw">
@@ -201,11 +201,19 @@
         if (AccountAddressDataService is not null) Addresses = (await AccountAddressDataService.GetAccountAddresses()).ToList();
         if (AccountDataService is not null) AccountDetails = await AccountDataService.GetAccountDetails();
         if (CountryDataService is not null) Countries = (await CountryDataService.GetCountries()).ToList();
-
-
+        SelectedAddress = Addresses.FirstOrDefault();
+        if (AccountAddressDataService is not null)  await ShippingAddressDataService.SelectExistingShippingAddress(SelectedAddress.address_id);
+        if (PaymentAddressDataService is not null)  await PaymentAddressDataService.SelectExistingPaymentAddress(SelectedAddress.address_id);
+        if (CheckoutDataService is not null)
+        {
+            PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).ToList();
+            ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
+            SelectedShippingMethod = ShippingMethods.FirstOrDefault().quote.FirstOrDefault();
+            await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);
+        }
         ActivePanel[0] = true;
         Tabs.ActivatePanel(1, true);
-        ActivePanel[1] = false;
+        ActivePanel[4] = false;
         TabButtonDisabled = false;
     }
 

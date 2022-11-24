@@ -1,4 +1,4 @@
-﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -133,12 +133,13 @@ a, .btn-link {
         }
 
 
-.mud-input.mud-input-filled{
-    background:transparent;
+.mud-input.mud-input-filled {
+    background: rgba(255,255,255,0.6) !important;
 }
 
 .mud-input-label-filled {
-    color: white !important;
+    color: #616161 !important;
+    font-weight: bold;
 }
 
 .mud-input.mud-input-filled.mud-input-underline:hover:before {
@@ -148,3 +149,26 @@ a, .btn-link {
 .mud-input.mud-input-underline:hover:not(.mud-disabled):before {
      border-bottom: 0px solid var(--mud-palette-action-default); 
 }
+
+div.search-bar div div:hover {
+    background-color: rgba(255,255,255,0.6) !important;
+}
+
+.top-app-bar {
+    padding-top: 95px !important;
+}
+
+@media screen and (max-width: 1279px) {
+    .top-app-bar {
+        padding-top: 25px !important;
+    }
+}
+
+.id-button{
+    border-radius:0px;
+}
+
+    .id-button:hover {
+        color: #59b210 !important;
+        background-color: #FAFAFA !important;
+    }
