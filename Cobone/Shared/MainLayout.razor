@@ -5,6 +5,9 @@
 @inject IAccountDataService AccountDataService
 @inject ICartDataService CartDataService
 @inject IBreakpointService BreakpointListener
+@inject IStringLocalizer<Resource> Loc
+@inject ILocalStorageService LocalStorage
+@using System.Globalization
 
 @using System.Net
 <MudThemeProvider Theme="MyCustomTheme" />
@@ -31,7 +34,7 @@
                 <MudLink Href="/" >
                     <MudImage Width="181" Height="65" Fluid="true" Src="images/Logo.png" />
                 </MudLink>
-                <MudMenu FullWidth="true" Class="pr-5 pl-5 align-self-stretch" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft" >
+@*                <MudMenu FullWidth="true" Class="pr-5 pl-5 align-self-stretch" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft"  >
                     <ActivatorContent>
                         <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" 
                                    Size="Size.Large" Class="ma-0 align-self-stretch rounded-lg" EndIcon="@Icons.Filled.ArrowDropDown" >@LanguageLabel</MudButton>
@@ -41,10 +44,19 @@
                             <MudMenuItem OnClick="()=>{OnLanguageMenuItemClick(lang);}" OnTouch="()=>{OnLanguageMenuItemClick(lang);}">@lang</MudMenuItem>
                         }
                     </ChildContent>
-                </MudMenu>
-                <MudAutocomplete T="string" Label="What are you looking for" @bind-Value="Search" SearchFunc="@Search1" Variant="Variant.Filled"
+                </MudMenu>*@
+                    <MudSelect Placeholder="Select Language" @bind-Value="@Culture"ToStringFunc="@convertFunc" Class="search-bar pr-5 pl-5 align-self-stretch"
+                    CloseIcon="@Icons.Material.Filled.Flag" AdornmentColor="Color.Primary" Variant="Variant.Filled"
+                               AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
+                        @foreach (var culture in cultures)
+                        {
+                            <MudSelectItem Value="culture" />
+                        }
+
+                    </MudSelect>
+                <MudAutocomplete T="string" Label="@Loc["appbar-search-text"]" @bind-Value="Search" SearchFunc="@Search1" Variant="Variant.Filled"
                                  AdornmentIcon="@Icons.Material.Filled.Search" 
-                                 AdornmentColor="Color.Dark" Class="ma-0 search-bar  rounded-lg align-self-stretch" />
+                                 AdornmentColor="Color.Tertiary" Class="search-bar  rounded-lg align-self-stretch" />
 
                 <MudSpacer />
 
@@ -54,13 +66,13 @@
                            OnClick="OpenSpecialPopOver">
                            <MudBadge Content="0" Visible="false" Overlap="true" Color="Color.Dark">
                     <MudIcon Icon="@Icons.Filled.NotificationsActive" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
-                    <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">Special Offers</MudText>
+                            <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_offer_text"]</MudText>
                     </MudBadge>
                     <MudPopover @bind-Open="SpecialPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top"
                                 AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight" RelativeWidth="false" Style="z-index:500">
                         <div class="pa-5">
                             <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
-                                <MudText Typo="Typo.button" Class="pr-5">Special Offers</MudText>
+                                    <MudText Typo="Typo.button" Class="pr-5">@Loc["appbar_offer_text"]</MudText>
                                 <MudSpacer />
                                 <MudIconButton OnClick="CloseOverlay" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
                             </MudItem>
@@ -77,28 +89,28 @@
                                    Size="Size.Large" Color="Color.Tertiary" OnClick="GoToLogin">
                                 <MudBadge Content="0" Visible="false" Overlap="true" Color="Color.Dark">
                                     <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
-                                    <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">My Account</MudText>
+                                        <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_account_text"]</MudText>
                                 </MudBadge>
                             </MudButton>
                           
                         </NotAuthorized>
 
                         <Authorized>
-                            <MudMenu Dense="true" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
+                            <MudMenu Dense="true" FullWidth="true" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
                                 <ActivatorContent>
                                     <MudButton DisableElevation="true" DisableRipple="true"
                                                Size="Size.Large" Color="Color.Tertiary">
                                                <MudBadge Content="0" Visible="false" Overlap="true" Color="Color.Dark">
                                             <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
-                                            <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">My Account</MudText>
+                                                <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_account_text"]</MudText>
                                                    </MudBadge>
                                     </MudButton>
                                 </ActivatorContent>
                                 <ChildContent>
-                                    <MudMenuItem Href="account/orders">Orders</MudMenuItem>
-                                    <MudMenuItem Href="account/credit">Credits</MudMenuItem>
-                                    <MudMenuItem Href="account/data">Settings</MudMenuItem>
-                                    <MudMenuItem OnClick="Logout">Logout</MudMenuItem>
+                                        <MudMenuItem Href="account/orders">@Loc["account-menu-order"]</MudMenuItem>
+                                        <MudMenuItem Href="account/credit">@Loc["account-menu-credit"]</MudMenuItem>
+                                        <MudMenuItem Href="account/data">@Loc["account-menu-settings"]</MudMenuItem>
+                                    <MudMenuItem OnClick="Logout">@Loc["account-menu-logout"]</MudMenuItem>
                                 </ChildContent>
                             </MudMenu>
                         </Authorized>
@@ -110,14 +122,14 @@
                     <MudBadge Content="@Cart.total_product_count" Visible="@(Cart.total_product_count>0)" Overlap="true" Color="Color.Dark">
                         <MudIcon Icon="@Icons.Outlined.ShoppingCart" Size="Size.Large" Color="Color.Tertiary"> 
                         </MudIcon>
-                        <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">Cart</MudText>
+                            <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_cart_text"]</MudText>
                     </MudBadge>
                     <MudPopover @bind-Open="CartPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Right"
                                 AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" OffsetY="true" RelativeWidth="false" Style="z-index:500" Class="pa-0 ma-0">
                         <div class="pa-5" style="width:auto; max-width:100vw">
                             @*<MudGrid Class="pa-5" Spacing="2" Justify="Justify.FlexEnd" >*@
                             <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
-                                <MudText Typo="Typo.h6" Class="pr-5">Your Shopping Cart</MudText>
+                                <MudText Typo="Typo.h6" Class="pr-5">@Loc["appbar_cart_text"]</MudText>
                                 <MudSpacer />
                                 <MudIconButton OnClick="CloseOverlay" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
                             </MudItem>
@@ -322,3 +334,38 @@
 </MudLayout>
 
 </MudRTLProvider>
+
+@code{
+    CultureInfo[] cultures = new[]{
+        new CultureInfo("en-US"),
+        new CultureInfo("ar-EG")
+    };
+
+    CultureInfo Culture
+    {
+        get => CultureInfo.CurrentCulture;
+        set {
+            if (CultureInfo.CurrentCulture != value)
+            {
+                LocalStorage.SetItemAsync<string>("culture", value.Name);
+                NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+            }
+        }
+    }
+    private string convertFunc(CultureInfo ci) {
+        if(ci is not null){
+            if (string.Equals(ci.Name, "en-US", StringComparison.OrdinalIgnoreCase))
+            {
+                _RTL = false;
+                return "English";
+            }
+            if (string.Equals(ci.Name, "ar-EG", StringComparison.OrdinalIgnoreCase))
+            {
+                _RTL = true;
+                return "العربيه";
+            }
+        }
+        _RTL = false;
+        return "N/A";
+    }
+}

@@ -2,6 +2,7 @@
 using Cobone.Utils;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace Cobone.MessageHandlers
             {
                 //if no authorization cookie saved, use the dummy token to get unauthorized response and request a new token
                 string cookie = await cookieService.GetValue("Authorization", " ");
+                request.Headers.Add("X-Oc-Merchant-Language", CultureInfo.CurrentCulture.Name.Split('-')[0]);
                 if (!string.IsNullOrWhiteSpace(cookie))
                 {
                     var cookieValues = cookie.Split(' ');
