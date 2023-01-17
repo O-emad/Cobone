@@ -43,36 +43,13 @@ builder.Services.AddAuthorizationCore(authorizationOptions =>
          CoboneMerchant.Policies.Policies.CanAuthorize());
 });
 builder.Services.AddTransient<BaseMessageHandler>();
-builder.Services.AddHttpClient<ICartDataService, CartDataService>("CartAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest/cart"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<ICategoryDataService, CategoryDataService>("CategoryAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/categories"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IHomeDataService, HomeDataService>("HomeAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/getHome"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IProductDataService, ProductDataService>("ProductAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/products"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IAccountDataService, AccountDataService>("AccountAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IPaymentAddressDataService, PaymentAddressDataService>("PaymentAddressAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IShippingAddressDataService, ShippingAddressDataService>("ShippingAddressAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IAccountAddressDataService, AccountAddressDataService>("AccountAddressAddressAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IAccountOrderDataService, AccountOrderDataService>("AccountOrderAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<ICheckoutDataService, CheckoutDataService>("CheckoutAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IPaymentGatewayDataService, PaymobDataService>("PaymentAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
-builder.Services.AddHttpClient<IInformationDataService, InformationDataService>("InformationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/information"))
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IMerchantDataService, MerchantDataService>("MerchantAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest/order"))
     .AddHttpMessageHandler<BaseMessageHandler>();
 
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/gettoken"));
-builder.Services.AddHttpClient<ICountryDataService, CountryDataService>("CountryAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed"))
-    .AddHttpMessageHandler<BaseMessageHandler>();
+
 
 builder.Services.AddSyncfusionBlazor();
 var host = builder.Build();
