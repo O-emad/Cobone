@@ -1,0 +1,23 @@
+﻿
+<MudItem xs="Xs" sm="Sm" md="Md" lg="Lg" xl="Xl" xxl="Xxl" Class="pa-0 ma-0">
+<MudPaper  Elevation="3" Class="pl-0 ma-0 flex-grow-1">
+    <MudNavMenu Class="mud-width-full" Margin="Margin.Dense" Color="Color.Primary" Bordered="true">
+                <MudText Typo="Typo.h6" Class="pa-4">My Account</MudText>
+        <MudDivider Light="true"></MudDivider>
+        <MudNavLink Href="account/orders" Icon="@Icons.Filled.Dashboard">Orders</MudNavLink>
+        <MudNavLink Href="account/credit" Icon="@Icons.Filled.Storage">Credit</MudNavLink>
+        <MudNavLink Href="account/data" Icon="@Icons.Filled.Science">Settings</MudNavLink>
+    </MudNavMenu>
+</MudPaper>
+</MudItem>
+
+@code{
+
+
+    [Parameter]public int Xs { get; set; }
+    [Parameter]public int Sm { get; set; }
+    [Parameter]public int Md { get; set; }
+    [Parameter]public int Lg { get; set; }
+    [Parameter]public int Xl { get; set; }
+    [Parameter]public int Xxl { get; set; }
+}

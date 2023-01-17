@@ -1,0 +1,317 @@
+﻿@page "/checkout"
+@using System.Text.Json
+@using System.Text
+
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xxl="6" xl="8" md="8" xs="12">
+        <MudTabs Elevation="2" Rounded="true" Centered="true" ApplyEffectsToContainer="true" PanelClass="pa-6" @ref="Tabs">
+            <MudTabPanel Text="Order Summary" Disabled="@ActivePanel[0]">
+                <MudPaper Elevation="0">
+                    <div class="pa-5" style="width:auto; max-width:100vw">
+                        <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                            <MudText Typo="Typo.h6" Class="pr-5">Your Shopping Cart</MudText>
+                        </MudItem>
+                        @if (Layout.Cart.total_product_count > 0)
+                        {
+                            <MudItem xs="12" xxl="12" Class="py-4 mt-3">
+                                <CascadingValue Value="this">
+                                    @foreach (var product in Layout.Cart.products)
+                                    {
+                                        <CartItemComponent Product="@product" />
+                                    }
+                                </CascadingValue>
+                            </MudItem>
+
+                            <MudItem xs="12" xxl="12" Class="pt-3">
+                                <MudText Typo="Typo.body2">ORDER TOTAL</MudText>
+                                <MudText Typo="Typo.h6">@Layout.Cart.total</MudText>
+                            </MudItem>
+
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnSummaryNextClick" Disabled="@TabButtonDisabled">Next</MudButton>
+
+                        }
+                    </div>
+                </MudPaper>
+            </MudTabPanel>
+            @*check if cart has shipping*@
+@*            <MudTabPanel Text="Shipping Address" Disabled="@ActivePanel[1]">
+                <MudPaper Elevation="0">
+                    <div class="pa-5" style="width:auto; max-width:100vw">
+                        <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                            <MudText Typo="Typo.h6" Class="pr-5">Shipping Address</MudText>
+                        </MudItem>
+                        @if (Addresses.Count > 0)
+                        {
+                            <MudRadioGroup @bind-SelectedOption="@SelectedAddress" Class="py-4 mt-3" Style="width:100%">
+                                @foreach (var address in Addresses)
+                                {
+                                    <MudRadio Option="@address" Color="Color.Primary" Class="pa-4" Style="display:flex; flex-grow:1;">
+
+
+                                        <MudExpansionPanels>
+                                            <MudExpansionPanel Text="@($"{address.address_1}, {address.city}, {address.country}")">
+                                                <MudStack Row="true">
+                                                    <MudButton Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large" FullWidth="true">
+                                                        Save
+                                                    </MudButton>
+                                                    <MudButton Color="Color.Error" Variant="Variant.Filled" Size="Size.Large" FullWidth="true">
+                                                        Delete
+                                                    </MudButton>
+                                                </MudStack>
+                                            </MudExpansionPanel>
+                                        </MudExpansionPanels>
+
+                                    </MudRadio>
+                                }
+                            </MudRadioGroup>
+                        }
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnShippingAddressNextClick" Disabled="@TabButtonDisabled">Next</MudButton>
+                    </div>
+                </MudPaper>
+            </MudTabPanel>
+            <MudTabPanel Text="Paymeny Address" Disabled="@ActivePanel[2]">
+                <MudPaper Elevation="0">
+                    <div class="pa-5" style="width:auto; max-width:100vw">
+                        <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                            <MudText Typo="Typo.h6" Class="pr-5">Payment Address</MudText>
+                        </MudItem>
+                        @if (Addresses.Count > 0)
+                        {
+                            <MudRadioGroup @bind-SelectedOption="@SelectedAddress" Class="py-4 mt-3" Style="width:100%">
+                                @foreach (var address in Addresses)
+                                {
+                                    <MudRadio Option="@address" Color="Color.Primary" Class="pa-4" Style="display:flex; flex-grow:1;">
+
+
+                                        <MudExpansionPanels>
+                                            <MudExpansionPanel Text="@($"{address.address_1}, {address.city}, {address.country}")">
+                                                <MudStack Row="true">
+                                                    <MudButton Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large" FullWidth="true">
+                                                        Save
+                                                    </MudButton>
+                                                    <MudButton Color="Color.Error" Variant="Variant.Filled" Size="Size.Large" FullWidth="true">
+                                                        Delete
+                                                    </MudButton>
+                                                </MudStack>
+                                            </MudExpansionPanel>
+                                        </MudExpansionPanels>
+
+                                    </MudRadio>
+                                }
+                            </MudRadioGroup>
+                        }
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnPaymentAddressNextClick" Disabled="@TabButtonDisabled">Next</MudButton>
+                    </div>
+                </MudPaper>
+            </MudTabPanel>
+            <MudTabPanel Text="Shipping Method" Disabled="@ActivePanel[3]">
+                <MudPaper Elevation="0">
+                    <div class="pa-5" style="width:auto; max-width:100vw">
+                        <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                            <MudText Typo="Typo.h6" Class="pr-5">Shipping Method</MudText>
+                        </MudItem>
+                        @if (ShippingMethods.Count > 0)
+                        {
+                            <MudRadioGroup @bind-SelectedOption="@SelectedShippingMethod" Class="py-4 mt-3" Style="width:100%">
+                                @foreach (var method in ShippingMethods)
+                                {
+                                    <MudText Typo="Typo.h6">@method.title</MudText>
+                                    @foreach (var quote in method.quote)
+                                    {
+                                        <MudRadio Option="@quote" Color="Color.Primary" Class="pa-4" Style="display:flex; flex-grow:1;">
+                                            <MudPaper Class="pa-3">
+                                                <MudText Typo="Typo.body1">@quote.text</MudText>
+                                            </MudPaper>
+                                        </MudRadio>
+                                    }
+
+                                }
+                            </MudRadioGroup>
+                        }
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnShippingMethodNextClick" Disabled="@TabButtonDisabled">Next</MudButton>
+                    </div>
+                </MudPaper>
+            </MudTabPanel>
+*@
+            <MudTabPanel Text="Payment Method" Disabled="@ActivePanel[4]">
+                <MudPaper Elevation="0">
+                    <div class="pa-5" style="width:auto; max-width:100vw">
+                        <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                            <MudText Typo="Typo.h6" Class="pr-5">Payment Method</MudText>
+                        </MudItem>
+                        @if (PaymentMethods.Count > 0)
+                        {
+                            <MudRadioGroup @bind-SelectedOption="@SelectedPaymentMethod" Class="py-4 mt-3" Style="width:100%">
+                                @foreach (var method in PaymentMethods)
+                                {
+                                    <MudRadio Option="@method" Color="Color.Primary" Class="pa-4" Style="display:flex; flex-grow:1;">
+                                        <MudPaper Class="pa-5">
+                                            <MudText Typo="Typo.body1">@method.title</MudText>
+                                        </MudPaper>
+                                    </MudRadio>
+                                }
+                            </MudRadioGroup>
+                        }
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnPaymentMethodNextClick" Disabled="@TabButtonDisabled">Next</MudButton>
+                    </div>
+                </MudPaper>
+            </MudTabPanel>
+        </MudTabs>
+
+    </MudItem>
+
+</MudGrid>
+
+
+
+@code {
+    [CascadingParameter] public MainLayout Layout { get; set; }
+    public int ActiveIndex { get; set; }
+    public MudTabs? Tabs;
+    [Inject] public NavigationManager NavigationManager { get; set; }
+    [Inject] public IPaymentAddressDataService PaymentAddressDataService { get; set; }
+    [Inject] public IShippingAddressDataService ShippingAddressDataService { get; set; }
+    [Inject] public IAccountAddressDataService AccountAddressDataService { get; set; }
+    [Inject] public IAccountDataService AccountDataService { get; set; }
+    [Inject] public ICountryDataService CountryDataService { get; set; }
+    [Inject] public ICheckoutDataService CheckoutDataService { get; set; }
+    [Inject] public IPaymentGatewayDataService PaymentGatewayDataService { get; set; }
+    public List<AccountAddress> Addresses { get; set; }
+    public List<Country> Countries { get; set; }
+    public AccountDetails AccountDetails { get; set; }
+    public AccountAddress SelectedAddress { get; set; }
+    public PaymentMethod SelectedPaymentMethod { get; set; }
+    public Quote SelectedShippingMethod { get; set; }
+    public List<PaymentMethod> PaymentMethods { get; set; }
+    public List<ShippingMethod> ShippingMethods { get; set; }
+
+
+    public bool TabButtonDisabled { get; set; } = false;
+    public bool[] ActivePanel { get; set; } = { false, true, true, true, true };
+
+    private async Task OnSummaryNextClick()
+    {
+        TabButtonDisabled = true;
+        if (AccountAddressDataService is not null) Addresses = (await AccountAddressDataService.GetAccountAddresses()).ToList();
+        if (AccountDataService is not null) AccountDetails = await AccountDataService.GetAccountDetails();
+        if (CountryDataService is not null) Countries = (await CountryDataService.GetCountries()).ToList();
+        SelectedAddress = Addresses.FirstOrDefault();
+        if (AccountAddressDataService is not null)  await ShippingAddressDataService.SelectExistingShippingAddress(SelectedAddress.address_id);
+        if (PaymentAddressDataService is not null)  await PaymentAddressDataService.SelectExistingPaymentAddress(SelectedAddress.address_id);
+        if (CheckoutDataService is not null)
+        {
+            PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).ToList();
+            ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
+            SelectedShippingMethod = ShippingMethods.FirstOrDefault().quote.FirstOrDefault();
+            await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);
+        }
+        ActivePanel[0] = true;
+        Tabs.ActivatePanel(1, true);
+        ActivePanel[4] = false;
+        TabButtonDisabled = false;
+    }
+
+    private async Task OnShippingAddressNextClick()
+    {
+        TabButtonDisabled = true;
+        if (ShippingAddressDataService is not null)
+        {
+            await ShippingAddressDataService.SelectExistingShippingAddress(SelectedAddress.address_id);
+            ActivePanel[1] = true;
+            Tabs.ActivatePanel(2, true);
+            ActivePanel[2] = false;
+        }
+        TabButtonDisabled = false;
+    }
+    private async Task OnPaymentAddressNextClick()
+    {
+        TabButtonDisabled = true;
+        if (PaymentAddressDataService is not null)
+        {
+            await PaymentAddressDataService.SelectExistingPaymentAddress(SelectedAddress.address_id);
+            if (CheckoutDataService is not null)
+            {
+                PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).ToList();
+                ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
+            }
+
+
+            ActivePanel[2] = true;
+            Tabs.ActivatePanel(3, true);
+            ActivePanel[3] = false;
+        }
+        TabButtonDisabled = false;
+    }
+
+    private async Task OnShippingMethodNextClick()
+    {
+        TabButtonDisabled = true;
+        if (CheckoutDataService is not null)
+        {
+            await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);
+            ActivePanel[3] = true;
+            Tabs.ActivatePanel(4, true);
+            ActivePanel[4] = false;
+        }
+        TabButtonDisabled = false;
+    }
+
+    private async Task OnPaymentMethodNextClick()
+    {
+        TabButtonDisabled = true;
+        if (CheckoutDataService is not null)
+        {
+            await CheckoutDataService.SelectPaymentMethod(SelectedPaymentMethod.code);
+            var orderOverview = await CheckoutDataService.GetOrderOverview();
+
+            if (PaymentGatewayDataService is not null)
+            {
+                var token = await PaymentGatewayDataService.AuthenticationRequest();
+                var orderRegisterRequest = new PaymobOrderRegisterRequest()
+                    {
+                        amount = (orderOverview.total * 100).ToString(),
+                        currency = orderOverview.currency_code,
+                        token = token
+                    };
+                var orderRegisterResponse = await PaymentGatewayDataService.OrderRegister(orderRegisterRequest);
+                var orderPaymentRequest = new PaymobPaymentRequest()
+                    {
+                        auth_token = token,
+                        amount_cents = orderRegisterRequest.amount,
+                        currency = orderRegisterRequest.currency,
+                        order_id = orderRegisterResponse.id.ToString(),
+                        expiration = 3600,
+                        integration_id = 2457117,
+                        lock_order_when_paid = "false",
+                        billing_data = new Billing_Data
+                        {
+                            email = AccountDetails.Email,
+                            first_name = AccountDetails.Firstname,
+                            last_name = AccountDetails.Lastname,
+                            phone_number = AccountDetails.Telephone,
+                            shipping_method = orderOverview.shipping_method,
+                            country = orderOverview.payment_country,
+                            city = orderOverview.payment_city,
+                            postal_code = orderOverview.payment_postcode,
+                            apartment = "4",
+                            building = "3",
+                            floor = "2",
+                            street = "1",
+                            state = "1"
+                        }
+                    };
+                var OrderPaymentResponse = await PaymentGatewayDataService.PaymentRequest(orderPaymentRequest);
+                NavigationManager.NavigateTo($"https://accept.paymob.com/api/acceptance/iframes/436114?payment_token={OrderPaymentResponse.token}", true);
+            }
+
+        }
+        //NavigationManager.NavigateTo("/", true);
+    }
+
+}

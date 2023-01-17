@@ -1,0 +1,23 @@
+﻿
+    <MudCarousel Style="@($" width:100%; aspect-ratio:3; justify-content:center")" 
+    ShowArrows="@arrows" ShowDelimiters="@delimiters" AutoCycle="@autocycle" TData="object">
+
+
+        @foreach(var banner in SliderData[0].Banners)
+        {
+            <MudCarouselItem Transition="transition" Color="@Color.Secondary"  Style="justify-content:center; width:100%; object-fit:cover">
+        <div class="d-flex" style="height:100%">
+                <MudImage Class="ma-0" Src="@banner.Image" Fluid="true" Style="object-fit:cover" />
+        </div>
+            
+    </MudCarouselItem>
+        }
+</MudCarousel>
+
+@code{
+    [Parameter] public List<Slider> SliderData { get; set; }
+    private bool arrows = true;
+    private bool delimiters = false;
+    private bool autocycle = true;
+    private Transition transition = Transition.Slide;
+}

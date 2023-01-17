@@ -1,0 +1,16 @@
+﻿
+
+
+<MudButton OnClick="DoAction" Style="@Style" Class="id-button" Variant="Variant.Text">@ButtonLabel</MudButton>
+
+
+@code{
+    [Parameter] public Action<Category> OnClick { get; set; }
+    [Parameter] public string ButtonLabel { get; set; }
+    [Parameter] public string Style { get; set; }
+    [Parameter] public Category Category { get; set; }
+
+    public void DoAction(){
+        OnClick(Category);
+    }
+}

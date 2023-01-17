@@ -1,0 +1,33 @@
+﻿@page "/registration"
+
+
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardHeader>
+                    <MudText Typo="Typo.h5">Register</MudText>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudTextField Label="First name" HelperText="Max. 8 characters" Variant="Variant.Outlined"
+                                  @bind-Value="model.Firstname" For="@(() => model.Firstname)" />
+                    <MudTextField Label="First name" HelperText="Max. 8 characters" Variant="Variant.Outlined"
+                                  @bind-Value="model.Lastname" For="@(() => model.Lastname)" />
+                    <MudTextField Label="Email" Class="mt-3" Variant="Variant.Outlined"
+                                  @bind-Value="model.Email" For="@(() => model.Email)" />
+                    <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3" Variant="Variant.Outlined"
+                                  @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
+                    <MudTextField Label="Confirm Password" HelperText="Repeat the password" Class="mt-3" Variant="Variant.Outlined"
+                                  @bind-Value="model.Confirm" For="@(() => model.Confirm)" InputType="InputType.Password" />
+                    <MudTextField Label="Phone" HelperText="Enter your phone number" Class="mt-3" Variant="Variant.Outlined"
+                                  @bind-Value="model.Telephone" For="@(() => model.Telephone)" InputType="InputType.Telephone" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large"
+                    FullWidth="true" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>

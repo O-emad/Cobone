@@ -1,0 +1,44 @@
+﻿@using CoboneMerchant.Models
+@using System.Net
+
+
+<MudItem xs="Xs" sm="Sm" md="Md" lg="Lg" xl="Xl" xxl="Xxl" Class="pa-0 ma-0 py-5">
+    <MudCard Elevation="0" Class="pa-0 ma-0" Style="@($"background:{Colors.Grey.Lighten4}")">
+        <MudCardContent>
+            <MudGrid Class="pa-0 ma-0" Spacing="1">
+                <MudItem xs="6">
+                    <MudText Typo="Typo.h5">@(WebUtility.HtmlDecode(Title))</MudText>
+                </MudItem>
+                <MudSpacer/>
+                <MudItem>
+                    <MudFab Icon="@Icons.Filled.Menu" Label="VIEW ALL"></MudFab>
+                </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.body1">@Description</MudText>
+            </MudItem>
+            <MudItem xs="12">
+                            <ProductCardsCarousel Source="@Products"></ProductCardsCarousel>
+            </MudItem>
+
+
+            </MudGrid>
+
+        </MudCardContent>
+    </MudCard>
+</MudItem>
+
+
+
+@code{
+
+
+    [Parameter]public int Xs { get; set; }
+    [Parameter]public int Sm { get; set; }
+    [Parameter]public int Md { get; set; }
+    [Parameter]public int Lg { get; set; }
+    [Parameter]public int Xl { get; set; }
+    [Parameter]public int Xxl { get; set; }
+    [Parameter]public List<Product> Products { get; set; }
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+}

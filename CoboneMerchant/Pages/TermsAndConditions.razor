@@ -1,0 +1,36 @@
+﻿@page "/termsandconditions"
+
+@inject IInformationDataService InformationDataService
+
+
+
+@if (PageInfo is not null)
+{
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="12">
+            
+            <MudCard>
+                <MudCardContent>
+                    @((MarkupString)(MarkupStringSanitized)HttpUtility.HtmlDecode(PageInfo.description))
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+}
+
+@code{
+    public InformationDetails? PageInfo { get; set; } = null;
+    protected override async Task OnInitializedAsync()
+    {
+        if(InformationDataService is not null){
+            var infos = await InformationDataService.GetSiteInformation();
+            var pageInfo = infos.FirstOrDefault(i => i.title.Contains("Terms &amp; Conditions", StringComparison.OrdinalIgnoreCase));
+
+            if(pageInfo is not null){
+                PageInfo = await InformationDataService.GetInformationDetails(pageInfo.id);       
+                
+        }
+            
+        }
+    }
+}

@@ -1,0 +1,26 @@
+﻿
+
+
+<MudButton OnClick="OnMouseEnter" Style="@ButtonStyle">@ButtonLabel</MudButton>
+<MudPopover  @bind-Open="PopoverOpen" @onmouseleave="OnMouseLeave" Direction="Direction.Top" 
+AnchorOrigin="Origin.TopCenter" TransformOrigin="Origin.TopCenter"  RelativeWidth="true" Style="z-index:400">
+    @PopoverContent
+</MudPopover>
+<MudOverlay @bind-Visible="PopoverOpen" DarkBackground="true" ZIndex="200" AutoClose="true"/>
+
+
+@code{
+    [Parameter] public string ButtonLabel{ get; set; }
+    [Parameter] public RenderFragment PopoverContent{ get; set; }
+    [Parameter] public string ButtonStyle{ get; set; }
+    public bool PopoverOpen { get; set; } = false;
+
+    private void OnMouseEnter()
+    {
+        PopoverOpen = !PopoverOpen;
+    }
+    private void OnMouseLeave()
+    {
+        PopoverOpen = false;
+    }
+}

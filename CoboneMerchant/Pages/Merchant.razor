@@ -1,0 +1,148 @@
+﻿@page "/merchant"
+@layout MerchantLayout
+@attribute [Authorize]
+
+<MudGrid Justify="Justify.Center" Spacing="2">
+    <MudItem xs="12" xxl="12">
+        <MudPaper Elevation="4" Style="border-radius:0px" class="d-flex flex-grow-1 gap-4 pa-5">
+            <MudTextField Label="Order Id" @bind-Value="orderId" Variant="@Variant.Text" Clearable Class="flex-grow-1" T="int" />
+                    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Search" Color="Color.Primary" Style="border-radius:20px" OnClick="Search">Search</MudButton>
+        </MudPaper>
+    </MudItem>
+    @if (searched)
+    {
+        <MudItem xs="12" xxl="12">
+            <MudCard Elevation="4" Style="border-radius:0px">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Order Details</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudDivider Light="true"></MudDivider>
+                <MudCardContent>
+                    <div class="d-flex align-end justify-space-between mud-width-full gap-5 flex-wrap px-4">
+                        <MudText Typo="Typo.body1"><b>Order#:</b> @SearchedOrderDetails.order_id</MudText>
+                        <MudText Typo="Typo.body1"><b>Payment:</b> @SearchedOrderDetails.payment_method</MudText>
+                        <MudText Typo="Typo.body1"><b>Date:</b> @SearchedOrderDetails.date_modified</MudText>
+                        <MudText Typo="Typo.body1"><b>Shipping:</b> @SearchedOrderDetails.shipping_method</MudText>
+                    </div>
+                </MudCardContent>
+                <MudCardActions>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" xxl="12">
+            <MudCard Elevation="4" Style="border-radius:0px">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Shipping Address</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudDivider Light="true"></MudDivider>
+                <MudCardContent>
+                    <div class="d-flex align-end justify-space-between mud-width-full gap-5 flex-wrap px-4">
+                        <MudText Typo="Typo.body1">@((MarkupString)SearchedOrderDetails.shipping_address)</MudText>
+                        </div>
+                    </MudCardContent>
+                    <MudCardActions>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        <MudItem xs="12" xxl="12">
+            <MudCard Elevation="4" Style="border-radius:0px">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Products</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudDivider Light="true"></MudDivider>
+                <MudCardContent>
+                    @*<div class="d-flex align-stretch flex-grow-1  mud-width-full gap-5 flex-wrap px-4">*@
+                    <MudGrid Spacing="4" Justify="Justify.FlexStart" Class="d-flex align-stretch">
+                        @foreach (var product in SearchedOrderDetails.products)
+                        {
+                            <MudItem xs="12" md="6" lg="4" xl="3" Class="align-stretch d-flex">
+                                <MudCard Class="py-4 d-flex flex-1 " Elevation="3">
+                                    <MudCardContent Class="flex-1 d-flex">
+                                        <div class="d-flex align-end flex-column mud-width-full gap-5 px-4 align-stretch">
+                                            <div class="d-flex flex-column flex-1 align-self-start">
+                                                <MudText Typo="Typo.body1"><b>@product.name</b></MudText>
+                                                <MudText Typo="Typo.body1">@product.model</MudText>
+                                                <MudText Typo="Typo.body1">
+                                                    @product.price_raw X @product.quantity = <b>@product.total</b>
+                                                </MudText>
+                                            </div>
+                                            @*<MudButton Color="Color.Primary" Variant="Variant.Filled" Class="mt-5">Reorder</MudButton>*@
+                                        </div>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                    @*</div>*@
+                </MudCardContent>
+                <MudCardActions>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" xxl="12">
+            <MudCard Elevation="4" Style="border-radius:0px">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Invoice Details</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudDivider Light="true"></MudDivider>
+                <MudCardContent>
+                    <div class="d-flex align-end justify-space-between mud-width-full gap-5 px-4">
+                        <div class="d-flex flex-column">
+                            @foreach (var item in SearchedOrderDetails.totals)
+                            {
+                                <MudText Typo="Typo.body1"><b>@item.title:</b> @item.value</MudText>
+                            }
+                        </div>
+                    </div>
+                </MudCardContent>
+                <MudCardActions>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" xxl="12">
+            <MudCard Elevation="4" Style="border-radius:0px">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Order History</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudDivider Light="true"></MudDivider>
+                <MudCardContent>
+                    <MudGrid Spacing="4" Justify="Justify.FlexStart" Class="d-flex align-stretch">
+                        @foreach (var history in SearchedOrderDetails.histories)
+                        {
+                            <MudItem xs="12" md="6" lg="4" xl="3" Class="align-stretch d-flex">
+                                <MudCard Class="py-4 d-flex flex-1 " Elevation="3">
+                                    <MudCardContent Class="flex-1 d-flex">
+                                        <div class="d-flex align-end flex-column mud-width-full gap-5 px-4 align-stretch">
+                                            <div class="d-flex flex-column flex-1 align-self-start">
+                                                <MudText Typo="Typo.body1"><b>Status: </b>@($"{history.status}")</MudText>
+                                                    <MudText Typo="Typo.body1"><b>Date: </b>@($"{history.date_added}")</MudText>
+                                                    <MudText Typo="Typo.body1">
+                                                        <b>Comment: </b>@($"{history.comment}")
+                                                </MudText>
+                                            </div>
+                                        </div>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
+                        }
+                    </MudGrid>
+
+                </MudCardContent>
+                <MudCardActions>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+                                               

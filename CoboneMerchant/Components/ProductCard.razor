@@ -1,0 +1,119 @@
+﻿@using CoboneMerchant.Models
+@using System.Net
+@inject NavigationManager NavigationManager
+
+ 
+<MudItem Class="@($"product-card {Class}")" xs="xs" sm="sm" md="md" lg="lg" xl="xl" xxl="xxl" Style="@Style">
+    <MudCard Square="false" Elevation="6" Style="height:auto; align-self:stretch; flex-grow:1; display:grid; border-radius:25px;">
+        @*Product Image*@
+        <MudCardMedia Height="200" Style="background-size:cover;" Image="@Thumb"  />
+        <MudCardContent >
+            @*Product Title*@
+            <MudText Inline="true"  Typo="Typo.h5">@(WebUtility.HtmlDecode(Product.Name))</MudText>
+            <MudItem xs="12">
+                <MudRating ReadOnly="true" SelectedValue="@((int)Product.Rating)" />
+            </MudItem>
+            <MudGrid Class="mt-5">
+                    <MudChip Label="true" Color="Color.Warning">@OffPercentage% off</MudChip>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions Class="pa-3" Style="@($"align-self:end; background-color:#59b210; border-radius:0px 0px 25px 25px;")">
+                <MudGrid Justify="Justify.FlexStart" Spacing="1" Class="d-flex justify-space-between flex-grow-1 gap-4">
+                <MudItem Class="pa-0 py-0 px-2" >
+                    @if (Product.Special > 0)
+                    {
+                        <MudText Align="Align.Left"
+                             Typo="Typo.h5" Style="@($"color:{Colors.Shades.White}")">
+                            <del style="@($"color:{ Colors.Grey.Lighten1}")">@Product.Price_Formated</del>
+                            <br/>
+                            <ins> @Product.Special_Formated</ins>
+
+                        </MudText>
+                    }
+                    else
+                    {
+                        <MudText Align="Align.Left"
+                             Typo="Typo.h5" Style="@($"color:{Colors.Shades.White}")">
+                             <ins>
+                                @Product.Price_Formated
+                                <br/>
+                                <br/>
+                             </ins>
+                        </MudText>
+
+                    }
+
+                </MudItem>
+
+                <MudSpacer></MudSpacer>
+                <MudItem Class="pa-0 ma-0 px-2" >
+@*                <MudChip  Label="false" DisableRipple="false" Style="@($"background-color:{Colors.Shades.White}")"
+                         Variant="Variant.Text" Size="Size.Large">
+                    <MudLink Href="@($"./productinfo/{Product.Product_Id}")" Underline="Underline.None" Color="Color.Default">
+                        VIEW DEAL
+                    </MudLink>
+                </MudChip>*@
+                    <MudChip OnClick="OnViewDealClick" Label="true" Style="@($"background-color:{Colors.Shades.White}")"
+                             Variant="Variant.Text" Size="Size.Large">View Deal
+                    </MudChip>
+                </MudItem>
+            </MudGrid>
+        </MudCardActions>
+    </MudCard>
+</MudItem>
+
+
+@code {
+    [Parameter] public int xs { get; set; }
+    [Parameter] public int sm { get; set; }
+    [Parameter] public int md { get; set; }
+    [Parameter] public int lg { get; set; }
+    [Parameter] public int xl { get; set; }
+    [Parameter] public int xxl { get; set; }
+    [Parameter] public string Class { get; set; }
+    [Parameter] public string Style { get; set; }
+
+    //switch this to generic typing in case you want to use the card for something rather than Product Model
+    [Parameter] public Product Product { get; set; }
+
+    public string Thumb { get; set; }
+    public int OffPercentage { get; set; }
+
+    void GetOffPercentage()
+    {
+        if (Product is not null)
+        {
+            if(Product.Special == 0){
+                OffPercentage = 0;
+            }
+            if (Product.Price > 0 && Product.Special > 0)
+            {
+
+                OffPercentage = (int)(100 - ((Product.Special / Product.Price) * 100));
+            }
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (Product is not null)
+        {
+            if (!string.IsNullOrWhiteSpace(Product.Thumb))
+            {
+                Thumb = Product.Thumb;
+            }
+            else
+            {
+                Thumb = Product.image;
+
+            }
+            //StateHasChanged();
+        }
+        //StateHasChanged();
+        GetOffPercentage();
+    }
+
+    private void OnViewDealClick(){
+        NavigationManager.NavigateTo($"./productinfo/{Product.Product_Id}");
+    }
+}
