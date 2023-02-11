@@ -2,8 +2,8 @@
 
 @page "/"
 @using Cobone.Models
-
-
+@using Microsoft.AspNetCore.Authorization;
+@inject IStringLocalizer<Resource>  Loc;
 <MudGrid>
 @*    <MudItem xs="12" Class="d-flex align-stretch">
         <MudGrid Justify="Justify.FlexStart">
@@ -62,9 +62,9 @@
 
     @if (Layout is not null && Layout.HomeData is not default(Home?))
     {
-        <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.BestSeller" Title="Best Seller"></CategoryPreviewBlock>
-        <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.Latest" Title="Latest"></CategoryPreviewBlock>
-        <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.Specials" Title="Special"></CategoryPreviewBlock>
+        <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.BestSeller" Title="@Loc["index_best_seller"]"></CategoryPreviewBlock>
+        <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.Latest" Title="@Loc["index_latest"]"></CategoryPreviewBlock>
+        <CategoryPreviewBlock Xs="12" Products="@Layout.HomeData?.Specials" Title="@Loc["index_special"]"></CategoryPreviewBlock>
         
     }
     @if(CategoriesWithProducts is not null && CategoriesWithProducts.Count > 0)

@@ -1,16 +1,16 @@
 ﻿@page "/checkout"
 @using System.Text.Json
 @using System.Text
-
+@inject IStringLocalizer<Resource> Loc
 
 <MudGrid Justify="Justify.Center">
     <MudItem xxl="6" xl="8" md="8" xs="12">
         <MudTabs Elevation="2" Rounded="true" Centered="true" ApplyEffectsToContainer="true" PanelClass="pa-6" @ref="Tabs">
-            <MudTabPanel Text="Order Summary" Disabled="@ActivePanel[0]">
+            <MudTabPanel Text="@Loc["order-summary"]" Disabled="@ActivePanel[0]">
                 <MudPaper Elevation="0">
                     <div class="pa-5" style="width:auto; max-width:100vw">
                         <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
-                            <MudText Typo="Typo.h6" Class="pr-5">Your Shopping Cart</MudText>
+                            <MudText Typo="Typo.h6" Class="pr-5">@Loc["your-shopping-cart"]</MudText>
                         </MudItem>
                         @if (Layout.Cart.total_product_count > 0)
                         {
@@ -24,12 +24,13 @@
                             </MudItem>
 
                             <MudItem xs="12" xxl="12" Class="pt-3">
-                                <MudText Typo="Typo.body2">ORDER TOTAL</MudText>
+                                <MudText Typo="Typo.body2">@Loc["order-total"]</MudText>
                                 <MudText Typo="Typo.h6">@Layout.Cart.total</MudText>
                             </MudItem>
 
                             <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnSummaryNextClick" Disabled="@TabButtonDisabled">Next</MudButton>
+                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnSummaryNextClick" 
+                                   Disabled="@TabButtonDisabled">@Loc["next"]</MudButton>
 
                         }
                     </div>
@@ -138,11 +139,11 @@
                 </MudPaper>
             </MudTabPanel>
 *@
-            <MudTabPanel Text="Payment Method" Disabled="@ActivePanel[4]">
+            <MudTabPanel Text="@Loc["payment-method"]" Disabled="@ActivePanel[4]">
                 <MudPaper Elevation="0">
                     <div class="pa-5" style="width:auto; max-width:100vw">
                         <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
-                            <MudText Typo="Typo.h6" Class="pr-5">Payment Method</MudText>
+                            <MudText Typo="Typo.h6" Class="pr-5">@Loc["payment-method"]</MudText>
                         </MudItem>
                         @if (PaymentMethods.Count > 0)
                         {
@@ -158,7 +159,8 @@
                             </MudRadioGroup>
                         }
                         <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnPaymentMethodNextClick" Disabled="@TabButtonDisabled">Next</MudButton>
+                                   FullWidth="true" Class="my-2" Size="Size.Large" OnClick="OnPaymentMethodNextClick" 
+                                   Disabled="@TabButtonDisabled">@Loc["next"]</MudButton>
                     </div>
                 </MudPaper>
             </MudTabPanel>
@@ -198,7 +200,42 @@
     private async Task OnSummaryNextClick()
     {
         TabButtonDisabled = true;
-        if (AccountAddressDataService is not null) Addresses = (await AccountAddressDataService.GetAccountAddresses()).ToList();
+        int trials = 3;
+        do
+        {
+            try
+            {
+                if (AccountAddressDataService is not null) Addresses = (await AccountAddressDataService.GetAccountAddresses()).ToList();
+            }
+            finally
+            {
+                if (Addresses is null || Addresses.Count < 1)
+                {
+                    await AccountAddressDataService.AddAccountAddress(new AccountAddress
+                        {
+                            firstname = "Demo",
+                            lastname = "User",
+                            company = "Demo Company name",
+                            address_1 = "Demo",
+                            address_2 = "Demo",
+                            postcode = "3333",
+                            city = "Berlin",
+                            zone_code = "BER",
+                            zone_id = "1256",
+                            zone = "Berlin",
+                            country_id = "81",
+                            country = "Germany",
+                            iso_code_2 = "DE",
+                            iso_code_3 = "DEU",
+                            address_format = "{company}\r\n{firstname} {lastname}\r\n{address_1}\r\n{address_2}\r\n{postcode} {city}\r\n{country}",
+                            _default = false,
+                            custom_field = new { }
+                        });
+                }
+            }
+            trials--;
+        } while (trials > 0 && (Addresses is null || Addresses.Count < 1));
+        if (trials <= 0) throw new Exception("failed to add address on checkout, please try again later");
         if (AccountDataService is not null) AccountDetails = await AccountDataService.GetAccountDetails();
         if (CountryDataService is not null) Countries = (await CountryDataService.GetCountries()).ToList();
         SelectedAddress = Addresses.FirstOrDefault();
@@ -206,7 +243,7 @@
         if (PaymentAddressDataService is not null)  await PaymentAddressDataService.SelectExistingPaymentAddress(SelectedAddress.address_id);
         if (CheckoutDataService is not null)
         {
-            PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).ToList();
+            PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).Where(pm => !string.Equals(pm.code, "cod",StringComparison.OrdinalIgnoreCase)).ToList();
             ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
             SelectedShippingMethod = ShippingMethods.FirstOrDefault().quote.FirstOrDefault();
             await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);

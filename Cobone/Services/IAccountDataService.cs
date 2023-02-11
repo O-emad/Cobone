@@ -10,7 +10,7 @@ namespace Cobone.Services
     public interface IAccountDataService
     {
         Task<AccountDetails> GetAccountDetails();
-        Task Login(AccountLogin accountLogin);
+        Task<bool> Login(AccountLogin accountLogin);
         Task ForgotPassword(AccountForgotPassword accountForgotPassword);
         Task Register(AccountRegister accountRegister);
         Task Logout();

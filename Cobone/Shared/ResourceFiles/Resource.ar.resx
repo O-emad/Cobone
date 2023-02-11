@@ -135,10 +135,178 @@
   <data name="appbar_account_text" xml:space="preserve">
     <value>حسابي</value>
   </data>
+  <data name="appbar_account_unauthorized_text" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
   <data name="appbar_cart_text" xml:space="preserve">
     <value>سلة المشتريات</value>
   </data>
   <data name="appbar_offer_text" xml:space="preserve">
     <value>عروض مميزه</value>
+  </data>
+  <data name="checkout" xml:space="preserve">
+    <value>الدفع</value>
+  </data>
+  <data name="continue-shopping" xml:space="preserve">
+    <value>استكمل التسوق</value>
+  </data>
+  <data name="footer-about-us" xml:space="preserve">
+    <value>عنا</value>
+  </data>
+  <data name="footer-company" xml:space="preserve">
+    <value>الشركة</value>
+  </data>
+  <data name="footer-contact-us" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="footer-customer-service" xml:space="preserve">
+    <value>خدمة عملاء</value>
+  </data>
+  <data name="footer-download" xml:space="preserve">
+    <value>تنزيل التطبيق</value>
+  </data>
+  <data name="footer-facebook" xml:space="preserve">
+    <value>فيسبوك</value>
+  </data>
+  <data name="footer-how-it-work" xml:space="preserve">
+    <value>شرح مبدأ كوبوني</value>
+  </data>
+  <data name="footer-how-to-buy" xml:space="preserve">
+    <value>طريقة الشراء</value>
+  </data>
+  <data name="footer-how-to-pay" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="footer-instagram" xml:space="preserve">
+    <value>انستغرام</value>
+  </data>
+  <data name="footer-learn-more" xml:space="preserve">
+    <value>إعرف المزيد</value>
+  </data>
+  <data name="footer-meet-us" xml:space="preserve">
+    <value>قابلنا</value>
+  </data>
+  <data name="footer-payment" xml:space="preserve">
+    <value>بطاقات الائتمان</value>
+  </data>
+  <data name="footer-privacy-policy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="footer-terms-conditions" xml:space="preserve">
+    <value>الأحكام و الشروط</value>
+  </data>
+  <data name="forgot-password-email" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="forgot-password-reset" xml:space="preserve">
+    <value>إستعادة كلمة المرور</value>
+  </data>
+  <data name="index_best_seller" xml:space="preserve">
+    <value>الأكثر مبيعًا</value>
+  </data>
+  <data name="index_latest" xml:space="preserve">
+    <value>وصل حديثاً</value>
+  </data>
+  <data name="index_special" xml:space="preserve">
+    <value>منتجات مميزة</value>
+  </data>
+  <data name="login-email" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="login-forgot" xml:space="preserve">
+    <value>نسيت كلمة المرور؟</value>
+  </data>
+  <data name="login-helper" xml:space="preserve">
+    <value>أختر كلمة مرور صعبة</value>
+  </data>
+  <data name="login-login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="login-password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="login-register" xml:space="preserve">
+    <value>سجل من هنا</value>
+  </data>
+  <data name="next" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="order-summary" xml:space="preserve">
+    <value>ملخص الطلب</value>
+  </data>
+  <data name="order-total" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="payment-method" xml:space="preserve">
+    <value>طريقة الدفع</value>
+  </data>
+  <data name="percentage-off" xml:space="preserve">
+    <value>خصم </value>
+  </data>
+  <data name="product-info-add-to-cart" xml:space="preserve">
+    <value>اضف الي السلة</value>
+  </data>
+  <data name="product-info-option" xml:space="preserve">
+    <value>أختر العرض</value>
+  </data>
+  <data name="product-info-quick-checkout" xml:space="preserve">
+    <value>انتقل الي الدفع</value>
+  </data>
+  <data name="product-info-share-deal" xml:space="preserve">
+    <value>شارك هذا العرض</value>
+  </data>
+  <data name="quantity" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="register-confirm-password" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+  <data name="register-confirm-password-helper" xml:space="preserve">
+    <value>أعد كتابة كلمة المرور</value>
+  </data>
+  <data name="register-email" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="register-email-invalid-message" xml:space="preserve">
+    <value>البريد الالكتروني غير صحيح</value>
+  </data>
+  <data name="register-first-name" xml:space="preserve">
+    <value>الأسم</value>
+  </data>
+  <data name="register-last-name" xml:space="preserve">
+    <value>أسم العائلة</value>
+  </data>
+  <data name="register-password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="register-password-helper" xml:space="preserve">
+    <value>أختر كلمة مرور صعبة</value>
+  </data>
+  <data name="register-password-match-message" xml:space="preserve">
+    <value>كلمة المرور غير متطابقه</value>
+  </data>
+  <data name="register-phone" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="register-phone-helper" xml:space="preserve">
+    <value>أدخل رقم الهاتف</value>
+  </data>
+  <data name="register-phone-invalid-message" xml:space="preserve">
+    <value>رقم الهاتف غير صحيح</value>
+  </data>
+  <data name="register-register" xml:space="preserve">
+    <value>تسجيل</value>
+  </data>
+  <data name="register-required-message" xml:space="preserve">
+    <value>هذه الخانه مطلوبة</value>
+  </data>
+  <data name="unavailable" xml:space="preserve">
+    <value>عفواْ , هذا المنتج غير متوفر حالياْ</value>
+  </data>
+  <data name="view-deal" xml:space="preserve">
+    <value>أذهب للعرض</value>
+  </data>
+  <data name="your-shopping-cart" xml:space="preserve">
+    <value>سلة مشترياتك</value>
   </data>
 </root>

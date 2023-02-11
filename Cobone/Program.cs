@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using Syncfusion.Blazor;
 using Blazored.LocalStorage;
-using Cobone.Utils;
+using Cobone.Shared.ResourceFiles;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -52,6 +52,8 @@ builder.Services.AddHttpClient<IHomeDataService, HomeDataService>("HomeAPI", cli
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IProductDataService, ProductDataService>("ProductAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/products"))
     .AddHttpMessageHandler<BaseMessageHandler>();
+builder.Services.AddHttpClient<IRelatedProductsDataService, RelatedProductsDataService>("RelatedProductAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/related"))
+    .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IAccountDataService, AccountDataService>("AccountAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IPaymentAddressDataService, PaymentAddressDataService>("PaymentAddressAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
@@ -74,7 +76,7 @@ builder.Services.AddHttpClient<IMerchantDataService, MerchantDataService>("Merch
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/gettoken"));
 builder.Services.AddHttpClient<ICountryDataService, CountryDataService>("CountryAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed"))
     .AddHttpMessageHandler<BaseMessageHandler>();
-
+builder.Services.AddTransient<Resource>();
 builder.Services.AddSyncfusionBlazor();
 var host = builder.Build();
 

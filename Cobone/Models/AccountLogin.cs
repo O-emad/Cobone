@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cobone.Shared.ResourceFiles;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,11 +11,10 @@ namespace Cobone.Models
 {
     public class AccountLogin
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = nameof(Resource.register_required_message))]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = nameof(Resource.register_email_invalid_message))]
         public string Email { get; set; }
-        [Required]
-        [StringLength(30, ErrorMessage = "Password must be at least 8 characters long.", MinimumLength = 8)]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = nameof(Resource.register_required_message))]
         public string Password { get; set; }
 
         private void donothing()

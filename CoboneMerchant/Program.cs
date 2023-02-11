@@ -8,7 +8,6 @@ using CoboneMerchant.MessageHandlers;
 using CoboneMerchant.Utils;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
-using Syncfusion.Blazor;
 using Blazored.LocalStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -51,7 +50,6 @@ builder.Services.AddHttpClient<IMerchantDataService, MerchantDataService>("Merch
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/gettoken"));
 
 
-builder.Services.AddSyncfusionBlazor();
 var host = builder.Build();
 
 await host.SetDefaultCulture();

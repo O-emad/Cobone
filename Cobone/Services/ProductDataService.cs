@@ -22,6 +22,14 @@ namespace Cobone.Services
             return response?.Data ?? new FullProductInfo();
         }
 
+        public async Task<List<ProductSearch>> GetProductByName(string name)
+        {
+            var response = await JsonSerializer.DeserializeAsync<BaseResponse<List<ProductSearch>>>
+                (await httpClient.GetStreamAsync($"index.php?route=feed/rest_api/products&custom_fields=id,name&search={name}"),
+                new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            return response?.Data ?? new List<ProductSearch>();
+        }
+
         public async Task<List<Product>> GetProductsByCategoryId(int id)
         {
 

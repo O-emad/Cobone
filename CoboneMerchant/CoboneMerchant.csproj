@@ -18,9 +18,11 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.0" />
     <PackageReference Include="MudBlazor" Version="6.0.16" />
-    <PackageReference Include="Syncfusion.Blazor.BarcodeGenerator" Version="20.3.0.57" />
-    <PackageReference Include="Syncfusion.Blazor.Core" Version="20.3.0.57" />
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>

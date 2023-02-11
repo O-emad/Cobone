@@ -25,7 +25,7 @@ namespace CoboneMerchant.Pages
                 model.Agree = 1;
                 model.Customer_Group_Id = 1;
                 await AccountDataService.Register(model);
-                NavigationManager.NavigateTo("/",true);
+                NavigationManager.NavigateTo("",true);
                 StateHasChanged();
 
             }

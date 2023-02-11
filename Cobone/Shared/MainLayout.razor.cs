@@ -1,4 +1,5 @@
 ﻿using Cobone.Models;
+using Cobone.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
@@ -16,6 +17,8 @@ namespace Cobone.Shared
     {
         [Inject]
         public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject]
+        public IProductDataService ProductDataService { get; set; }
         public List<Category> Categories { get; set; }
         public Home? HomeData { get; set; }
         private BreadcrumbItem item;
@@ -39,33 +42,18 @@ namespace Cobone.Shared
         public List<string> Languages { get; set; } = new List<string>() { "English", "العربيه" };
 
 
-        private string[] states =
-    {
-        "Alabama", "Alaska", "American Samoa", "Arizona",
-        "Arkansas", "California", "Colorado", "Connecticut",
-        "Delaware", "District of Columbia", "Federated States of Micronesia",
-        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
-        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-        "Louisiana", "Maine", "Marshall Islands", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
-        "Missouri", "Montana", "Nebraska", "Nevada",
-        "New Hampshire", "New Jersey", "New Mexico", "New York",
-        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
-        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
-        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
-        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
-        "Washington", "West Virginia", "Wisconsin", "Wyoming",
-    };
+
 
         private async Task<IEnumerable<string>> Search1(string value)
         {
-            // In real life use an asynchronous function for fetching data from an api.
-            await Task.Delay(1000);
-
-            // if text is null or empty, show complete list
-            if (string.IsNullOrEmpty(value))
-                return HomeData.BestSeller.Select(p=>p.Name).ToList();
-            return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            if (ProductDataService is not null)
+            {
+                if (string.IsNullOrEmpty(value))
+                    return HomeData.BestSeller.Select(p => p.Name).Distinct().ToList();
+                var values = await ProductDataService.GetProductByName(value);
+                if (values is not null && values.Count > 0) return values.Select(p=>p.name).Distinct();
+            }
+            return new List<string>() { "Couldn't be found" };
         }
 
         public void OpenCartPopOver()
@@ -119,6 +107,7 @@ namespace Cobone.Shared
                 _subscriptionId = subscriptionResult.SubscriptionId;
                 StateHasChanged();
             }
+            //await RefreshCart();
             await base.OnAfterRenderAsync(firstRender);
         }
     protected override async Task OnInitializedAsync()
@@ -158,7 +147,8 @@ namespace Cobone.Shared
             }
             else
             {
-                //Navigate to sign-in / registeration
+                NavigationManager.NavigateTo("/login");
+                CloseOverlay();
             }
         }
 

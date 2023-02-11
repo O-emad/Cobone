@@ -11,5 +11,6 @@ namespace Cobone.Services
     {
         Task<FullProductInfo> GetProductById(int id);
         Task<List<Product>> GetProductsByCategoryId(int id);
+        Task<List<ProductSearch>> GetProductByName(string name);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Cobone.Models;
 using Cobone.Services;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,24 @@ namespace Cobone.Pages
         public NavigationManager NavigationManager { get; set; }
         [Inject]
         public IAccountDataService AccountDataService { get; set; }
+        [Inject]
+        public ISnackbar Snackbar { get; set; }
         private async void OnValidSubmit()
         {
 
             if (AccountDataService is not null)
             {
-                await AccountDataService.Login(model);
-                NavigationManager.NavigateTo("/", true);
-                StateHasChanged();
+                if (await AccountDataService.Login(model))
+                {
+                    NavigationManager.NavigateTo("/", true);
+                    StateHasChanged();
+                }
+                else
+                {
+                    Snackbar.Clear();
+                    Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    Snackbar.Add($"Failed to login: Invalid Email or Password", Severity.Error);
+                }
 
             }
         }

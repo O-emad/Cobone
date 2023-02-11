@@ -16,6 +16,8 @@ namespace Cobone.Pages
         public NavigationManager NavigationManager { get; set; }
         [Inject]
         public IAccountDataService AccountDataService { get; set; }
+        [Inject]
+        public IAccountAddressDataService AccountAddressDataService { get; set; }
         private async void OnValidSubmit()
         {
 
@@ -25,6 +27,26 @@ namespace Cobone.Pages
                 model.Agree = 1;
                 model.Customer_Group_Id = 1;
                 await AccountDataService.Register(model);
+                await AccountAddressDataService.AddAccountAddress(new AccountAddress
+                {
+                    firstname = "Demo",
+                    lastname = "User",
+                    company = "Demo Company name",
+                    address_1 = "Demo",
+                    address_2 = "Demo",
+                    postcode = "3333",
+                    city = "Berlin",
+                    zone_code = "BER",
+                    zone_id = "1256",
+                    zone = "Berlin",
+                    country_id = "81",
+                    country = "Germany",
+                    iso_code_2 = "DE",
+                    iso_code_3 = "DEU",
+                    address_format = "{company}\r\n{firstname} {lastname}\r\n{address_1}\r\n{address_2}\r\n{postcode} {city}\r\n{country}",
+                    _default = false,
+                    custom_field = new { }
+                });
                 NavigationManager.NavigateTo("/",true);
                 StateHasChanged();
 

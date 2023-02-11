@@ -1,6 +1,8 @@
-﻿
+﻿@inject IStringLocalizer<Resource>  Loc
+
+
 <MudItem Style="text-align:center;">
-    <label>Quantity</label>
+    <label>@Loc["quantity"]</label>
     <br />
     <MudButtonGroup Variant="Variant.Filled" Size="Size.Small" Color="Color.Default">
         <MudIconButton Icon="@Icons.Filled.Remove" Variant="Variant.Filled" Color="Color.Default" Size="Size.Small" 

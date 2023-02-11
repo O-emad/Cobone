@@ -1,5 +1,5 @@
 ﻿@page "/login"
-
+@attribute [AllowAnonymous]
 <EditForm Model="@model" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <MudGrid Justify="Justify.Center">
@@ -14,7 +14,7 @@
                                   @bind-Value="model.Email" For="@(() => model.Email)" />
                         <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3" Variant="Variant.Outlined"
                                   @bind-Value="model.Password" For="@(() => model.Password)" InputType="InputType.Password" />
-                    <MudLink Href="/forgotpassword">Forgot password?</MudLink>
+                    <MudLink Href="forgotpassword">Forgot password?</MudLink>
                     @*<MudLink Href="/registration">not registered yet. click here</MudLink>*@
                     </MudStack>
                 </MudCardContent>

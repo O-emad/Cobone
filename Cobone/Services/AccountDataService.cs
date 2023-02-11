@@ -30,15 +30,17 @@ namespace Cobone.Services
             }
         }
 
-        public async Task Login(AccountLogin accountLogin)
+        public async Task<bool> Login(AccountLogin accountLogin)
         {
             try
             {
                 var loginJson =  new StringContent(JsonSerializer.Serialize(accountLogin).ToLower(), encoding: Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync("index.php?route=rest/login/login", loginJson);
+                response.EnsureSuccessStatusCode();
+                return true;
             }catch (Exception ex)
             {
-
+                return false;
             }
         }
         public async Task ForgotPassword(AccountForgotPassword accountForgotPassword)

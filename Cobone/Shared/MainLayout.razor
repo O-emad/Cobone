@@ -45,7 +45,7 @@
                         }
                     </ChildContent>
                 </MudMenu>*@
-                    <MudSelect Placeholder="Select Language" @bind-Value="@Culture"ToStringFunc="@convertFunc" Class="search-bar pr-5 pl-5 align-self-stretch"
+@*                    <MudSelect Placeholder="Select Language" @bind-Value="@Culture"ToStringFunc="@convertFunc" Class="search-bar pr-5 pl-5 align-self-stretch"
                     CloseIcon="@Icons.Material.Filled.Flag" AdornmentColor="Color.Primary" Variant="Variant.Filled"
                                AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
                         @foreach (var culture in cultures)
@@ -54,9 +54,20 @@
                         }
 
                     </MudSelect>
+*@
+                    <MudMenu Class="mx-5 align-self-stretch" Size="Size.Large" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" Label="@(convertFunc(Culture))"
+                    Color="Color.Tertiary" Variant="Variant.Outlined"
+                             AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" FullWidth="true">
+                        @foreach (var culture in cultures)
+                        {
+                            <MudMenuItem OnClick="()=>{Culture = culture;}">@(convertFunc(culture))</MudMenuItem>
+                        }
+                    </MudMenu>
                 <MudAutocomplete T="string" Label="@Loc["appbar-search-text"]" @bind-Value="Search" SearchFunc="@Search1" Variant="Variant.Filled"
                                  AdornmentIcon="@Icons.Material.Filled.Search" 
-                                 AdornmentColor="Color.Tertiary" Class="search-bar  rounded-lg align-self-stretch" />
+                                 AdornmentColor="Color.Tertiary" Class="search-bar  rounded-lg align-self-stretch" >
+                                 
+                                 </MudAutocomplete>
 
                 <MudSpacer />
 
@@ -69,7 +80,7 @@
                             <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_offer_text"]</MudText>
                     </MudBadge>
                     <MudPopover @bind-Open="SpecialPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top"
-                                AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.BottomRight" RelativeWidth="false" Style="z-index:500">
+                                    AnchorOrigin="@(_RTL ?Origin.BottomLeft:Origin.BottomRight)" TransformOrigin="@(_RTL ? Origin.TopLeft:Origin.TopRight)" RelativeWidth="false" Style="z-index:500">
                         <div class="pa-5">
                             <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
                                     <MudText Typo="Typo.button" Class="pr-5">@Loc["appbar_offer_text"]</MudText>
@@ -89,7 +100,7 @@
                                    Size="Size.Large" Color="Color.Tertiary" OnClick="GoToLogin">
                                 <MudBadge Content="0" Visible="false" Overlap="true" Color="Color.Dark">
                                     <MudIcon Icon="@Icons.Outlined.AccountCircle" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
-                                        <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_account_text"]</MudText>
+                                        <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_account_unauthorized_text"]</MudText>
                                 </MudBadge>
                             </MudButton>
                           
@@ -125,7 +136,7 @@
                             <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_cart_text"]</MudText>
                     </MudBadge>
                     <MudPopover @bind-Open="CartPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Right"
-                                AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" OffsetY="true" RelativeWidth="false" Style="z-index:500" Class="pa-0 ma-0">
+                                    AnchorOrigin="@(_RTL ?Origin.BottomLeft:Origin.BottomRight)" TransformOrigin="@(_RTL ? Origin.TopLeft:Origin.TopRight)" OffsetY="true" RelativeWidth="false" Style="z-index:500" Class="pa-0 ma-0">
                         <div class="pa-5" style="width:auto; max-width:100vw">
                             @*<MudGrid Class="pa-5" Spacing="2" Justify="Justify.FlexEnd" >*@
                             <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
@@ -145,14 +156,14 @@
                                 </MudItem>
 
                                 <MudItem xs="12" xxl="12" Class="pt-3">
-                                    <MudText Typo="Typo.body2">ORDER TOTAL</MudText>
+                                    <MudText Typo="Typo.body2">@Loc["order-total"]</MudText>
                                     <MudText Typo="Typo.h6">@Cart.total</MudText>
                                 </MudItem>
 
                                 <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                                       FullWidth="true" Class="my-2" Size="Size.Large" OnClick="Checkout">CheckOut</MudButton>
+                                       FullWidth="true" Class="my-2" Size="Size.Large" OnClick="Checkout">@Loc["checkout"]</MudButton>
                                 <MudButton Variant="Variant.Filled" Color="Color.Dark"
-                                       FullWidth="true" Class="my-2" Size="Size.Large" OnClick="CloseOverlay">Continue Shopping</MudButton>
+                                       FullWidth="true" Class="my-2" Size="Size.Large" OnClick="CloseOverlay">@Loc["continue-shopping"]</MudButton>
                             }
                             @* </MudGrid>*@
                         </div>
@@ -248,24 +259,24 @@
                 <MudGrid>
                     <MudItem xs="12" sm="12" md="4">
                         <MudStack>
-                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">COMPANY</MudText>
-                            <MudLink Href="/aboutus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">About us</MudLink>
-                            <MudLink Href="/contactus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Contact us</MudLink>
-                            <MudLink Href="/termsandconditions" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Terms and conditions</MudLink>
-                            <MudLink Href="/privacy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">Privacy Policy</MudLink>
+                                <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-company"]</MudText>
+                                <MudLink Href="/aboutus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-about-us"]</MudLink>
+                                <MudLink Href="/contactus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-contact-us"]</MudLink>
+                                <MudLink Href="/termsandconditions" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-terms-conditions"]</MudLink>
+                                <MudLink Href="/privacy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-privacy-policy"]</MudLink>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="12" sm="12" md="4">
                         <MudStack>
-                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">LEARN MORE</MudText>
-                            <MudLink Href="/howitworks" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">How it works</MudLink>
-                            <MudLink Href="/howtobuy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">How to buy</MudLink>
-                            <MudLink Href="/howtopay" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">How to pay</MudLink>
+                                <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-learn-more"]</MudText>
+                                <MudLink Href="/howitworks" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-how-it-work"]</MudLink>
+                                <MudLink Href="/howtobuy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-how-to-buy"]</MudLink>
+                                <MudLink Href="/howtopay" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-how-to-pay"]</MudLink>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="12" sm="12" md="4">
                         <MudStack>
-                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">DOWNLOAD OUR APP</MudText>
+                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-download"]</MudText>
                             <MudStack Row="true">
                                 <MudPaper Class="mud-transparent d-flex justify-center align-center pa-4 pt-0" Style="height:100%" Elevation="0">
                                     <MudLink Href="https://apps.apple.com/eg/app/cobony/id1604234152">
@@ -279,7 +290,7 @@
                                     </MudLink>
                                 </MudPaper>
                             </MudStack>
-                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">MEET US </MudText>
+                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-meet-us"]</MudText>
                             <MudStack Class="pa-4 pt-0">
                                 <MudStack Row="true">
                                     <MudButton Href="https://facebook.com"
@@ -291,7 +302,7 @@
                                                Style="@($"color:{Colors.Shades.Black}")"
                                                Size="Size.Large" FullWidth="true">
 
-                                        Facebook
+                                            @Loc["footer-facebook"]
                                     </MudButton>
                                     <MudButton Href="https://instagram.com"
                                                Target="_blank"
@@ -301,7 +312,7 @@
                                                Color="Color.Tertiary"
                                                Style="@($"color:{Colors.Shades.Black}")"
                                                Size="Size.Large" FullWidth="true">
-                                        Instagram
+                                            @Loc["footer-instagram"]
                                     </MudButton>
                                 </MudStack>
                                 <MudButton Href="/helpcenter"
@@ -312,10 +323,10 @@
                                            Style="@($"color:{Colors.Shades.Black}")"
                                            Size="Size.Large" FullWidth="true">
 
-                                    Customer Service
+                                        @Loc["footer-customer-service"]
                                 </MudButton>
                             </MudStack>
-                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">CREDIT / DEBIT CARDS </MudText>
+                            <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-payment"]</MudText>
                             <MudStack Row="true">
                                 <MudPaper Class="mud-transparent d-flex justify-center align-center pa-4 pt-0" Style="height:100%" Elevation="0">
                                     <MudImage Src="images/credit.png" Alt="credit" ObjectFit="ObjectFit.Cover" ObjectPosition="ObjectPosition.Center" />
@@ -349,6 +360,7 @@
             {
                 LocalStorage.SetItemAsync<string>("culture", value.Name);
                 NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+                //RefreshCart();
             }
         }
     }
