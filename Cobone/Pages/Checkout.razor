@@ -238,15 +238,15 @@
         if (trials <= 0) throw new Exception("failed to add address on checkout, please try again later");
         if (AccountDataService is not null) AccountDetails = await AccountDataService.GetAccountDetails();
         if (CountryDataService is not null) Countries = (await CountryDataService.GetCountries()).ToList();
-        SelectedAddress = Addresses.FirstOrDefault();
-        if (AccountAddressDataService is not null)  await ShippingAddressDataService.SelectExistingShippingAddress(SelectedAddress.address_id);
-        if (PaymentAddressDataService is not null)  await PaymentAddressDataService.SelectExistingPaymentAddress(SelectedAddress.address_id);
+        //SelectedAddress = Addresses.FirstOrDefault();
+        //if (AccountAddressDataService is not null)  await ShippingAddressDataService.SelectExistingShippingAddress(SelectedAddress.address_id);
+        if (PaymentAddressDataService is not null)  await PaymentAddressDataService.SelectExistingPaymentAddress("");
         if (CheckoutDataService is not null)
         {
             PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).Where(pm => !string.Equals(pm.code, "cod",StringComparison.OrdinalIgnoreCase)).ToList();
-            ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
-            SelectedShippingMethod = ShippingMethods.FirstOrDefault().quote.FirstOrDefault();
-            await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);
+            //ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
+            //SelectedShippingMethod = ShippingMethods.FirstOrDefault().quote.FirstOrDefault();
+            //await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);
         }
         ActivePanel[0] = true;
         Tabs.ActivatePanel(1, true);
@@ -254,50 +254,50 @@
         TabButtonDisabled = false;
     }
 
-    private async Task OnShippingAddressNextClick()
-    {
-        TabButtonDisabled = true;
-        if (ShippingAddressDataService is not null)
-        {
-            await ShippingAddressDataService.SelectExistingShippingAddress(SelectedAddress.address_id);
-            ActivePanel[1] = true;
-            Tabs.ActivatePanel(2, true);
-            ActivePanel[2] = false;
-        }
-        TabButtonDisabled = false;
-    }
-    private async Task OnPaymentAddressNextClick()
-    {
-        TabButtonDisabled = true;
-        if (PaymentAddressDataService is not null)
-        {
-            await PaymentAddressDataService.SelectExistingPaymentAddress(SelectedAddress.address_id);
-            if (CheckoutDataService is not null)
-            {
-                PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).ToList();
-                ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
-            }
+    //private async Task OnShippingAddressNextClick()
+    //{
+    //    TabButtonDisabled = true;
+    //    if (ShippingAddressDataService is not null)
+    //    {
+    //        await ShippingAddressDataService.SelectExistingShippingAddress(SelectedAddress.address_id);
+    //        ActivePanel[1] = true;
+    //        Tabs.ActivatePanel(2, true);
+    //        ActivePanel[2] = false;
+    //    }
+    //    TabButtonDisabled = false;
+    //}
+    //private async Task OnPaymentAddressNextClick()
+    //{
+    //    TabButtonDisabled = true;
+    //    if (PaymentAddressDataService is not null)
+    //    {
+    //        await PaymentAddressDataService.SelectExistingPaymentAddress(SelectedAddress.address_id);
+    //        if (CheckoutDataService is not null)
+    //        {
+    //            PaymentMethods = (await CheckoutDataService.GetPaymentMethods()).ToList();
+    //            ShippingMethods = (await CheckoutDataService.GetShippingMethods()).ToList();
+    //        }
 
 
-            ActivePanel[2] = true;
-            Tabs.ActivatePanel(3, true);
-            ActivePanel[3] = false;
-        }
-        TabButtonDisabled = false;
-    }
+    //        ActivePanel[2] = true;
+    //        Tabs.ActivatePanel(3, true);
+    //        ActivePanel[3] = false;
+    //    }
+    //    TabButtonDisabled = false;
+    //}
 
-    private async Task OnShippingMethodNextClick()
-    {
-        TabButtonDisabled = true;
-        if (CheckoutDataService is not null)
-        {
-            await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);
-            ActivePanel[3] = true;
-            Tabs.ActivatePanel(4, true);
-            ActivePanel[4] = false;
-        }
-        TabButtonDisabled = false;
-    }
+    //private async Task OnShippingMethodNextClick()
+    //{
+    //    TabButtonDisabled = true;
+    //    if (CheckoutDataService is not null)
+    //    {
+    //        await CheckoutDataService.SelectShippingMethod(SelectedShippingMethod.code);
+    //        ActivePanel[3] = true;
+    //        Tabs.ActivatePanel(4, true);
+    //        ActivePanel[4] = false;
+    //    }
+    //    TabButtonDisabled = false;
+    //}
 
     private async Task OnPaymentMethodNextClick()
     {

@@ -40,7 +40,7 @@ namespace Cobone.Services
 
         public async Task SelectExistingPaymentAddress(string paymentAddressId)
         {
-            var content = new StringContent(JsonSerializer.Serialize(new { address_id = paymentAddressId }), encoding: Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(new { /*address_id = paymentAddressId*/ }), encoding: Encoding.UTF8, "application/json");
             var response = await HttpClient.PostAsync("index.php?route=rest/payment_address/paymentaddress&existing=1", content);
             response?.EnsureSuccessStatusCode();
         }
