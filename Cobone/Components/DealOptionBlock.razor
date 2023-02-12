@@ -1,16 +1,16 @@
 ﻿@using Cobone.Pages
+@using System.Net;
 @inject IStringLocalizer<Resource> Loc
 
 
 
 <MudCard Square="true" Elevation="0" Style="@($"border-left-style:solid; border-left-width:6px; border-left-color:{Colors.Grey.Lighten1}")">
     <MudCardHeader>
-        <MudText Typo="Typo.h6">@Name</MudText>
+        <MudText Typo="Typo.h6">@(WebUtility.HtmlDecode(Name))</MudText>
     </MudCardHeader>
     <MudCardContent>
         @*<MudText>Story of the day</MudText>*@
-        <MudText Typo="Typo.body2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec sodales orci. Proin dui ligula, commodo sit amet purus id, lacinia pellentesque turpis.
-            Vivamus maximus pretium eros sit amet fermentum. Sed iaculis nulla lectus, non cursus odio hendrerit id. Mauris posuere purus pulvinar, tincidunt sapien in, dictum magna.</MudText>
+        <MudText Typo="Typo.body2">@(WebUtility.HtmlDecode(Description))</MudText>
         @if(Quantity == 0){
             <MudText Typo="Typo.body1" Color="Color.Error">@Loc["unavailable"]</MudText>
         }
@@ -48,6 +48,7 @@
     [Parameter] public int Quantity { get; set; }
     [Parameter] public string Name { get; set; } = "";
     [Parameter] public int OptionId { get; set; }
+    [Parameter] public string Description { get; set; } = "";
     public int OffPercentage { get; set; }
     [CascadingParameter]
     public ProductInfo ProductInfo { get; set; }

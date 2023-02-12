@@ -40,7 +40,7 @@
                         <MudList Clickable="false" Dense="false" DisableGutters="true">
                             <MudListItem Inset="false">
                                 <CascadingValue Value="this">
-                                 @if(Product.options.Length > 0){
+@*                                 @if(Product.options.Length > 0){
                                     @foreach (var option in Product.options)
                                     {
                                         @foreach (var optionValue in option.option_value)
@@ -61,7 +61,20 @@
                                     }
                                  }else{
                                 <DealOptionBlock Price="@Product.Price" Special="@Product.Special" Quantity="@Product.Quantity" />
-                                }
+                                }*@
+                                        <DealOptionBlock OptionId="@Product.Product_Id" Price="@Product.Price" Special="@Product.Special" Quantity="@Product.Quantity" />
+                                        @if (RelatedProducts.Count > 0)
+                                        {
+                                            @foreach (var product in RelatedProducts)
+                                            {
+                                                
+                                                    <DealOptionBlock Name="@product.name" Price="product.price" Special="product.special" Quantity="@product.quantity"
+                                                     OptionId="@product.product_id" Description="@product.description"/>
+                                            }
+                                        }
+                                       
+                                        
+                                        
                                     </CascadingValue>
                             </MudListItem>
 @*                            <MudListItem Inset="false">

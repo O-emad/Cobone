@@ -40,6 +40,7 @@ namespace Cobone.Shared
         public string LanguageLabel { get; set; } = "English";
         public bool _RTL { get; set; } = false;
         public List<string> Languages { get; set; } = new List<string>() { "English", "العربيه" };
+        public List<Information> Infos { get; set; } = new List<Information>();
 
 
 
@@ -122,6 +123,10 @@ namespace Cobone.Shared
             }
             if (CartDataService is not null){
                 Cart = await CartDataService.GetCartItems();
+            }
+            if(InformationDataService is not null)
+            {
+                Infos = await InformationDataService.GetSiteInformation();
             }
         }
 

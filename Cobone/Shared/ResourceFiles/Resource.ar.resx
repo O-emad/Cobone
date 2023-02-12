@@ -147,6 +147,39 @@
   <data name="checkout" xml:space="preserve">
     <value>الدفع</value>
   </data>
+  <data name="contact_us_email" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="contact_us_first_name" xml:space="preserve">
+    <value>الأسم</value>
+  </data>
+  <data name="contact_us_last_name" xml:space="preserve">
+    <value>أسم العائلة</value>
+  </data>
+  <data name="contact_us_message" xml:space="preserve">
+    <value>الرسالة</value>
+  </data>
+  <data name="contact_us_phone" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="contact_us_reason" xml:space="preserve">
+    <value>السبب</value>
+  </data>
+  <data name="contact_us_reason_1" xml:space="preserve">
+    <value>لدي سؤال يخص العرض</value>
+  </data>
+  <data name="contact_us_reason_2" xml:space="preserve">
+    <value>لدي سؤال يخص الدفع</value>
+  </data>
+  <data name="contact_us_reason_3" xml:space="preserve">
+    <value>اود مشاركة انطباعي</value>
+  </data>
+  <data name="contact_us_send" xml:space="preserve">
+    <value>إرسل</value>
+  </data>
+  <data name="contact_us_subject" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
   <data name="continue-shopping" xml:space="preserve">
     <value>استكمل التسوق</value>
   </data>

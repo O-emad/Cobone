@@ -10,7 +10,7 @@
             
             <MudStack Row="true">
                 <MudStack Spacing="0">
-                        <MudText Typo="Typo.h6">@Product.option.FirstOrDefault().value</MudText>
+                        @*<MudText Typo="Typo.h6">@Product.option.FirstOrDefault().value</MudText>*@
                     <MudText Typo="Typo.h6">@Product.price</MudText>
                     <MudText Typo="Typo.h6">@($"{Loc["quantity"]}: {Product.quantity}")</MudText>
                 </MudStack>

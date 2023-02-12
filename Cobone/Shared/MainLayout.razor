@@ -7,6 +7,8 @@
 @inject IBreakpointService BreakpointListener
 @inject IStringLocalizer<Resource> Loc
 @inject ILocalStorageService LocalStorage
+@inject IInformationDataService InformationDataService
+
 @using System.Globalization
 
 @using System.Net
@@ -257,23 +259,26 @@
         <MudGrid Justify="Justify.Center" Class="pt-5">
             <MudItem xs="10" xxl="10">
                 <MudGrid>
-                    <MudItem xs="12" sm="12" md="4">
-                        <MudStack>
-                                <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-company"]</MudText>
-                                <MudLink Href="/aboutus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-about-us"]</MudLink>
-                                <MudLink Href="/contactus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-contact-us"]</MudLink>
-                                <MudLink Href="/termsandconditions" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-terms-conditions"]</MudLink>
-                                <MudLink Href="/privacy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-privacy-policy"]</MudLink>
-                        </MudStack>
-                    </MudItem>
-                    <MudItem xs="12" sm="12" md="4">
-                        <MudStack>
+                        @if (Infos.Count > 0)
+                        {
+                            <MudItem xs="12" sm="12" md="4">
+                                <MudStack>
+                                    <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-company"]</MudText>
+                                    <MudLink Href="/aboutus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@WebUtility.HtmlDecode(Infos.FirstOrDefault(i=>i.id == 4).title) @*@Loc["footer-about-us"]*@</MudLink>
+                                    <MudLink Href="/contactus" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-contact-us"]</MudLink>
+                                    <MudLink Href="/termsandconditions" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@WebUtility.HtmlDecode(Infos.FirstOrDefault(i=>i.id == 5).title)@*@Loc["footer-terms-conditions"]*@</MudLink>
+                                    <MudLink Href="/privacy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@WebUtility.HtmlDecode(Infos.FirstOrDefault(i=>i.id == 3).title)@*@Loc["footer-privacy-policy"]*@</MudLink>
+                                </MudStack>
+                            </MudItem>
+                            <MudItem xs="12" sm="12" md="4">
+                                <MudStack>
                                 <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-learn-more"]</MudText>
-                                <MudLink Href="/howitworks" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-how-it-work"]</MudLink>
-                                <MudLink Href="/howtobuy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-how-to-buy"]</MudLink>
-                                <MudLink Href="/howtopay" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@Loc["footer-how-to-pay"]</MudLink>
+                                <MudLink Href="/howitworks" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@WebUtility.HtmlDecode(Infos.FirstOrDefault(i=>i.id == 9).title)@*@Loc["footer-how-it-work"]*@</MudLink>
+                                <MudLink Href="/howtobuy" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@WebUtility.HtmlDecode(Infos.FirstOrDefault(i=>i.id == 7).title)@*@Loc["footer-how-to-buy"]*@</MudLink>
+                                <MudLink Href="/howtopay" Underline="Underline.None" Class="link pl-5" Color="Color.Info" Typo="Typo.subtitle2">@WebUtility.HtmlDecode(Infos.FirstOrDefault(i=>i.id == 8).title)@*@Loc["footer-how-to-pay"]*@</MudLink>
                         </MudStack>
                     </MudItem>
+                    }
                     <MudItem xs="12" sm="12" md="4">
                         <MudStack>
                             <MudText Style="@($"color:{Colors.Grey.Default}")" Typo="Typo.subtitle2">@Loc["footer-download"]</MudText>
@@ -364,6 +369,7 @@
             }
         }
     }
+    
     private string convertFunc(CultureInfo ci) {
         if(ci is not null){
             if (string.Equals(ci.Name, "en-US", StringComparison.OrdinalIgnoreCase))

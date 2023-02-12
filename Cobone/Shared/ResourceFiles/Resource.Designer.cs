@@ -151,6 +151,105 @@ namespace Cobone.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string contact_us_email {
+            get {
+                return ResourceManager.GetString("contact_us_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string contact_us_first_name {
+            get {
+                return ResourceManager.GetString("contact_us_first_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string contact_us_last_name {
+            get {
+                return ResourceManager.GetString("contact_us_last_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Message.
+        /// </summary>
+        public static string contact_us_message {
+            get {
+                return ResourceManager.GetString("contact_us_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string contact_us_phone {
+            get {
+                return ResourceManager.GetString("contact_us_phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason.
+        /// </summary>
+        public static string contact_us_reason {
+            get {
+                return ResourceManager.GetString("contact_us_reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I have a question about the deal.
+        /// </summary>
+        public static string contact_us_reason_1 {
+            get {
+                return ResourceManager.GetString("contact_us_reason_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I have a question about payment.
+        /// </summary>
+        public static string contact_us_reason_2 {
+            get {
+                return ResourceManager.GetString("contact_us_reason_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I would like to share some feedback.
+        /// </summary>
+        public static string contact_us_reason_3 {
+            get {
+                return ResourceManager.GetString("contact_us_reason_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string contact_us_send {
+            get {
+                return ResourceManager.GetString("contact_us_send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subject.
+        /// </summary>
+        public static string contact_us_subject {
+            get {
+                return ResourceManager.GetString("contact_us_subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue Shopping.
         /// </summary>
         public static string continue_shopping {

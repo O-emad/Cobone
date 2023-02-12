@@ -147,6 +147,39 @@
   <data name="checkout" xml:space="preserve">
     <value>Checkout</value>
   </data>
+  <data name="contact_us_email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="contact_us_first_name" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="contact_us_last_name" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="contact_us_message" xml:space="preserve">
+    <value>Your Message</value>
+  </data>
+  <data name="contact_us_phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="contact_us_reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="contact_us_reason_1" xml:space="preserve">
+    <value>I have a question about the deal</value>
+  </data>
+  <data name="contact_us_reason_2" xml:space="preserve">
+    <value>I have a question about payment</value>
+  </data>
+  <data name="contact_us_reason_3" xml:space="preserve">
+    <value>I would like to share some feedback</value>
+  </data>
+  <data name="contact_us_send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="contact_us_subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
   <data name="continue-shopping" xml:space="preserve">
     <value>Continue Shopping</value>
   </data>
