@@ -61,6 +61,60 @@ namespace Cobone.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string account_change_password {
+            get {
+                return ResourceManager.GetString("account_change_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credit.
+        /// </summary>
+        public static string account_credit {
+            get {
+                return ResourceManager.GetString("account_credit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string account_edit {
+            get {
+                return ResourceManager.GetString("account_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string account_email {
+            get {
+                return ResourceManager.GetString("account_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string account_first_name {
+            get {
+                return ResourceManager.GetString("account_first_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string account_last_name {
+            get {
+                return ResourceManager.GetString("account_last_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credit.
         /// </summary>
         public static string account_menu_credit {
@@ -93,6 +147,267 @@ namespace Cobone.Shared.ResourceFiles {
         public static string account_menu_settings {
             get {
                 return ResourceManager.GetString("account-menu-settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credit.
+        /// </summary>
+        public static string account_nav_credit {
+            get {
+                return ResourceManager.GetString("account_nav_credit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Account.
+        /// </summary>
+        public static string account_nav_my_account {
+            get {
+                return ResourceManager.GetString("account_nav_my_account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orders.
+        /// </summary>
+        public static string account_nav_orders {
+            get {
+                return ResourceManager.GetString("account_nav_orders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string account_nav_settings {
+            get {
+                return ResourceManager.GetString("account_nav_settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment:  .
+        /// </summary>
+        public static string account_order_comment {
+            get {
+                return ResourceManager.GetString("account_order_comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date: .
+        /// </summary>
+        public static string account_order_date {
+            get {
+                return ResourceManager.GetString("account_order_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Details.
+        /// </summary>
+        public static string account_order_details {
+            get {
+                return ResourceManager.GetString("account_order_details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order History.
+        /// </summary>
+        public static string account_order_history {
+            get {
+                return ResourceManager.GetString("account_order_history", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoice Details.
+        /// </summary>
+        public static string account_order_invoice {
+            get {
+                return ResourceManager.GetString("account_order_invoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order#:.
+        /// </summary>
+        public static string account_order_no {
+            get {
+                return ResourceManager.GetString("account_order_no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment:.
+        /// </summary>
+        public static string account_order_payment {
+            get {
+                return ResourceManager.GetString("account_order_payment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Products.
+        /// </summary>
+        public static string account_order_products {
+            get {
+                return ResourceManager.GetString("account_order_products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order QR-Code.
+        /// </summary>
+        public static string account_order_qr {
+            get {
+                return ResourceManager.GetString("account_order_qr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipping:.
+        /// </summary>
+        public static string account_order_shipping {
+            get {
+                return ResourceManager.GetString("account_order_shipping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipping Address.
+        /// </summary>
+        public static string account_order_shipping_address {
+            get {
+                return ResourceManager.GetString("account_order_shipping_address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status: .
+        /// </summary>
+        public static string account_order_status {
+            get {
+                return ResourceManager.GetString("account_order_status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string account_order_table_currency {
+            get {
+                return ResourceManager.GetString("account_order_table_currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Added.
+        /// </summary>
+        public static string account_order_table_date {
+            get {
+                return ResourceManager.GetString("account_order_table_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string account_order_table_loading {
+            get {
+                return ResourceManager.GetString("account_order_table_loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string account_order_table_name {
+            get {
+                return ResourceManager.GetString("account_order_table_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No matching records found.
+        /// </summary>
+        public static string account_order_table_not_found {
+            get {
+                return ResourceManager.GetString("account_order_table_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string account_order_table_status {
+            get {
+                return ResourceManager.GetString("account_order_table_status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string account_order_table_total {
+            get {
+                return ResourceManager.GetString("account_order_table_total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Orders.
+        /// </summary>
+        public static string account_orders {
+            get {
+                return ResourceManager.GetString("account_orders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password Changed Successfully.
+        /// </summary>
+        public static string account_password_changed {
+            get {
+                return ResourceManager.GetString("account_password_changed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string account_phone {
+            get {
+                return ResourceManager.GetString("account_phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        public static string account_save {
+            get {
+                return ResourceManager.GetString("account_save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string account_settings {
+            get {
+                return ResourceManager.GetString("account_settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Updated Successfully.
+        /// </summary>
+        public static string account_update {
+            get {
+                return ResourceManager.GetString("account_update", resourceCulture);
             }
         }
         
@@ -151,7 +466,7 @@ namespace Cobone.Shared.ResourceFiles {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email.
+        ///   Looks up a localized string similar to Email or Phone.
         /// </summary>
         public static string contact_us_email {
             get {

@@ -129,6 +129,111 @@
   <data name="account-menu-settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="account_change_password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="account_credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="account_edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="account_email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="account_first_name" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="account_last_name" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="account_nav_credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="account_nav_my_account" xml:space="preserve">
+    <value>My Account</value>
+  </data>
+  <data name="account_nav_orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="account_nav_settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="account_orders" xml:space="preserve">
+    <value>My Orders</value>
+  </data>
+  <data name="account_order_comment" xml:space="preserve">
+    <value>Comment:  </value>
+  </data>
+  <data name="account_order_date" xml:space="preserve">
+    <value>Date: </value>
+  </data>
+  <data name="account_order_details" xml:space="preserve">
+    <value>Order Details</value>
+  </data>
+  <data name="account_order_history" xml:space="preserve">
+    <value>Order History</value>
+  </data>
+  <data name="account_order_invoice" xml:space="preserve">
+    <value>Invoice Details</value>
+  </data>
+  <data name="account_order_no" xml:space="preserve">
+    <value>Order#:</value>
+  </data>
+  <data name="account_order_payment" xml:space="preserve">
+    <value>Payment:</value>
+  </data>
+  <data name="account_order_products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="account_order_qr" xml:space="preserve">
+    <value>Order QR-Code</value>
+  </data>
+  <data name="account_order_shipping" xml:space="preserve">
+    <value>Shipping:</value>
+  </data>
+  <data name="account_order_shipping_address" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
+  <data name="account_order_status" xml:space="preserve">
+    <value>Status: </value>
+  </data>
+  <data name="account_order_table_currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="account_order_table_date" xml:space="preserve">
+    <value>Date Added</value>
+  </data>
+  <data name="account_order_table_loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="account_order_table_name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="account_order_table_not_found" xml:space="preserve">
+    <value>No matching records found</value>
+  </data>
+  <data name="account_order_table_status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="account_order_table_total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="account_password_changed" xml:space="preserve">
+    <value>Password Changed Successfully</value>
+  </data>
+  <data name="account_phone" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="account_save" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="account_settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="account_update" xml:space="preserve">
+    <value>Account Updated Successfully</value>
+  </data>
   <data name="appbar-search-text" xml:space="preserve">
     <value>What are you looking for?</value>
   </data>
@@ -148,7 +253,7 @@
     <value>Checkout</value>
   </data>
   <data name="contact_us_email" xml:space="preserve">
-    <value>Email</value>
+    <value>Email or Phone</value>
   </data>
   <data name="contact_us_first_name" xml:space="preserve">
     <value>First Name</value>

@@ -62,14 +62,15 @@
                                  }else{
                                 <DealOptionBlock Price="@Product.Price" Special="@Product.Special" Quantity="@Product.Quantity" />
                                 }*@
-                                        <DealOptionBlock OptionId="@Product.Product_Id" Price="@Product.Price" Special="@Product.Special" Quantity="@Product.Quantity" />
+                                        <DealOptionBlock OptionId="@Product.Product_Id" Price="@Product.Price"
+                                        Special="@Product.Special" Quantity="@Product.Quantity" Description="@(Helpers.StripHTML(Product.Description).Split('.')[0])" Name="@Product.Name" />
                                         @if (RelatedProducts.Count > 0)
                                         {
                                             @foreach (var product in RelatedProducts)
                                             {
                                                 
                                                     <DealOptionBlock Name="@product.name" Price="product.price" Special="product.special" Quantity="@product.quantity"
-                                                     OptionId="@product.product_id" Description="@product.description"/>
+                                                     OptionId="@product.product_id" Description="@product.description.Split('.')[0]" />
                                             }
                                         }
                                        
@@ -92,11 +93,18 @@
                         </MudItem>
                         <MudItem Style="text-align:center">
                             <h6>@Loc["product-info-share-deal"]</h6>
-                            <MudIconButton Icon="@Icons.Custom.Brands.Facebook" Color="Color.Primary" aria-label="github"></MudIconButton>
-                            <MudIconButton Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Primary" aria-label="github"></MudIconButton>
-                            <MudIconButton Icon="@Icons.Custom.Brands.Google" Color="Color.Primary" aria-label="github"></MudIconButton>
-                            <MudIconButton Icon="@Icons.Custom.Brands.Twitter" Color="Color.Primary" aria-label="github"></MudIconButton>
-                            <MudIconButton Icon="@Icons.Custom.Brands.Instagram" Color="Color.Primary" aria-label="github"></MudIconButton>
+                                <MudIconButton Href="@($"https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcobony-eg.com%2Fproductinfo%2F{Product.Product_Id}&amp;src=sdkpreparse")"
+                                target="_blank" 
+                                Icon="@Icons.Custom.Brands.Facebook" Color="Color.Primary"></MudIconButton>
+                                
+                                <MudIconButton Href="@($"whatsapp://send?text=https%3A%2F%2Fcobony-eg.com%2Fproductinfo%2F{Product.Product_Id}")"
+                                           data-action="share/whatsapp/share"
+                                           target="_blank"
+                                Icon="@Icons.Custom.Brands.WhatsApp" Color="Color.Primary" aria-label="github"></MudIconButton>
+
+                                <MudIconButton Href="@($"https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw&url=https%3A%2F%2Fcobony-eg.com%2Fproductinfo%2F{Product.Product_Id}")"
+                                           data-url="@($"https://cobony-eg.com/productinfo/{Product.Product_Id}")" target="_blank"
+                                Icon="@Icons.Custom.Brands.Twitter" Color="Color.Primary" aria-label="github"></MudIconButton>
                         </MudItem>
                     </MudPaper>
                     

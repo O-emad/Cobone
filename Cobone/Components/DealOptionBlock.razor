@@ -10,7 +10,7 @@
     </MudCardHeader>
     <MudCardContent>
         @*<MudText>Story of the day</MudText>*@
-        <MudText Typo="Typo.body2">@(WebUtility.HtmlDecode(Description))</MudText>
+        <MudText Typo="Typo.body2" >@(WebUtility.HtmlDecode(Description.Split('.')[0]))</MudText>
         @if(Quantity == 0){
             <MudText Typo="Typo.body1" Color="Color.Error">@Loc["unavailable"]</MudText>
         }

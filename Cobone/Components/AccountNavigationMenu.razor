@@ -1,12 +1,16 @@
 ﻿
+
+@inject IStringLocalizer<Resource> Loc
+
+
 <MudItem xs="Xs" sm="Sm" md="Md" lg="Lg" xl="Xl" xxl="Xxl" Class="pa-0 ma-0">
 <MudPaper  Elevation="3" Class="pl-0 ma-0 flex-grow-1">
     <MudNavMenu Class="mud-width-full" Margin="Margin.Dense" Color="Color.Primary" Bordered="true">
-                <MudText Typo="Typo.h6" Class="pa-4">My Account</MudText>
+            <MudText Typo="Typo.h6" Class="pa-4">@Loc["account_nav_my_account"]</MudText>
         <MudDivider Light="true"></MudDivider>
-        <MudNavLink Href="account/orders" Icon="@Icons.Filled.Dashboard">Orders</MudNavLink>
-        <MudNavLink Href="account/credit" Icon="@Icons.Filled.Storage">Credit</MudNavLink>
-        <MudNavLink Href="account/data" Icon="@Icons.Filled.Science">Settings</MudNavLink>
+            <MudNavLink Href="account/orders" Icon="@Icons.Filled.Dashboard">@Loc["account_nav_orders"]</MudNavLink>
+            <MudNavLink Href="account/credit" Icon="@Icons.Filled.Storage">@Loc["account_nav_credit"]</MudNavLink>
+            <MudNavLink Href="account/data" Icon="@Icons.Filled.Science">@Loc["account_nav_settings"]</MudNavLink>
     </MudNavMenu>
 </MudPaper>
 </MudItem>

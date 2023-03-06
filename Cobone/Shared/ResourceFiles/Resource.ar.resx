@@ -129,6 +129,111 @@
   <data name="account-menu-settings" xml:space="preserve">
     <value>الأعدادات</value>
   </data>
+  <data name="account_change_password" xml:space="preserve">
+    <value>تغير كلمة المرور</value>
+  </data>
+  <data name="account_credit" xml:space="preserve">
+    <value>الرصيد</value>
+  </data>
+  <data name="account_edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="account_email" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="account_first_name" xml:space="preserve">
+    <value>الأسم</value>
+  </data>
+  <data name="account_last_name" xml:space="preserve">
+    <value>أسم العائلة</value>
+  </data>
+  <data name="account_nav_credit" xml:space="preserve">
+    <value>الرصيد</value>
+  </data>
+  <data name="account_nav_my_account" xml:space="preserve">
+    <value>حسابي</value>
+  </data>
+  <data name="account_nav_orders" xml:space="preserve">
+    <value>الطلبات</value>
+  </data>
+  <data name="account_nav_settings" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+  <data name="account_orders" xml:space="preserve">
+    <value>طلباتي</value>
+  </data>
+  <data name="account_order_comment" xml:space="preserve">
+    <value>التعليقات: </value>
+  </data>
+  <data name="account_order_date" xml:space="preserve">
+    <value>تاريخ الطلب: </value>
+  </data>
+  <data name="account_order_details" xml:space="preserve">
+    <value>تفاصيل الطلب</value>
+  </data>
+  <data name="account_order_history" xml:space="preserve">
+    <value>سجل الطلب</value>
+  </data>
+  <data name="account_order_invoice" xml:space="preserve">
+    <value>تفاصيل الفاتورة</value>
+  </data>
+  <data name="account_order_no" xml:space="preserve">
+    <value>رقم الطلب: </value>
+  </data>
+  <data name="account_order_payment" xml:space="preserve">
+    <value>طريقة الدفع: </value>
+  </data>
+  <data name="account_order_products" xml:space="preserve">
+    <value>المنتجات</value>
+  </data>
+  <data name="account_order_qr" xml:space="preserve">
+    <value>الطلب QR-Code</value>
+  </data>
+  <data name="account_order_shipping" xml:space="preserve">
+    <value>طريقة الشحن: </value>
+  </data>
+  <data name="account_order_shipping_address" xml:space="preserve">
+    <value>عنوان الشحن</value>
+  </data>
+  <data name="account_order_status" xml:space="preserve">
+    <value>حالة الطلب: </value>
+  </data>
+  <data name="account_order_table_currency" xml:space="preserve">
+    <value>العملة</value>
+  </data>
+  <data name="account_order_table_date" xml:space="preserve">
+    <value>تاريخ الإضافة</value>
+  </data>
+  <data name="account_order_table_loading" xml:space="preserve">
+    <value>تحميل...</value>
+  </data>
+  <data name="account_order_table_name" xml:space="preserve">
+    <value>الأسم</value>
+  </data>
+  <data name="account_order_table_not_found" xml:space="preserve">
+    <value>لا يوجد طلبات</value>
+  </data>
+  <data name="account_order_table_status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="account_order_table_total" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+  <data name="account_password_changed" xml:space="preserve">
+    <value>تم تغير كلمة المرور بنجاح</value>
+  </data>
+  <data name="account_phone" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="account_save" xml:space="preserve">
+    <value>أحفظ</value>
+  </data>
+  <data name="account_settings" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+  <data name="account_update" xml:space="preserve">
+    <value>تم تعديل البيانات بنجاح</value>
+  </data>
   <data name="appbar-search-text" xml:space="preserve">
     <value>عن ماذا تبحث؟</value>
   </data>
@@ -148,7 +253,7 @@
     <value>الدفع</value>
   </data>
   <data name="contact_us_email" xml:space="preserve">
-    <value>البريد الالكتروني</value>
+    <value>البريد الالكتروني او رقم االهاتف</value>
   </data>
   <data name="contact_us_first_name" xml:space="preserve">
     <value>الأسم</value>

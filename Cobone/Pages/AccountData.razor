@@ -3,6 +3,9 @@
 @inject IAccountAddressDataService AccountAddressDataService
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Resource> Loc
+
+
 <MudGrid Spacing="8" Class="pl-8 pr-3">
     <AccountNavigationMenu Lg="2" Xl="2" Xxl="1" Md="3" Sm="4" Xs="4"></AccountNavigationMenu>
     <MudItem lg="10" xl="10" xxl="11" md="9" sm="8" xs="8" Class="pt-3">
@@ -15,16 +18,16 @@
             <MudItem xs="12" xxl="12">
             <MudCard>
     <MudCardHeader Class="pa-6">
-        <MudText Typo="Typo.h6">Settings</MudText>
+                        <MudText Typo="Typo.h6">@Loc["account_settings"]</MudText>
     </MudCardHeader>
     <MudCardContent>
                         @if(AccountDetails is not null)
                         {
                             <MudStack>
-                            <MudTextField @bind-Value="AccountDetails.Firstname" Label="First Name" Disabled="@DisableEdit" Variant="Variant.Outlined" />
-                            <MudTextField @bind-Value="AccountDetails.Lastname" Label="Last Name" Disabled="@DisableEdit" Variant="Variant.Outlined" />
-                            <MudTextField @bind-Value="AccountDetails.Email" Label="Email" Disabled="@DisableEdit" Variant="Variant.Outlined" />
-                            <MudTextField @bind-Value="AccountDetails.Telephone" Label="Phone" Disabled="@DisableEdit" Variant="Variant.Outlined" />
+                            <MudTextField @bind-Value="AccountDetails.Firstname" Label="@Loc["account_first_name"]" Disabled="@DisableEdit" Variant="Variant.Outlined" />
+                                <MudTextField @bind-Value="AccountDetails.Lastname" Label="@Loc["account_last_name"]" Disabled="@DisableEdit" Variant="Variant.Outlined" />
+                                <MudTextField @bind-Value="AccountDetails.Email" Label="@Loc["account_email"]" Disabled="@DisableEdit" Variant="Variant.Outlined" />
+                                <MudTextField @bind-Value="AccountDetails.Telephone" Label="@Loc["account_phone"]" Disabled="@DisableEdit" Variant="Variant.Outlined" />
                             </MudStack>
                         }
                     </MudCardContent>
@@ -32,7 +35,7 @@
                         <MudButton Variant="Variant.Filled" FullWidth="true" Size="Size.Large" Class="ma-2"
                         OnClick="OnSettingsButtonClick" Color="Color.Primary">@ButtonText</MudButton>
                         <MudButton Variant="Variant.Filled" FullWidth="true" Size="Size.Large" Class="ma-2"
-                         OnClick="OpenChangePasswordDialog" Color="Color.Primary">Change Password</MudButton>
+                                   OnClick="OpenChangePasswordDialog" Color="Color.Primary">@Loc["account_change_password"]</MudButton>
                     </MudCardActions>
         </MudCard>
         </MudItem>
@@ -46,9 +49,10 @@
 @code{
     public AccountDetails? AccountDetails { get; set; } = null;
     public bool DisableEdit { get; set; } = true;
-    public string ButtonText { get; set; } = "Edit";
+    public string ButtonText { get; set; } = "";
     protected override async Task OnInitializedAsync()
     {
+        ButtonText = Loc["account_edit"];
         if(AccountDataService is not null)
         {
             AccountDetails = await AccountDataService.GetAccountDetails();
@@ -60,7 +64,7 @@
         if (DisableEdit && AccountDataService is not null)
         {
             DisableEdit = false;
-            ButtonText = "Save Changes";
+            ButtonText = Loc["account_save"];
             return;
         }
         if(!DisableEdit && AccountDataService is not null && AccountDetails is not null)
@@ -75,9 +79,9 @@
             await AccountDataService.UpdateAccountDetails(updateDetails);
             Snackbar.Clear();
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            Snackbar.Add("Account Updated Successfully", Severity.Success);
+            Snackbar.Add(Loc["account_update"], Severity.Success);
             DisableEdit = true;
-            ButtonText = "Edit";
+            ButtonText = Loc["account_edit"];
             return;
         }
     }
@@ -87,9 +91,9 @@
         DialogOptions closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true, CloseButton = true, FullWidth = true };
         var dialogParameters = new DialogParameters
             {
-                ["snackbarMessage"] = "Password Changed Successfully"
+                ["snackbarMessage"] = (string)Loc["account_password_changed"]
             };
-        var dialog = DialogService.Show<ChangePasswordDialog>("Change Password", dialogParameters, closeOnEscapeKey);
+        var dialog = DialogService.Show<ChangePasswordDialog>((string)Loc["account_change_password"], dialogParameters, closeOnEscapeKey);
         var result = await dialog.Result;
         //if (result is not null && result.Data is not null && (bool)result.Data) await table.ReloadServerData();
     }

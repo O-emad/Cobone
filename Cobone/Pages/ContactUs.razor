@@ -1,6 +1,7 @@
 ﻿@page "/contactus"
 @inject IStringLocalizer<Resource> Loc
-
+@inject IContactUsDataService ContactDataService
+@inject NavigationManager NavigationManger
 <MudGrid Justify="Justify.Center">
     <MudItem xs="12" sm="12">
 
@@ -11,19 +12,19 @@
             </MudCardHeader>
             <MudCardContent Class="pa-5">
                <MudStack>
-                    <MudSelect Dense="false" T="string" Label="@Loc["contact_us_reason"]" Variant="Variant.Outlined">
+                    <MudSelect @bind-Value="Reason" Dense="false" T="string"  Label="@Loc["contact_us_reason"]" Variant="Variant.Outlined">
                         <MudSelectItem Value="@((string)Loc["contact_us_reason_1"])" />
                         <MudSelectItem Value="@((string)Loc["contact_us_reason_2"])" />
                         <MudSelectItem Value="@((string)Loc["contact_us_reason_3"])" />
                     </MudSelect>
 
-                    <MudTextField T="string" Label="@Loc["contact_us_first_name"]" Variant="Variant.Outlined"></MudTextField>
-                    <MudTextField T="string" Label="@Loc["contact_us_last_name"]" Variant="Variant.Outlined"></MudTextField>
-                    <MudTextField T="string" Label="@Loc["contact_us_phone"]" Variant="Variant.Outlined"></MudTextField>
-                    <MudTextField T="string" Label="@Loc["contact_us_email"]" Variant="Variant.Outlined"></MudTextField>
-                    <MudTextField T="string" Label="@Loc["contact_us_subject"]" Variant="Variant.Outlined"></MudTextField>
-                    <MudTextField T="string" Label="@Loc["contact_us_message"]" Variant="Variant.Outlined" Lines="5"></MudTextField>
-                    <MudButton Variant="Variant.Filled" Size="Size.Large" Color="Color.Primary">@Loc["contact_us_send"]</MudButton>
+                    <MudTextField @bind-Value="Name" T="string" Label="@Loc["contact_us_first_name"]" Variant="Variant.Outlined"></MudTextField>
+                    @*<MudTextField T="string" Label="@Loc["contact_us_last_name"]" Variant="Variant.Outlined"></MudTextField>*@
+                    @*<MudTextField T="string" Label="@Loc["contact_us_phone"]" Variant="Variant.Outlined"></MudTextField>*@
+                    <MudTextField @bind-Value="Email" T="string" Label="@Loc["contact_us_email"]" Variant="Variant.Outlined"></MudTextField>
+                    @*<MudTextField T="string" Label="@Loc["contact_us_subject"]" Variant="Variant.Outlined"></MudTextField>*@
+                    <MudTextField @bind-Value="Message" T="string" Label="@Loc["contact_us_message"]" Variant="Variant.Outlined" Lines="5"></MudTextField>
+                    <MudButton Variant="Variant.Filled" Size="Size.Large" OnClick="SendEmail" Color="Color.Primary">@Loc["contact_us_send"]</MudButton>
                 </MudStack>
             </MudCardContent>
         </MudCard>
@@ -32,5 +33,25 @@
 
 @code{
 
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Reason { get; set; }
+    public string Message { get; set; }
+
+
+    public async Task SendEmail()
+    {
+        if(ContactDataService is not null)
+        {
+            var model = new ContactUsModel()
+                {
+                    name = Name,
+                    email = Email,
+                    enquiry = string.Concat(Reason, "\n", Message)
+                };
+            await ContactDataService.SendMessage(model);
+            NavigationManger.NavigateTo("/");
+        }
+    } 
 
 }
