@@ -1,9 +1,10 @@
 ﻿@page "/account/credit/"
-@inject IStringLocalizer<Resource> Loc
 
-<MudGrid Spacing="8" Class="pl-8 pr-3">
-    <AccountNavigationMenu Lg="2" Xl="2" Xxl="1" Md="3" Sm="4" Xs="4"></AccountNavigationMenu>
-    <MudItem lg="10" xl="10" xxl="11" md="9" sm="8" xs="8" Class="pt-3">
+@inject IStringLocalizer<Resource> Loc
+@attribute [Authorize]
+<MudGrid Spacing="8" Justify="Justify.Center">
+    <AccountNavigationMenu Lg="2" Xl="2" Xxl="1" Md="3" Sm="12" Xs="12"></AccountNavigationMenu>
+    <MudItem lg="10" xl="10" xxl="11" md="9" sm="12" xs="12" Class="pt-3">
         <MudGrid>
             <MudPaper Class="flex-grow-1 ma-0 " Width="64px" Elevation="3">
 

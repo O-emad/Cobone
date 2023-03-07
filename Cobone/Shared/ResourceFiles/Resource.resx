@@ -366,6 +366,9 @@
   <data name="login-register" xml:space="preserve">
     <value>not registered yet. click here</value>
   </data>
+  <data name="nav-menu-home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="next" xml:space="preserve">
     <value>Next</value>
   </data>

@@ -9,7 +9,7 @@ namespace Cobone.Services
 {
     public interface IAccountOrderDataService
     {
-        Task<List<AccountOrder>> GetAccountOrders(int page, int pageSize);
+        Task<Tuple<int, List<AccountOrder>>> GetAccountOrders(int page, int pageSize);
         Task<AccountOrderDetails> GetAccountOrderDetails(int id);
     }
 }

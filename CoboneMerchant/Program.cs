@@ -19,7 +19,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddMudServices(config =>
 {
     config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomLeft;
-
     config.SnackbarConfiguration.PreventDuplicates = true;
     config.SnackbarConfiguration.NewestOnTop = false;
     config.SnackbarConfiguration.ShowCloseIcon = true;
@@ -45,6 +44,8 @@ builder.Services.AddTransient<BaseMessageHandler>();
 builder.Services.AddHttpClient<IAccountDataService, AccountDataService>("AccountAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest"))
     .AddHttpMessageHandler<BaseMessageHandler>();
 builder.Services.AddHttpClient<IMerchantDataService, MerchantDataService>("MerchantAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=rest/order"))
+    .AddHttpMessageHandler<BaseMessageHandler>();
+builder.Services.AddHttpClient<IOrderStatusDataService, OrderStatusDataService>("OrderStatusAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/orderhistory"))
     .AddHttpMessageHandler<BaseMessageHandler>();
 
 builder.Services.AddHttpClient<IAuthorizationManager, AuthorizationManager>("AuthorizationAPI", client => client.BaseAddress = new Uri("https://cobony-eg.com/controlcenter/index.php?route=feed/rest_api/gettoken"));

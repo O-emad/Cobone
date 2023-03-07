@@ -25,14 +25,18 @@
                         <MudText Typo="Typo.body1"><b>Order#:</b> @SearchedOrderDetails.order_id</MudText>
                         <MudText Typo="Typo.body1"><b>Payment:</b> @SearchedOrderDetails.payment_method</MudText>
                         <MudText Typo="Typo.body1"><b>Date:</b> @SearchedOrderDetails.date_modified</MudText>
-                        <MudText Typo="Typo.body1"><b>Shipping:</b> @SearchedOrderDetails.shipping_method</MudText>
+                        @if (int.TryParse(SearchedOrderDetails.order_status_id, out int id) && id != 5)
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Style="border-radius:20px" Size="Size.Large" OnClick="Redeem">Redeem</MudButton>
+                        }
+                        @*<MudText Typo="Typo.body1"><b>Shipping:</b> @SearchedOrderDetails.shipping_method</MudText>*@
                     </div>
                 </MudCardContent>
                 <MudCardActions>
                 </MudCardActions>
             </MudCard>
         </MudItem>
-        <MudItem xs="12" xxl="12">
+@*        <MudItem xs="12" xxl="12">
             <MudCard Elevation="4" Style="border-radius:0px">
                 <MudCardHeader>
                     <CardHeaderContent>
@@ -48,7 +52,7 @@
                     <MudCardActions>
                     </MudCardActions>
                 </MudCard>
-            </MudItem>
+            </MudItem>*@
         <MudItem xs="12" xxl="12">
             <MudCard Elevation="4" Style="border-radius:0px">
                 <MudCardHeader>

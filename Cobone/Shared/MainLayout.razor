@@ -29,6 +29,49 @@
 
                 @if (breakPoint < Breakpoint.Lg)
                 {
+                        <MudPopover @bind-Open="CartPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Right"
+                                AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" OffsetY="true" RelativeWidth="false" Style="z-index:500" Class="pa-0 ma-0">
+                            <div class="pa-5" style="width:auto; max-width:100vw">
+                                @*<MudGrid Class="pa-5" Spacing="2" Justify="Justify.FlexEnd" >*@
+                                <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                                    <MudText Typo="Typo.h6" Class="pr-5">@Loc["appbar_cart_text"]</MudText>
+                                    <MudSpacer />
+                                    <MudIconButton OnClick="CloseOverlay" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
+                                </MudItem>
+                                @if (Cart.total_product_count > 0)
+                                {
+                                    <MudItem xs="12" xxl="12" Class="py-4 mt-3" Style="max-height:300px; overflow-y:scroll; overflow-x:hidden;">
+                                        <CascadingValue Value="this">
+                                            @foreach (var product in Cart.products)
+                                            {
+                                                <CartItemComponent Product="@product" />
+                                            }
+                                        </CascadingValue>
+                                    </MudItem>
+
+                                    <MudItem xs="12" xxl="12" Class="pt-3">
+                                        <MudText Typo="Typo.body2">@Loc["order-total"]</MudText>
+                                        <MudText Typo="Typo.h6">@Cart.total</MudText>
+                                    </MudItem>
+
+                                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                                       FullWidth="true" Class="my-2" Size="Size.Large" OnClick="Checkout">@Loc["checkout"]</MudButton>
+                                    <MudButton Variant="Variant.Filled" Color="Color.Dark"
+                                       FullWidth="true" Class="my-2" Size="Size.Large" OnClick="CloseOverlay">@Loc["continue-shopping"]</MudButton>
+                                }
+                                @* </MudGrid>*@
+                            </div>
+                        </MudPopover>
+                        <MudPopover @bind-Open="SpecialPopoverOpen" OverflowBehavior="OverflowBehavior.FlipAlways" Direction="Direction.Top"
+                                AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" RelativeWidth="false" Style="z-index:500">
+                            <div class="pa-5">
+                                <MudItem xs="12" xxl="12" Class="d-flex flex-grow-1 gap-4">
+                                    <MudText Typo="Typo.button" Class="pr-5">@Loc["appbar_offer_text"]</MudText>
+                                    <MudSpacer />
+                                    <MudIconButton OnClick="CloseOverlay" Icon="@Icons.Outlined.Close" Class="pa-0 pl-5"></MudIconButton>
+                                </MudItem>
+                            </div>
+                        </MudPopover>
                     <MudIconButton DisableElevation="true" DisableRipple="true" Icon="@Icons.Material.Filled.Menu"
                                Color="Color.Tertiary" Size="Size.Large" OnClick="@ToggleDrawer" />
                     <MudSpacer />
@@ -62,9 +105,12 @@
                              AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" FullWidth="true">
                         @foreach (var culture in cultures)
                         {
-                            <MudMenuItem OnClick="()=>{Culture = culture;}">@(convertFunc(culture))</MudMenuItem>
+                            <MudMenuItem OnClick="()=>{Culture = culture;}"
+                                OnTouch="()=>{Culture = culture;}">@(convertFunc(culture))</MudMenuItem>
                         }
                     </MudMenu>
+                    @if (breakPoint > Breakpoint.Md)
+                    {
                 <MudAutocomplete T="string" Label="@Loc["appbar-search-text"]" @bind-Value="Search" SearchFunc="@Search1" Variant="Variant.Filled"
                                  AdornmentIcon="@Icons.Material.Filled.Search" 
                                  AdornmentColor="Color.Tertiary" Class="search-bar  rounded-lg align-self-stretch" >
@@ -73,10 +119,8 @@
 
                 <MudSpacer />
 
-                @*<MudIconButton Icon="@Icons.Filled.Storefront" DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary" OnClick="NavigateToMerchant" />*@
-                @*<MudDivider Vertical="true" Light="true" FlexItem="true" Class="ma-3" />*@
-                <MudButton DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary"
-                           OnClick="OpenSpecialPopOver">
+
+                <MudButton DisableElevation="true" DisableRipple="true" Size="Size.Large" Color="Color.Tertiary" OnClick="OpenSpecialPopOver">
                            <MudBadge Content="0" Visible="false" Overlap="true" Color="Color.Dark">
                     <MudIcon Icon="@Icons.Filled.NotificationsActive" Size="Size.Large" Color="Color.Tertiary"></MudIcon>
                             <MudText Typo="Typo.h6" Color="Color.Tertiary" Style="margin-top:-15px;">@Loc["appbar_offer_text"]</MudText>
@@ -93,8 +137,6 @@
                     </MudPopover>
                 </MudButton>
 
-                @if (breakPoint > Breakpoint.Md)
-                {
                     <MudDivider Vertical="true" Light="true" FlexItem="true" Class="ma-3" />
                     <AuthorizeView>
                         <NotAuthorized>
@@ -129,7 +171,7 @@
                         </Authorized>
 
                     </AuthorizeView>
-                }
+               
                 <MudDivider Vertical="true" FlexItem="true" Light="true" Class="ma-3" />
                 <MudButton DisableElevation="false" DisableRipple="false" OnClick="OpenCartPopOver">
                     <MudBadge Content="@Cart.total_product_count" Visible="@(Cart.total_product_count>0)" Overlap="true" Color="Color.Dark">
@@ -171,6 +213,7 @@
                         </div>
                     </MudPopover>
                 </MudButton>
+                    }
             </MudAppBar>
         @*</MudItem>*@
         <!---CategoriesAppBar-->
@@ -188,17 +231,24 @@
     </MudAppBar>
 
             <MudDrawer Class="z-30" @bind-Open="@openDrawer" Elevation="1" ClipMode="DrawerClipMode.Docked">
-                <MudPaper Elevation="25" Style="padding-top:10px;">
+                <MudPaper Elevation="0" Style="padding-top:10px;" >
                     <MudToolBar>
                         <MudIconButton Icon="@Icons.Material.Outlined.ArrowBack" Color="Color.Primary" Size="Size.Large" OnClick="ToggleDrawer" />
+                    <MudSpacer />
+                    <MudIconButton DisableElevation="true" DisableRipple="true" Icon="@Icons.Filled.NotificationsActive" Size="Size.Large" Color="Color.Primary" OnClick="()=>{OpenSpecialPopOver(); ToggleDrawer();}">
+                    </MudIconButton>
+                    <MudSpacer />
+                    <MudIconButton DisableElevation="false" DisableRipple="false" Icon="@Icons.Outlined.ShoppingCart" Size="Size.Large" Color="Color.Primary" OnClick="()=>{OpenCartPopOver(); ToggleDrawer();}">
+                    </MudIconButton>
                         <MudSpacer />
-                        <MudIconButton Icon="@Icons.Outlined.AccountCircle" Color="Color.Primary" Size="Size.Large" />
+                        <MudIconButton Icon="@Icons.Outlined.AccountCircle" Color="Color.Primary" Size="Size.Large" Href="/account/orders"  OnClick="ToggleDrawer"/>
                     </MudToolBar>
                 </MudPaper>
-
-                <MudPaper Width="250px" Class="py-3" Elevation="0">
+                
+                <MudPaper Width="100%" Class="py-3" Elevation="0" Square="true">
+                <MudDivider Style="background-color:#59b210" />
                     <MudNavMenu Color="Color.Primary" Bordered="true" Rounded="true" Dense="false">
-                        <MudNavLink Class="mud-nav-group" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+                        <MudNavLink Class="mud-nav-group" Href="/" Match="NavLinkMatch.All">@Loc["nav-menu-home"]</MudNavLink>
                         @if (Categories is not null && Categories.Count > 0)
                         {
                             @foreach (var category in Categories)
@@ -220,6 +270,13 @@
                                 }
                             }
                         }
+                        <AuthorizeView>
+                            <Authorized>
+                            <MudDivider Style="background-color:#59b210" />
+                            <MudNavLink Class="mud-nav-group" OnClick="Logout">@Loc["account-menu-logout"]</MudNavLink>
+                            </Authorized>
+                        </AuthorizeView>
+
                     </MudNavMenu>
                 </MudPaper>
             </MudDrawer>
@@ -241,7 +298,7 @@
                             <TopAddCarousel SliderData="@HomeData.Slider" />
                         }
                     </MudItem>
-                    <MudItem xs="10" Class="mt-5">
+                    <MudItem xs="10" Class="mt-5" Style="justify-content:center;">
                         @Body
                     </MudItem>
                 </MudGrid>

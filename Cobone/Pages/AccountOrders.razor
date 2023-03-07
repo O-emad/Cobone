@@ -1,15 +1,15 @@
 ﻿@page "/account/orders/"
 
 @inject IStringLocalizer<Resource> Loc
-
-<MudGrid Spacing="8" Class="pl-8 pr-3">
-    <AccountNavigationMenu Lg="2" Xl="2" Xxl="1" Md="3" Sm="4" Xs="4"></AccountNavigationMenu>
-    <MudItem lg="10" xl="10" xxl="11" md="9" sm="8" xs="8" Class="pt-3">
-        <MudGrid>
+@attribute [Authorize]
+<MudGrid Spacing="8"  Justify="Justify.Center">
+    <AccountNavigationMenu Lg="2" Xl="2" Xxl="1" Md="3" Sm="12" Xs="12"></AccountNavigationMenu>
+    <MudItem lg="10" xl="10" xxl="11" md="9" sm="12" xs="12" Class="pt-3">
+@*        <MudGrid>
             <MudPaper Class="flex-grow-1 ma-0 " Width="64px" Elevation="3">
 
             </MudPaper>
-        </MudGrid>
+        </MudGrid>*@
         <MudGrid Justify="Justify.Center" Spacing="2">
             <MudItem xs="12" xxl="12">
                 @*                <MudCard Elevation="4" Style="border-radius:0px">
@@ -27,7 +27,7 @@
                         <MudText Typo="Typo.h6">@Loc["account_orders"]</MudText>
                     </MudCardHeader>
                     <MudCardContent>
-                        <MudTable ServerData="@(new Func<TableState, Task<TableData<AccountOrder>>>(ServerReload))"
+                        <MudTable ServerData="@(new Func<TableState, Task<TableData<AccountOrder>>>(ServerReload))" RowsPerPage="3"
                                   Dense="false" Hover="true" @ref="table" RowClassFunc="@SelectedRowClassFunc" OnRowClick="RowClickEvent" T="AccountOrder">
                             @*            <ToolBarContent>
                             <MudSpacer />
@@ -244,10 +244,11 @@
     {
 
         if (AccountOrderDataService is null) return new TableData<AccountOrder>();
-        IEnumerable<AccountOrder> data = await AccountOrderDataService.GetAccountOrders(state.Page, state.PageSize);
+        var ordersData = await AccountOrderDataService.GetAccountOrders(state.Page, state.PageSize);
+        IEnumerable<AccountOrder> data = ordersData.Item2;
         await Task.Delay(300);
         data = data.ToArray();
-        totalItems = data.Count();
+        totalItems = ordersData.Item1;
         switch (state.SortLabel)
         {
             case "enabled_field":
@@ -258,8 +259,8 @@
                 break;
         }
 
-        pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToArray();
-        return new TableData<AccountOrder>() { TotalItems = totalItems, Items = pagedData };
+       // pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToArray();
+        return new TableData<AccountOrder>() { TotalItems = totalItems, Items = data };
     }
 
     private async Task RowClickEvent(TableRowClickEventArgs<AccountOrder> tableRowClickEventArgs)

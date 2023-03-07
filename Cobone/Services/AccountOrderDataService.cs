@@ -35,20 +35,22 @@ namespace Cobone.Services
             }
         }
 
-        public async Task<List<AccountOrder>> GetAccountOrders(int page, int pageSize)
+        public async Task<Tuple<int, List<AccountOrder>>> GetAccountOrders(int page, int pageSize)
         {
             try
             {
+                var res = await httpClient.GetAsync($"index.php?route=rest/order/orders&limit={pageSize}&page={page}");
                 var response = await JsonSerializer.DeserializeAsync<BaseResponse<List<AccountOrder>>>(
-                    await httpClient.GetStreamAsync($"index.php?route=rest/order/orders&limit={pageSize}&page={page}"),
+                    res.Content.ReadAsStream(),
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
                     );
-                return response?.Data ?? new List<AccountOrder>();
+                var hasCountHeader = int.TryParse(res.Headers.FirstOrDefault(h => string.Equals(h.Key, "x-total-count", StringComparison.OrdinalIgnoreCase)).Value?.FirstOrDefault(), out int totalCount);
+                return new Tuple<int, List<AccountOrder>>(hasCountHeader?totalCount:100, response?.Data ?? new List<AccountOrder>());
             }
             catch (Exception ex)
             {
 
-                return new List<AccountOrder>();
+                return new Tuple<int, List<AccountOrder>>(0,new());
             }
         }
     }

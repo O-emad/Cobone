@@ -366,6 +366,9 @@
   <data name="login-register" xml:space="preserve">
     <value>سجل من هنا</value>
   </data>
+  <data name="nav-menu-home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
   <data name="next" xml:space="preserve">
     <value>التالي</value>
   </data>

@@ -4,11 +4,11 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IStringLocalizer<Resource> Loc
+@attribute [Authorize]
 
-
-<MudGrid Spacing="8" Class="pl-8 pr-3">
-    <AccountNavigationMenu Lg="2" Xl="2" Xxl="1" Md="3" Sm="4" Xs="4"></AccountNavigationMenu>
-    <MudItem lg="10" xl="10" xxl="11" md="9" sm="8" xs="8" Class="pt-3">
+<MudGrid Spacing="8" Justify="Justify.Center">
+    <AccountNavigationMenu Lg="2" Xl="2" Xxl="1" Md="3" Sm="12" Xs="12"></AccountNavigationMenu>
+    <MudItem lg="10" xl="10" xxl="11" md="9" sm="12" xs="12" Class="pt-3">
         <MudGrid>
             <MudPaper Class="flex-grow-1 ma-0 " Width="64px" Elevation="3">
 
@@ -32,10 +32,12 @@
                         }
                     </MudCardContent>
                     <MudCardActions>
+                        <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Style="width: 100%;" Class="ma-2">
                         <MudButton Variant="Variant.Filled" FullWidth="true" Size="Size.Large" Class="ma-2"
                         OnClick="OnSettingsButtonClick" Color="Color.Primary">@ButtonText</MudButton>
                         <MudButton Variant="Variant.Filled" FullWidth="true" Size="Size.Large" Class="ma-2"
                                    OnClick="OpenChangePasswordDialog" Color="Color.Primary">@Loc["account_change_password"]</MudButton>
+                        </MudStack>
                     </MudCardActions>
         </MudCard>
         </MudItem>

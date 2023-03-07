@@ -15,6 +15,8 @@ namespace CoboneMerchant.Pages
         [Inject]
         public IMerchantDataService MerchantDataService { get; set; }
         [Inject]
+        public IOrderStatusDataService OrderStatusDataService { get; set; }
+        [Inject]
         public ISnackbar Snackbar { get; set; }
         private int orderId ;
 
@@ -33,10 +35,32 @@ namespace CoboneMerchant.Pages
                 else
                 {
                     Snackbar.Clear();
-                    Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopRight;
                     Snackbar.Add($"No Order available with id = {orderId}", Severity.Error);
                     searched = false;
                 }
+            }
+        }
+
+        public async Task Redeem()
+        {
+            if(OrderStatusDataService is not null)
+            {
+               var updated =  await OrderStatusDataService.RedeemOfferOnOrder(SearchedOrderDetails.order_id);
+                if (!updated)
+                {
+                    Snackbar.Clear();
+                    Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopRight;
+                    Snackbar.Add($"Couldn't redeem the offer please try again later", Severity.Error);
+
+                }
+                else
+                {
+                    Snackbar.Clear();
+                    Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopRight;
+                    Snackbar.Add($"Offer Redeem Sucessfully", Severity.Success);
+                }
+                searched = false;
             }
         }
     }

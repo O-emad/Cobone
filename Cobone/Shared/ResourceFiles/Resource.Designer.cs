@@ -808,6 +808,15 @@ namespace Cobone.Shared.ResourceFiles {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string nav_menu_home {
+            get {
+                return ResourceManager.GetString("nav-menu-home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next.
         /// </summary>
         public static string next {
