@@ -40,7 +40,7 @@ namespace CoboneMerchant.Shared
                 await AccountDataService.Logout();
             }
             StateHasChanged();
-            NavigationManager.NavigateTo("", true);
+            NavigationManager.NavigateTo("/merchant", true);
         }
 
     }

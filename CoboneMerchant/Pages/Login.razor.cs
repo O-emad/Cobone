@@ -22,7 +22,7 @@ namespace CoboneMerchant.Pages
             if (AccountDataService is not null)
             {
                 await AccountDataService.Login(model);
-                NavigationManager.NavigateTo("", true);
+                NavigationManager.NavigateTo("/merchant", true);
                 StateHasChanged();
 
             }
